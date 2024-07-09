@@ -2,14 +2,14 @@
 <app-navbar></app-navbar>
 
 <!-- Hero Section start here -->
-<section class="bg-gray-700 bg-[url('https://i.ibb.co/8Dw3HDN/conference.jpg')] bg-center bg-no-repeat bg-blend-multiply mt-6 h-70vh">
+<section class="bg-gray-700 bg-[url('https://i.ibb.co/8Dw3HDN/conference.jpg')] bg-center bg-no-repeat bg-blend-multiply mt-6 h-50vh">
   <div class="mx-auto max-w-screen-xl px-4 py-24 text-center lg:py-56">
-    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">Unleashing the Power of Web Development</h1>
-    <p class="mb-8 text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">Join us for an exciting journey into the world of web development, where we believe in harnessing the boundless potential of innovation, technology, and capital.</p>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">Experience the Future of Events</h1>
+    <p class="mb-8 text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">Immerse yourself in an event designed to inspire and ignite your passion. Build meaningful connections that will drive your success.</p>
     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0">
       <a href="#register" class="inline-flex items-center justify-center rounded-lg bg-indigo-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
         Book Your Spot Now
-        <svg aria-hidden="true" class="-mr-1 ml-2 h-4 w-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+        <i class="pi pi-arrow-right ml-2"></i>
       </a>
       <a href="#agenda" class="inline-flex items-center justify-center rounded-lg border border-white px-5 py-3 text-center text-base font-medium text-white hover:bg-gray-100 hover:text-gray-900 focus:ring-4 focus:ring-gray-400"> Learn more </a>
     </div>
@@ -21,32 +21,34 @@
 <!-- Stats Section Start Here  -->
 <div class="bg-slate-100 py-1 sm:py-6 lg:py-8">
   <div class="mx-auto max-w-screen-xl px-4 md:px-8">
-
     <div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:gap-8">
       <!-- stat - start -->
       <div class="flex flex-col items-center justify-center rounded-lg bg-gray-200 p-4 lg:p-8">
-        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">50+</div>
-        <div class="text-sm font-semibold sm:text-base">Webinar</div>
+        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">{{ yearsCount }}+</div>
+        <div class="text-sm font-semibold sm:text-base">Years</div>
       </div>
       <!-- stat - end -->
 
       <!-- stat - start -->
       <div class="flex flex-col items-center justify-center rounded-lg bg-gray-200 p-4 md:p-8">
-        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">5000+</div>
-        <div class="text-sm font-semibold sm:text-base">Attended</div>
+        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">{{ attendedCount }}+</div>
+        <div class="text-sm font-semibold sm:text-base">Events</div>
       </div>
 
       <!-- stat - start -->
       <div class="flex flex-col items-center justify-center rounded-lg bg-gray-200 p-4 md:p-8">
-        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">400+</div>
-        <div class="text-sm font-semibold sm:text-base">Hours</div>
+        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">{{ attendeesCount }}+</div>
+        <div class="text-sm font-semibold sm:text-base">Attendees</div>
       </div>
       <!-- stat - end -->
 
       <!-- stat - start -->
       <div class="flex flex-col items-center justify-center rounded-lg bg-gray-200 p-4 md:p-8">
-        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">6000+</div>
-        <div class="text-sm font-semibold sm:text-base">Subscriber</div>
+        <div class="text-xl font-bold text-indigo-500 sm:text-2xl md:text-3xl">
+          {{ usersCount }}
+          +
+        </div>
+        <div class="text-sm font-semibold sm:text-base">Users</div>
       </div>
       <!-- stat - end -->
     </div>
@@ -58,96 +60,140 @@
 <!-- Agenda Section Card -->
 <div id="agenda">
   <div class="mt-16 text-center">
-      <h2 class="text-2xl  md:text-4xl font-bold text-gray-100 dark:text-white">What You Will Learn</h2>
-      <p class="text-gray-500 text-lg mt-4 mb-8 dark:text-gray-400 ">Topics that will be covered in this webinar</p>
+    <h2 class="text-2xl md:text-4xl font-bold">Popular Events For You</h2>
+    <p class="text-gray-500 text-lg mt-4 mb-8 dark:text-gray-400">Discover The Most Happening Events Around You</p>
   </div>
   <!-- Card Component  -->
   <div class="flex flex-wrap justify-center mx-auto py-8 px-4 md:mb-16">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-  <!-- Card 1 -->
-  <div class="w-full sm:w-80  mb-4 bg-white rounded-lg shadow-lg">
-      <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="" />
-      <div class="py-4 px-6">
-        <h2 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Front-End Development</h2>
-        <p class="hover:cursor-pointer py-2 text-gray-600 leading-5">HTML, CSS, JavaScript, and frameworks like React and Vue.js - Learn to craft stunning user interfaces and create responsive websites that leave a lasting impression.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
+        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div class="py-4 px-6">
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
+            <span class="text-gray-500 text-sm sm:text-base">24th Aug 2024</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
+              $99
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
+            <div class="flex items-center">
+              <i class="pi pi-users text-gray-600 mr-2"></i>
+              <span class="text-gray-900 font-semibold">150</span>
+              <span class="text-gray-500 ml-1">attending</span>
+            </div>
+          </div>
+        </div>
       </div>
-  </div> 
 
-  <!-- Card 2 -->
-  <div class="w-full sm:w-80  mb-4 bg-white rounded-lg shadow-lg">
-    <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="" />
-    <div class="py-4 px-6">
-      <h2 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Back-End Development</h2>
-      <p class="hover:cursor-pointer py-2 text-gray-600 leading-5">Node.js, Python, MongoDB, MySQL, Express.js, and Django - Discover the magic of server-side programming and build scalable web applications.</p>
-    </div>
-  </div>
+      <!-- Card 2 -->
+      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
+        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 2 Image" />
+        <div class="py-4 px-6">
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
+            <span class="text-gray-500 text-sm sm:text-base">1st Sep 2024</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
+              $129
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
+            <div class="flex items-center">
+              <i class="pi pi-users text-gray-600 mr-2"></i>
+              <span class="text-gray-900 font-semibold">200</span>
+              <span class="text-gray-500 ml-1">attending</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
-  <!-- Card 3 -->
-  <div class="w-full sm:w-80  mb-4 bg-white rounded-lg shadow-lg">
-    <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="" />
-    <div class="py-4 px-6">
-      <h2 class="hover:cursor-pointer mt-2 text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Becoming a Full-Stack Developer</h2>
-      <p class="hover:cursor-pointer py-2 text-gray-600 leading-5">Front-end to back-end, APIs, development tools, and optimization - Elevate your coding skills and become a versatile web development maestro.</p>
+      <!-- Card 3 -->
+      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
+        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 3 Image" />
+        <div class="py-4 px-6">
+          <div class="flex justify-between items-center mb-2">
+            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
+            <span class="text-gray-500 text-sm sm:text-base">15th Sep 2024</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
+              $149
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-2">
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
+            <div class="flex items-center">
+              <i class="pi pi-users text-gray-600 mr-2"></i>
+              <span class="text-gray-900 font-semibold">250</span>
+              <span class="text-gray-500 ml-1">attending</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
-  
-     </div>
   </div>
 </div>
-
 
 <!-- Testimonial Start Here-->
-<div id="review" class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="mx-auto max-w-screen-xl px-4 md:px-8 md:mt-16 md:mb-16">
-    <h2 class="mb-16 text-center text-2xl font-bold text-gray-800 md:mb-12 lg:text-3xl">What others say about us</h2>
+<div id="review" class="bg-white py-8 sm:py-12 lg:py-16">
+  <div class="mx-auto max-w-screen-xl px-4 md:px-8">
+    <h2 class="mb-12 text-center text-3xl font-extrabold text-gray-800 md:mb-16 md:text-4xl">What others say about Plana</h2>
 
-    <div class="grid gap-y-10 sm:grid-cols-2 sm:gap-y-12 lg:grid-cols-3 lg:divide-x">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12">
       <!-- quote - start -->
-      <div class="flex flex-col items-center gap-4 sm:px-4 md:gap-6 lg:px-8">
-        <div class="text-center text-gray-600">“The webinar on web development conducted by John was exceptional. He explained complex concepts in a simple and engaging manner. I learned a lot and feel more confident in my web development skills now.”</div>
+      <div class="flex flex-col items-center gap-6 bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="text-center text-gray-600">“Using Plana to book and attend events has been a fantastic experience. I could easily find events that matched my interests, and the reminders kept me informed about upcoming sessions. The overall experience exceeded my expectations.”</div>
 
-        <div class="flex flex-col items-center gap-2 sm:flex-row md:gap-3">
-          <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-14 md:w-14">
-            <img src="https://images.unsplash.com/photo-1567515004624-219c11d31f2e??auto=format&q=75&fit=crop&w=112" loading="lazy" alt="Photo by Radu Florin" class="h-full w-full object-cover object-center" />
+        <div class="flex flex-col items-center gap-3 sm:flex-row">
+          <div class="h-16 w-16 overflow-hidden rounded-full shadow-lg">
+            <img src="assets/review-1.jpeg" loading="lazy" alt="Photo by Radu Florin" class="h-full w-full object-cover object-center" />
           </div>
 
-          <div>
-            <div class="text-center text-sm font-bold text-indigo-500 sm:text-left md:text-base">Sarah Thompson</div>
-            <p class="text-center text-sm text-gray-500 sm:text-left md:text-sm">Lead Developer / TechPro Solutions</p>
+          <div class="text-center sm:text-left">
+            <div class="text-lg font-bold text-indigo-500">Sarah Thompson</div>
+            <p class="text-gray-500">Lead Developer / TechPro Solutions</p>
           </div>
         </div>
       </div>
       <!-- quote - end -->
 
       <!-- quote - start -->
-      <div class="flex flex-col items-center gap-4 sm:px-4 md:gap-6 lg:px-8 ">
-        <div class="text-center text-gray-600">“I thoroughly enjoyed the webinar hosted by Michael. His expertise in web development is evident, and he shared valuable insights and tips. It was a great learning experience, and I would highly recommend it to others.”</div>
+      <div class="flex flex-col items-center gap-6 bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="text-center text-gray-600">“Plana has been a game-changer for creating & advertising my events. The platform makes it easy to set up and manage events. Thanks to Plana, my events have seen a significant increase in attendance and positive feedback.”</div>
 
-        <div class="flex flex-col items-center gap-2 sm:flex-row md:gap-3">
-          <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-14 md:w-14">
-            <img src="https://images.unsplash.com/photo-1532073150508-0c1df022bdd1?auto=format&q=75&fit=crop&w=112" loading="lazy" alt="Photo by christian ferrer" class="h-full w-full object-cover object-center" />
+        <div class="flex flex-col items-center gap-3 sm:flex-row">
+          <div class="h-16 w-16 overflow-hidden rounded-full shadow-lg">
+            <img src="assets/review-2.jpeg" loading="lazy" alt="Photo by christian ferrer" class="h-full w-full object-cover object-center" />
           </div>
 
-          <div>
-            <div class="text-center text-sm font-bold text-indigo-500 sm:text-left md:text-base">Kate Berg</div>
-            <p class="text-center text-sm text-gray-500 sm:text-left md:text-sm">Chief Technology Officer / InnovateX</p>
+          <div class="text-center sm:text-left">
+            <div class="text-lg font-bold text-indigo-500">Kate Berg</div>
+            <p class="text-gray-500">Chief Technology Officer / InnovateX</p>
           </div>
         </div>
       </div>
       <!-- quote - end -->
 
       <!-- quote - start -->
-      <div class="flex flex-col items-center gap-4 sm:px-4 md:gap-6 lg:px-8">
-        <div class="text-center text-gray-600">Attending Emily's webinar on web development was a game-changer for me. His knowledge and passion for the subject were inspiring. The practical examples and hands-on helped me improve my coding skills.”</div>
+      <div class="flex flex-col items-center gap-6 bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300">
+        <div class="text-center text-gray-600">“Plana made organizing my event incredibly easy and efficient. The support team was also very responsive and helpful. I was able to reach a wide audience and received positive feedback from attendees. I will definitely use Plana again!”</div>
 
-        <div class="flex flex-col items-center gap-2 sm:flex-row md:gap-3">
-          <div class="h-12 w-12 overflow-hidden rounded-full bg-gray-100 shadow-lg md:h-14 md:w-14">
-            <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&q=75&fit=crop&w=500" loading="lazy" alt="Photo by Ayo Ogunseinde" class="h-full w-full object-cover object-center" />
+        <div class="flex flex-col items-center gap-3 sm:flex-row">
+          <div class="h-16 w-16 overflow-hidden rounded-full shadow-lg">
+            <img src="assets/review-3.jpeg" loading="lazy" alt="Photo by Ayo Ogunseinde" class="h-full w-full object-cover object-center" />
           </div>
 
-          <div>
-            <div class="text-center text-sm font-bold text-indigo-500 sm:text-left md:text-base">Greg Jackson</div>
-            <p class="text-center text-sm text-gray-500 sm:text-left md:text-sm">Frontend Developer / CodeCrafters</p>
+          <div class="text-center sm:text-left">
+            <div class="text-lg font-bold text-indigo-500">Greg Jackson</div>
+            <p class="text-gray-500">Frontend Developer / CodeCrafters</p>
           </div>
         </div>
       </div>
@@ -155,6 +201,7 @@
     </div>
   </div>
 </div>
+
 
 
 

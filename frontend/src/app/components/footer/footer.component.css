@@ -1,0 +1,95 @@
+/* Styles for the modal */
+.fixed {
+    position: fixed;
+  }
+  
+  .inset-0 {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .z-50 {
+    z-index: 50;
+  }
+  
+  .flex {
+    display: flex;
+  }
+  
+  .items-center {
+    align-items: center;
+  }
+  
+  .justify-center {
+    justify-content: center;
+  }
+  
+  .bg-gray-900 {
+    background-color: rgba(17, 24, 39, var(--tw-bg-opacity));
+  }
+  
+  .bg-opacity-50 {
+    --tw-bg-opacity: 0.5;
+  }
+  
+  .relative {
+    position: relative;
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  .p-6 {
+    padding: 1.5rem;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .max-w-3xl {
+    max-width: 48rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .text-gray-500 {
+    color: rgba(107, 114, 128, var(--tw-text-opacity));
+  }
+  
+  .hover\:text-gray-700:hover {
+    color: rgba(55, 65, 81, var(--tw-text-opacity));
+  }
+  
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .modal-enter-active {
+    animation: modalFadeIn 0.5s ease-out;
+  }
+  
+  .modal-enter {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  .max-h-screen-80 {
+    max-height: 60vh; 
+  }
+  
+  .overflow-y-auto {
+    overflow-y: auto;
+}
