@@ -1,0 +1,105 @@
+<div class="font-[sans-serif]">
+    <app-navbar></app-navbar>
+    <div class="container mx-auto px-4 py-8 mt-16">
+        <!-- Top Section: Search Bar and Filter Options -->
+        <div class="flex flex-col lg:flex-row justify-between items-start mb-6">
+            <!-- Filters Sidebar -->
+            <div class="w-full lg:w-1/6 pr-4 mt-8">
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center"><i class="pi pi-map-marker mr-2"></i>Location</h3>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+                        <option>All Locations</option>
+                        <option>Nairobi</option>
+                        <option>Mombasa</option>
+                        <option>Kisumu</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center"><i class="pi pi-tags mr-2"></i>Category</h3>
+                    <select class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+                        <option>All Categories</option>
+                        <option>Music</option>
+                        <option>Sports</option>
+                        <option>Conferences</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2 flex items-center"><i class="pi pi-clock mr-2"></i>Time</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input id="anytime" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="anytime" class="ml-2 text-gray-700">Anytime</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="this-week" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="this-week" class="ml-2 text-gray-700">This Week</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="next-week" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="next-week" class="ml-2 text-gray-700">Next Week</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="this-month" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="this-month" class="ml-2 text-gray-700">This Month</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="next-month" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="next-month" class="ml-2 text-gray-700">Next Month</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="this-year" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50" />
+                            <label for="this-year" class="ml-2 text-gray-700">This Year</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <h3 class="text-lg font-semibold mb-2">Price Range</h3>
+                    <div class="flex justify-between text-sm text-gray-700 mb-2">
+                        <span>$0</span>
+                        <span>$500</span>
+                    </div>
+                    <input type="range" min="0" max="500" step="10" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50">
+                </div>
+            </div>
+
+            <!-- Search Bar and Content Area -->
+            <div class="w-full lg:w-5/6">
+                <!-- Search Bar -->
+                <div class="flex justify-between items-center mb-6">
+                    <div class="flex w-full items-center relative">
+                        <i class="pi pi-search absolute left-3 text-gray-400"></i>
+                        <input type="text" class="w-3/4 pl-10 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50" placeholder="Search for events..." />
+                        <button class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 ml-4 flex items-center h-full"><i class="pi pi-times mr-2"></i>Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Card 1 -->
+                    <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+                        <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+                        <div class="flex justify-between items-start px-4 pt-0 pb-2">
+                            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight">Soul Night Carnivore Grounds</h2>
+                            <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
+                                <span class="text-lg font-bold">30</span>
+                                <span class="text-sm font-bold">Sep</span>
+                                <span class="text-sm font-bold">2024</span>
+                            </div>
+                        </div>
+                        <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
+                        <div class="flex justify-between items-center px-4 py-2">
+                            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+                            <div class="flex items-center ml-4">
+                                <i class="pi pi-users text-gray-600 mr-2"></i>
+                                <span class="text-gray-900 font-semibold">300</span>
+                                <span class="text-gray-500 ml-1 text-sm">attending</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Cards -->
+                    <!-- Repeat similar card structure for more events -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

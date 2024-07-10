@@ -7,7 +7,7 @@
     <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">Experience the Future of Events</h1>
     <p class="mb-8 text-lg font-normal text-gray-300 sm:px-16 lg:px-48 lg:text-xl">Immerse yourself in an event designed to inspire and ignite your passion. Build meaningful connections that will drive your success.</p>
     <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-x-4 sm:space-y-0">
-      <a href="#register" class="inline-flex items-center justify-center rounded-lg bg-indigo-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
+      <a routerLink="/register" class="inline-flex items-center justify-center rounded-lg bg-indigo-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-300 dark:focus:ring-indigo-900">
         Book Your Spot Now
         <i class="pi pi-arrow-right ml-2"></i>
       </a>
@@ -65,75 +65,92 @@
   </div>
   <!-- Card Component  -->
   <div class="flex flex-wrap justify-center mx-auto py-8 px-4 md:mb-16">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Card 1 -->
-      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
-        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
-        <div class="py-4 px-6">
-          <div class="flex justify-between items-center mb-2">
-            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
-            <span class="text-gray-500 text-sm sm:text-base">24th Aug 2024</span>
-          </div>
-          <div class="flex justify-between items-center mt-4">
-            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
-              $99
-            </div>
-          </div>
-          <div class="flex justify-between items-center mt-2">
-            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
-            <div class="flex items-center">
-              <i class="pi pi-users text-gray-600 mr-2"></i>
-              <span class="text-gray-900 font-semibold">150</span>
-              <span class="text-gray-500 ml-1">attending</span>
-            </div>
+      <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+        <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div class="flex justify-between items-start px-4 pt-0 pb-2">
+          <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight flex-grow text-center">Soul Night Carnivore Ground</h2>
+          <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
+            <span class="text-lg font-bold">30</span>
+            <span class="text-sm font-bold">Sep</span>
+            <span class="text-sm font-bold">2024</span>
           </div>
         </div>
-      </div>
+        <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
+        <div class="flex justify-between items-center px-4 py-2">
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+          <div class="flex items-center ml-4">
+            <i class="pi pi-users text-gray-600 mr-2"></i>
+            <span class="text-gray-900 font-semibold">300</span>
+            <span class="text-gray-500 ml-1 text-sm">attending</span>
+          </div>
+        </div>
+      </div>      
+           
 
       <!-- Card 2 -->
-      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
-        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 2 Image" />
-        <div class="py-4 px-6">
-          <div class="flex justify-between items-center mb-2">
-            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
-            <span class="text-gray-500 text-sm sm:text-base">1st Sep 2024</span>
+      <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+        <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div class="flex justify-between items-start px-4 pt-0 pb-2">
+          <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight flex-grow text-center">Soul Night Carnivore Ground</h2>
+          <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
+            <span class="text-lg font-bold">30</span>
+            <span class="text-sm font-bold">Sep</span>
+            <span class="text-sm font-bold">2024</span>
           </div>
-          <div class="flex justify-between items-center mt-4">
-            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
-              $129
-            </div>
-          </div>
-          <div class="flex justify-between items-center mt-2">
-            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
-            <div class="flex items-center">
-              <i class="pi pi-users text-gray-600 mr-2"></i>
-              <span class="text-gray-900 font-semibold">200</span>
-              <span class="text-gray-500 ml-1">attending</span>
-            </div>
+        </div>
+        <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
+        <div class="flex justify-between items-center px-4 py-2">
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+          <div class="flex items-center ml-4">
+            <i class="pi pi-users text-gray-600 mr-2"></i>
+            <span class="text-gray-900 font-semibold">300</span>
+            <span class="text-gray-500 ml-1 text-sm">attending</span>
           </div>
         </div>
       </div>
 
       <!-- Card 3 -->
-      <div class="w-full sm:w-80 mb-4 bg-white rounded-lg shadow-lg">
-        <img class="rounded-t-lg w-full h-48 sm:h-64 object-cover" src="assets/event1.jpg" alt="Event 3 Image" />
-        <div class="py-4 px-6">
-          <div class="flex justify-between items-center mb-2">
-            <h2 class="hover:cursor-pointer text-gray-900 font-bold text-xl sm:text-2xl tracking-tight">Soul Night at Carnivore</h2>
-            <span class="text-gray-500 text-sm sm:text-base">15th Sep 2024</span>
+      <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+        <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div class="flex justify-between items-start px-4 pt-0 pb-2">
+          <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight flex-grow text-center">Soul Night Carnivore Ground</h2>
+          <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
+            <span class="text-lg font-bold">30</span>
+            <span class="text-sm font-bold">Sep</span>
+            <span class="text-sm font-bold">2024</span>
           </div>
-          <div class="flex justify-between items-center mt-4">
-            <div class="bg-indigo-100 text-indigo-700 font-semibold text-lg px-3 py-1 rounded-lg shadow-inner">
-              $149
-            </div>
+        </div>
+        <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
+        <div class="flex justify-between items-center px-4 py-2">
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+          <div class="flex items-center ml-4">
+            <i class="pi pi-users text-gray-600 mr-2"></i>
+            <span class="text-gray-900 font-semibold">300</span>
+            <span class="text-gray-500 ml-1 text-sm">attending</span>
           </div>
-          <div class="flex justify-between items-center mt-2">
-            <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Book Now</button>
-            <div class="flex items-center">
-              <i class="pi pi-users text-gray-600 mr-2"></i>
-              <span class="text-gray-900 font-semibold">250</span>
-              <span class="text-gray-500 ml-1">attending</span>
-            </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+        <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div class="flex justify-between items-start px-4 pt-0 pb-2">
+          <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight flex-grow text-center">Soul Night Carnivore Ground</h2>
+          <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
+            <span class="text-lg font-bold">30</span>
+            <span class="text-sm font-bold">Sep</span>
+            <span class="text-sm font-bold">2024</span>
+          </div>
+        </div>
+        <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
+        <div class="flex justify-between items-center px-4 py-2">
+          <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+          <div class="flex items-center ml-4">
+            <i class="pi pi-users text-gray-600 mr-2"></i>
+            <span class="text-gray-900 font-semibold">300</span>
+            <span class="text-gray-500 ml-1 text-sm">attending</span>
           </div>
         </div>
       </div>
@@ -141,6 +158,8 @@
     </div>
   </div>
 </div>
+
+  <!-- Card Component Ends Here --> 
 
 <!-- Testimonial Start Here-->
 <div id="review" class="bg-white py-8 sm:py-12 lg:py-16">

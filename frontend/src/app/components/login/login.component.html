@@ -1,72 +1,76 @@
+<app-navbar></app-navbar>
 
-
-<div class="font-[sans-serif]">
-    <app-navbar></app-navbar>
-    <div class="min-h-90 flex flex-col items-center justify-center pt-24">
-      <div class="grid md:grid-cols-2 items-center gap-4 max-md:gap-8 max-w-6xl max-md:max-w-lg w-full p-4 m-4 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md">
-        <div class="md:max-w-md w-full px-4 py-4">
-          <form>
-            <div class="mb-12">
-              <h3 class="text-gray-800 text-3xl font-extrabold">Sign in</h3>
-              <p class="text-sm mt-4 text-gray-800">Don't have an account <a routerLink="/register" class="text-indigo-700 font-semibold hover:underline ml-1 whitespace-nowrap">Register here</a></p>
-            </div>
-  
-            <div>
-              <label class="text-gray-800 text-xs block mb-2">Email</label>
-              <div class="relative flex items-center">
-                <input name="email" type="text" required class="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-indigo-700 px-2 py-3 outline-none" placeholder="Enter email" />
-                <i class="pi pi-envelope absolute right-2 text-gray-400"></i>
-              </div>
-            </div>
-  
-            <div class="mt-8">
-              <label class="text-gray-800 text-xs block mb-2">Password</label>
-              <div class="relative flex items-center">
-                <input name="password" type="password" required class="w-full text-gray-800 text-sm border-b border-gray-300 focus:border-indigo-700 px-2 py-3 outline-none" placeholder="Enter password" />
-                <i class="pi pi-eye absolute right-2 text-gray-400 cursor-pointer"></i>
-              </div>
-            </div>
-  
-            <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
-              <div class="flex items-center">
-                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 shrink-0 text-indigo-700 focus:ring-indigo-700 border-gray-300 rounded" />
-                <label for="remember-me" class="ml-3 block text-sm text-gray-800">
-                  Remember me
-                </label>
-              </div>
-              <div>
-                <a href="/reset-password" class="text-indigo-700 font-semibold text-sm hover:underline">
-                  Forgot Password?
-                </a>
-              </div>
-            </div>
-  
-            <div class="mt-12">
-              <button type="button" class="w-full shadow-xl py-2.5 px-4 text-sm tracking-wide rounded-md text-white bg-indigo-700 hover:bg-indigo-800 focus:outline-none">
-                Sign in
-              </button>
-            </div>
-  
-            <div class="space-x-6 flex justify-center mt-6">
-              <button type="button" class="border-none outline-none">
-                <img src="https://static-00.iconduck.com/assets.00/google-icon-2048x2048-pks9lbdv.png" alt="Google Sign-In" class="w-8 h-8"/>
-              </button>
-              <button type="button" class="border-none outline-none">
-                <img src="https://cdn-icons-png.flaticon.com/512/154/154870.png" alt="Apple Sign-In" class="w-8 h-8"/>
-              </button>
-              <button type="button" class="border-none outline-none">
-                <img src="https://static-00.iconduck.com/assets.00/facebook-color-icon-2048x2048-bfly1vxr.png" alt="Facebook Sign-In" class="w-8 h-8"/>
-              </button>
-            </div>
-          </form>
+<div class="font-[sans-serif] bg-gray-50 flex items-center md:h-screen p-4">
+  <div class="w-full max-w-4xl max-md:max-w-xl mx-auto">
+    <div class="bg-white grid md:grid-cols-2 gap-8 w-full sm:p-12 p-12 shadow-md rounded-md overflow-hidden">
+      <div class="max-md:order-1 space-y-8">
+        <div class="md:mb-8 mb-4">
+          <h3 class="text-gray-800 text-2xl font-bold">Instant Access</h3>
         </div>
-  
-        <div class="md:h-full bg-slate-950 rounded-xl">
-          <img src="assets/event1.jpg" class="w-full h-full object-cover rounded-xl" alt="login-image" />
+
+        <div class="space-y-6">
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-indigo-700 hover:bg-indigo-800">
+            <i class="pi pi-facebook mr-2"></i>
+            Continue with Facebook
+          </button>
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-gray-800 text-base tracking-wider font-semibold border-none outline-none bg-gray-100 hover:bg-gray-200">
+            <i class="pi pi-google mr-2"></i>
+            Continue with Google
+          </button>
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-black hover:bg-[#333]">
+            <i class="pi pi-apple mr-2"></i>
+            Continue with Apple
+          </button>
         </div>
       </div>
-    </div>
-  </div>  
-  
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full">
+        <div class="mb-6">
+          <h3 class="text-gray-800 text-2xl font-bold">Login</h3>
+        </div>
 
-  <!-- <app-footer></app-footer> -->
+        <div class="space-y-6">
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Email</label>
+            <div class="relative flex items-center">
+              <input formControlName="email" type="email" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter email" />
+              <i class="pi pi-envelope absolute right-4 text-gray-400"></i>
+            </div>
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Password</label>
+            <div class="relative flex items-center">
+              <input formControlName="password" type="password" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter password" />
+              <i class="pi pi-eye absolute right-4 text-gray-400 cursor-pointer"></i>
+            </div>
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <input id="remember-me" formControlName="rememberMe" type="checkbox" class="h-4 w-4 shrink-0 text-indigo-700 focus:ring-indigo-800 border-gray-300 rounded-md" />
+            <label for="remember-me" class="text-gray-800 ml-3 block text-sm">
+              Remember me
+            </label>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <button type="submit" [disabled]="loginForm.invalid" class="w-full py-2.5 px-4 text-sm tracking-wider font-semibold rounded-md bg-indigo-700 hover:bg-indigo-800 text-white focus:outline-none">
+            Login
+          </button>
+        </div>
+        <p class="text-gray-800 text-sm mt-4 text-center">Don't have an account? <a routerLink="/register" class="text-indigo-700 font-semibold hover:underline ml-1">Register here</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

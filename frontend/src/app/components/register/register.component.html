@@ -1,0 +1,103 @@
+<app-navbar></app-navbar>
+
+<div class="font-[sans-serif] bg-gray-50 flex items-center md:h-screen p-4">
+  <div class="w-full max-w-4xl max-md:max-w-xl mx-auto">
+    <div class="bg-white grid md:grid-cols-2 gap-8 w-full sm:p-4 p-4 shadow-md rounded-md overflow-hidden">
+      <div class="max-md:order-1 space-y-4">
+        <div class="md:mb-8 mb-4">
+          <h3 class="text-gray-800 text-2xl font-bold">Instant Access</h3>
+        </div>
+
+        <div class="space-y-4">
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-indigo-700 hover:bg-indigo-800">
+            <i class="pi pi-facebook mr-2"></i>
+            Continue with Facebook
+          </button>
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-gray-800 text-base tracking-wider font-semibold border-none outline-none bg-gray-100 hover:bg-gray-200">
+            <i class="pi pi-google mr-2"></i>
+            Continue with Google
+          </button>
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-black hover:bg-[#333]">
+            <i class="pi pi-apple mr-2"></i>
+            Continue with Apple
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-full">
+        <div class="mb-6">
+          <h3 class="text-gray-800 text-2xl font-bold">Register</h3>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Name</label>
+            <div class="relative flex items-center">
+              <input formControlName="name" type="text" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter name" />
+              <i class="pi pi-user absolute right-4 text-gray-400"></i>
+            </div>
+            <div *ngIf="registerForm.get('name')?.touched && registerForm.get('name')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="registerForm.get('name')?.errors?.['required']">Name is required.</div>
+              <div *ngIf="registerForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Email</label>
+            <div class="relative flex items-center">
+              <input formControlName="email" type="email" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter email" />
+              <i class="pi pi-envelope absolute right-4 text-gray-400"></i>
+            </div>
+            <div *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="registerForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Password</label>
+            <div class="relative flex items-center">
+              <input formControlName="password" type="password" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter password" />
+              <i class="pi pi-eye absolute right-4 text-gray-400 cursor-pointer"></i>
+            </div>
+            <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="registerForm.get('password')?.errors?.['required']">Password is required.</div>
+              <div *ngIf="registerForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Phone Number</label>
+            <div class="relative flex items-center">
+              <input formControlName="phone" type="text" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter phone number" />
+              <i class="pi pi-phone absolute right-4 text-gray-400"></i>
+            </div>
+            <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="registerForm.get('phone')?.errors?.['required']">Phone number is required.</div>
+              <div *ngIf="registerForm.get('phone')?.errors?.['pattern']">Invalid phone number format.</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <input id="terms" formControlName="terms" type="checkbox" class="h-4 w-4 shrink-0 text-indigo-700 focus:ring-indigo-800 border-gray-300 rounded-md" />
+            <label for="terms" class="text-gray-800 ml-3 block text-sm">
+              I accept the <a href="javascript:void(0);" class="text-indigo-700 font-semibold hover:underline ml-1">Terms and Conditions</a>
+            </label>
+          </div>
+          <div *ngIf="registerForm.get('terms')?.touched && registerForm.get('terms')?.invalid" class="text-red-600 text-sm mt-1">
+            <div *ngIf="registerForm.get('terms')?.errors?.['required']">You must accept the terms and conditions.</div>
+          </div>
+        </div>
+      
+        <div class="!mt-6">
+          <button type="submit" [disabled]="registerForm.invalid" class="w-full py-2.5 px-4 text-sm tracking-wider font-semibold rounded-md bg-indigo-700 hover:bg-indigo-800 text-white focus:outline-none">
+            Create Account
+          </button>
+        </div>
+        <p class="text-gray-800 text-sm mt-4 text-center">Already have an account? <a routerLink="/login" class="text-indigo-700 font-semibold hover:underline ml-1">Login here</a></p>
+      </form>
+              
+      
+    </div>
+  </div>
+</div>  
+
+<app-footer></app-footer>
