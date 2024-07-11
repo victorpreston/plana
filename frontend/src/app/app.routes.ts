@@ -3,10 +3,12 @@ import { LandingComponent } from './components/landing/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EventsComponent } from './components/events/events.component';
+import { OrganiserComponent } from './components/organiser/organiser.component';
 
 export const routes: Routes = [
     { path: '', component: LandingComponent},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent},
-    { path: 'events', component: EventsComponent}
+    { path: 'events', component: EventsComponent},
+    { path: 'organiser', component: OrganiserComponent}
 ];
