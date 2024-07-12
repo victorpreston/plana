@@ -1,1 +1,139 @@
-<p>attendees works!</p>
+<div class="container mx-auto px-4 py-4">
+    <!-- Navbar -->
+    <nav class="flex items-center justify-between p-4 m-4 rounded-md">
+      <div class="flex items-center text-xl font-medium px-4">
+        <i class="pi pi-users mr-2"></i>Attendees
+      </div>
+    </nav>
+  
+    <div class="font-[sans-serif] overflow-x-auto">
+      <table class="min-w-full bg-white">
+        <thead class="bg-indigo-800 text-white">
+          <tr>
+            <th class="pl-4 w-8 text-center">
+              <input id="checkbox" type="checkbox" class="hidden peer" />
+              <label for="checkbox"
+                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-indigo-700 border border-gray-400 rounded overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                  <path
+                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
+                    data-name="7-Check" data-original="#000000" />
+                </svg>
+              </label>
+            </th>
+            <th class="p-4 text-center text-sm font-semibold">
+              <i class="pi pi-image mr-1"></i>Profile
+            </th>
+            <th class="p-4 text-center text-sm font-semibold">
+              <i class="pi pi-user mr-1"></i>Name
+            </th>
+            <th class="p-4 text-center text-sm font-semibold">
+              <i class="pi pi-envelope mr-1"></i>Email
+            </th>
+            <th class="p-4 text-center text-sm font-semibold">
+              <i class="pi pi-phone mr-1"></i>Contact
+            </th>
+            <th class="p-4 text-center text-sm font-semibold">
+              <i class="pi pi-ticket mr-1"></i>Tickets
+            </th>
+          </tr>
+        </thead>
+  
+        <tbody class="whitespace-nowrap">
+          <tr class="odd:bg-blue-50">
+            <td class="pl-4 w-8 text-center">
+              <input id="checkbox1" type="checkbox" class="hidden peer" />
+              <label for="checkbox1"
+                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-indigo-700 border border-gray-400 rounded overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                  <path
+                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
+                    data-name="7-Check" data-original="#000000" />
+                </svg>
+              </label>
+            </td>
+            <td class="p-4 text-center text-sm">
+              <div class="flex items-center cursor-pointer w-max mx-auto">
+                <img src='assets/profile.png' class="w-9 h-9 rounded-full shrink-0" />
+              </div>
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              Gladys Jones
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+                evan&#64;example.com
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              +1 (123) 456-7890
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              $50.00
+            </td>
+          </tr>
+  
+          <tr class="odd:bg-blue-50">
+            <td class="pl-4 w-8 text-center">
+              <input id="checkbox2" type="checkbox" class="hidden peer" />
+              <label for="checkbox2"
+                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-indigo-700 border border-gray-400 rounded overflow-hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                  <path
+                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
+                    data-name="7-Check" data-original="#000000" />
+                </svg>
+              </label>
+            </td>
+            <td class="p-4 text-center text-sm">
+              <div class="flex items-center cursor-pointer w-max mx-auto">
+                <img src='assets/profile.png' class="w-9 h-9 rounded-full shrink-0" />
+              </div>
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              Jennie Cooper
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+                evan&#64;example.com
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              +1 (987) 654-3210
+            </td>
+            <td class="p-4 text-center text-sm text-black">
+              $30.00
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Paginator -->
+    <div class="flex justify-end mt-4">
+      <ul class="flex space-x-4">
+        <li class="flex items-center justify-center shrink-0 bg-gray-300 w-10 h-10 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400" viewBox="0 0 55.753 55.753">
+            <path
+              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+              data-original="#000000" />
+          </svg>
+        </li>
+        <li
+          class="flex items-center justify-center shrink-0 bg-indigo-700  border-2 border-indigo-700 cursor-pointer text-base font-bold text-white w-10 h-10 rounded-full">
+          1
+        </li>
+        <li
+          class="flex items-center justify-center shrink-0 hover:bg-gray-50  border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
+          2
+        </li>
+        <li
+          class="flex items-center justify-center shrink-0 hover:bg-gray-50  border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
+          3
+        </li>
+        <li class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer w-10 h-10 rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400 rotate-180" viewBox="0 0 55.753 55.753">
+            <path
+              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+              data-original="#000000" />
+          </svg>
+        </li>
+      </ul>
+    </div>
+  </div>  
