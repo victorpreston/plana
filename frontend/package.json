@@ -25,6 +25,7 @@
     "@fullcalendar/angular": "^6.1.14",
     "@fullcalendar/core": "^6.1.14",
     "@fullcalendar/daygrid": "^6.1.14",
+    "@popperjs/core": "^2.11.8",
     "@swimlane/ngx-charts": "^20.5.0",
     "apexcharts": "^3.50.0",
     "chart.js": "^4.4.3",
