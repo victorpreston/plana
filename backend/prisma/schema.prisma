@@ -21,7 +21,7 @@ enum Role {
 }
 
 model User {
-  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String       @id
   email       String       @unique
   password    String
   firstName   String        @map("first_name")
@@ -47,7 +47,7 @@ model User {
 }
 
 model Address {
-  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String       @id
   street      String?
   city        String?
   state       String?
@@ -60,7 +60,7 @@ model Address {
 }
 
 model Event {
-  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String       @id
   title       String
   description String
   date        DateTime
@@ -83,7 +83,7 @@ model Event {
 }
 
 model EventAttendee {
-  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id        String   @id
   eventId   String   @map("event_id")
   userId    String   @map("user_id")
   event     Event    @relation(fields: [eventId], references: [id])
@@ -94,7 +94,7 @@ model EventAttendee {
 }
 
 model Ticket {
-  id            String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id            String   @id
   type          String
   price         Float
   availableCount Int     @map("available_count")
@@ -109,7 +109,7 @@ model Ticket {
 }
 
 model Booking {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   userId      String    @map("user_id")
   eventId     String    @map("event_id")
   ticketId    String    @map("ticket_id")
@@ -126,11 +126,11 @@ model Booking {
 }
 
 model Notification {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   userId      String    @map("user_id")
   content     String
   type        String    // "in-app", "push"
-  status      String    @default("pending") // "pending", "sent", "failed"
+  status      String    @default("pending") // "pending", "read"
   user        User      @relation(fields: [userId], references: [id])
   isDeleted   Boolean   @default(false) @map("is_deleted")
   createdAt   DateTime  @default(now()) @map("created_at")
@@ -140,7 +140,7 @@ model Notification {
 }
 
 model ChatMessage {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   content     String
   senderId    String    @map("sender_id")
   sender      User      @relation(fields: [senderId], references: [id])
@@ -154,7 +154,7 @@ model ChatMessage {
 }
 
 model Conversation {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   participants User[]   @relation("UserConversations")
   messages     ChatMessage[]
   isDeleted   Boolean   @default(false) @map("is_deleted")
@@ -165,7 +165,7 @@ model Conversation {
 }
 
 model AuditLog {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   userId      String?   @map("user_id")
   action      String
   details     String?
@@ -176,9 +176,9 @@ model AuditLog {
 }
 
 model Review {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   userId      String    @map("user_id")
-  rating      Int       @default(0) // Rating from 1 to 5
+  rating      Int       @default(0) // Let rating default be 0
   comment     String
   user        User      @relation(fields: [userId], references: [id])
   isDeleted   Boolean   @default(false) @map("is_deleted")
@@ -189,19 +189,19 @@ model Review {
 }
 
 model Category {
-  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id          String    @id
   name        String    @unique
   description String?
   events      Event[]
   isDeleted   Boolean   @default(false) @map("is_deleted")
   createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  updatedAt   DateTime  @default(now()) @map("updated_at")
   
   @@map("categories")
 }
 
 model Tag {
-  id        String     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  id        String     @id
   name      String     @unique
   events    EventTag[]
   createdAt DateTime   @default(now()) @map("created_at")
