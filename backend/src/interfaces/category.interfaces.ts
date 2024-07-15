@@ -1,11 +1,10 @@
-import { Event } from './event.interface';
+import { Event } from './event.interfaces';
 
 export interface Category {
   id: string;
   name: string;
-  description?: string;
   events: Event[];
-  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
+  isDeleted: boolean;
 }

@@ -14,208 +14,138 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ATTENDEE
-  MANAGER
-  ADMIN
-}
-
 model User {
-  id          String       @id
-  email       String       @unique
-  password    String
-  firstName   String        @map("first_name")
-  lastName    String        @map("last_name")
-  phoneNumber String?       @map("phone_number")
-  address     Address?
-  role        Role          @default(ATTENDEE)
-  profilePic  String?       @map("profile_pic")
-  isApproved  Boolean       @default(false) @map("is_approved")
-  bookings    Booking[]     
-  events      Event[]       @relation("EventManager")
-  attended    EventAttendee[]
-  reviews     Review[]
-  notifications Notification[]
-  chatMessages ChatMessage[]
-  conversations Conversation[] @relation("UserConversations")
-  auditLogs   AuditLog[]
-  isDeleted   Boolean       @default(false) @map("is_deleted")
-  createdAt   DateTime      @default(now()) @map("created_at")
-  updatedAt   DateTime      @updatedAt      @map("updated_at")
-  
+  id        String    @id @default(uuid())
+  email     String    @unique
+  password  String
+  role      Role
+  profile   Profile?
+  bookings  Booking[]
+  events    Event[]   @relation("EventManager")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isDeleted Boolean   @default(false)
+  logs      Log[]
+
   @@map("users")
 }
 
-model Address {
-  id          String       @id
-  street      String?
-  city        String?
-  state       String?
-  postalCode  String?      @map("postal_code")
-  country     String?
-  userId      String       @unique @map("user_id")
-  user        User         @relation(fields: [userId], references: [id])
-  
-  @@map("addresses")
+model Profile {
+  id        String  @id @default(uuid())
+  userId    String  @unique
+  firstName String
+  lastName  String
+  phone     String?
+  imageUrl  String? // Image upload capability
+  user      User    @relation(fields: [userId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  isDeleted Boolean  @default(false)
+
+  @@map("profiles")
 }
 
 model Event {
-  id          String       @id
+  id          String     @id @default(uuid())
   title       String
   description String
   date        DateTime
   time        DateTime
   location    String
-  bannerUrl   String?      @map("banner_url")
-  createdBy   User         @relation("EventManager", fields: [createdById], references: [id])
-  createdById String       @map("created_by_id")
-  tickets     Ticket[]
-  attendees   EventAttendee[]
+  bannerImage String?    // Banner image for the event
+  ticketTypes TicketType[]
   bookings    Booking[]
+  managerId   String
+  manager     User       @relation("EventManager", fields: [managerId], references: [id])
   categoryId  String
-  category    Category     @relation(fields: [categoryId], references: [id])
+  category    Category   @relation(fields: [categoryId], references: [id])
   tags        EventTag[]
-  isDeleted   Boolean      @default(false) @map("is_deleted")
-  createdAt   DateTime     @default(now()) @map("created_at")
-  updatedAt   DateTime     @updatedAt      @map("updated_at")
-  
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  isDeleted   Boolean    @default(false)
+  logs        Log[]
+
   @@map("events")
 }
 
-model EventAttendee {
-  id        String   @id
-  eventId   String   @map("event_id")
-  userId    String   @map("user_id")
+model TicketType {
+  id        String   @id @default(uuid())
+  eventId   String
+  type      String   // e.g., "single", "group"
+  price     Float
+  quantity  Int
   event     Event    @relation(fields: [eventId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-  isDeleted Boolean  @default(false) @map("is_deleted")
-  
-  @@map("event_attendees")
-}
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
 
-model Ticket {
-  id            String   @id
-  type          String
-  price         Float
-  availableCount Int     @map("available_count")
-  event         Event    @relation(fields: [eventId], references: [id])
-  eventId       String   @map("event_id")
-  bookings      Booking[]
-  isDeleted     Boolean  @default(false) @map("is_deleted")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt      @map("updated_at")
-  
-  @@map("tickets")
+  @@map("ticket_types")
 }
 
 model Booking {
-  id          String    @id
-  userId      String    @map("user_id")
-  eventId     String    @map("event_id")
-  ticketId    String    @map("ticket_id")
-  status      String    @default("booked") // "booked", "canceled", "checked-in"
-  qrCodeUrl   String    @map("qr_code_url")
-  user        User      @relation(fields: [userId], references: [id])
-  event       Event     @relation(fields: [eventId], references: [id])
-  ticket      Ticket    @relation(fields: [ticketId], references: [id])
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
-  
+  id        String   @id @default(uuid())
+  userId    String
+  eventId   String
+  tickets   Int      // number of tickets booked
+  status    String   // e.g., "confirmed", "cancelled"
+  user      User     @relation(fields: [userId], references: [id])
+  event     Event    @relation(fields: [eventId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+  logs      Log[]
+
   @@map("bookings")
 }
 
-model Notification {
-  id          String    @id
-  userId      String    @map("user_id")
-  content     String
-  type        String    // "in-app", "push"
-  status      String    @default("pending") // "pending", "read"
-  user        User      @relation(fields: [userId], references: [id])
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
-  
-  @@map("notifications")
-}
-
-model ChatMessage {
-  id          String    @id
-  content     String
-  senderId    String    @map("sender_id")
-  sender      User      @relation(fields: [senderId], references: [id])
-  conversationId String @map("conversation_id")
-  conversation Conversation @relation(fields: [conversationId], references: [id])
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
-  
-  @@map("chat_messages")
-}
-
-model Conversation {
-  id          String    @id
-  participants User[]   @relation("UserConversations")
-  messages     ChatMessage[]
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
-  
-  @@map("conversations")
-}
-
-model AuditLog {
-  id          String    @id
-  userId      String?   @map("user_id")
-  action      String
-  details     String?
-  user        User?     @relation(fields: [userId], references: [id])
-  createdAt   DateTime  @default(now()) @map("created_at")
-  
-  @@map("audit_logs")
-}
-
-model Review {
-  id          String    @id
-  userId      String    @map("user_id")
-  rating      Int       @default(0) // Let rating default be 0
-  comment     String
-  user        User      @relation(fields: [userId], references: [id])
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt      @map("updated_at")
-  
-  @@map("reviews")
-}
-
 model Category {
-  id          String    @id
-  name        String    @unique
-  description String?
-  events      Event[]
-  isDeleted   Boolean   @default(false) @map("is_deleted")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @default(now()) @map("updated_at")
-  
+  id        String   @id @default(uuid())
+  name      String   @unique
+  events    Event[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
+
   @@map("categories")
 }
 
 model Tag {
-  id        String     @id
-  name      String     @unique
+  id        String   @id @default(uuid())
+  name      String   @unique
   events    EventTag[]
-  createdAt DateTime   @default(now()) @map("created_at")
-  updatedAt DateTime   @updatedAt      @map("updated_at")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  isDeleted Boolean  @default(false)
 
   @@map("tags")
 }
 
 model EventTag {
-  eventId String @map("event_id")
-  tagId   String @map("tag_id")
-  event   Event  @relation(fields: [eventId], references: [id])
-  tag     Tag    @relation(fields: [tagId], references: [id])
+  eventId String
+  tagId   String
+  event   Event @relation(fields: [eventId], references: [id])
+  tag     Tag   @relation(fields: [tagId], references: [id])
 
   @@id([eventId, tagId])
   @@map("event_tags")
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  userId    String?
+  eventId   String?
+  bookingId String?
+  action    String   // e.g., "user_signin", "user_signout", "event_booked"
+  timestamp DateTime @default(now())
+  user      User?    @relation(fields: [userId], references: [id])
+  event     Event?   @relation(fields: [eventId], references: [id])
+  booking   Booking? @relation(fields: [bookingId], references: [id])
+
+  @@map("logs")
+}
+
+enum Role {
+  ATTENDEE
+  MANAGER
+  ADMIN
 }
