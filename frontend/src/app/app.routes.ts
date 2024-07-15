@@ -50,6 +50,7 @@ export const routes: Routes = [
         { path: 'categories', component: CategoriesComponent },
         { path: 'profile-settings', component: ProfileSettingsComponent },
         { path: 'calendar', component: CalendarComponent },
+        { path: '', redirectTo: 'analytics', pathMatch: 'full' },
         // { path: 'category', component: CategoriesComponent },
       ]}
 ];

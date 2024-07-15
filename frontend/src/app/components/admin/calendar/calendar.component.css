@@ -1,0 +1,17 @@
+.calendar-container {
+    max-width: 100%;
+    height: 800px;
+    margin: 10 auto;
+    overflow: hidden;
+    /* border: 1px solid #ccc; */
+    border-radius: 3px;
+    margin: 10px;
+  }
+  
+  .tooltip {
+    pointer-events: none;
+  }
+
+.fc-event-title {
+    color: #303f9f;
+}
