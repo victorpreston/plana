@@ -4,6 +4,7 @@
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,4 +12,210 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ATTENDEE
+  MANAGER
+  ADMIN
+}
+
+model User {
+  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email       String       @unique
+  password    String
+  firstName   String        @map("first_name")
+  lastName    String        @map("last_name")
+  phoneNumber String?       @map("phone_number")
+  address     Address?
+  role        Role          @default(ATTENDEE)
+  profilePic  String?       @map("profile_pic")
+  isApproved  Boolean       @default(false) @map("is_approved")
+  bookings    Booking[]     
+  events      Event[]       @relation("EventManager")
+  attended    EventAttendee[]
+  reviews     Review[]
+  notifications Notification[]
+  chatMessages ChatMessage[]
+  conversations Conversation[] @relation("UserConversations")
+  auditLogs   AuditLog[]
+  isDeleted   Boolean       @default(false) @map("is_deleted")
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt      @map("updated_at")
+  
+  @@map("users")
+}
+
+model Address {
+  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  street      String?
+  city        String?
+  state       String?
+  postalCode  String?      @map("postal_code")
+  country     String?
+  userId      String       @unique @map("user_id")
+  user        User         @relation(fields: [userId], references: [id])
+  
+  @@map("addresses")
+}
+
+model Event {
+  id          String       @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title       String
+  description String
+  date        DateTime
+  time        DateTime
+  location    String
+  bannerUrl   String?      @map("banner_url")
+  createdBy   User         @relation("EventManager", fields: [createdById], references: [id])
+  createdById String       @map("created_by_id")
+  tickets     Ticket[]
+  attendees   EventAttendee[]
+  bookings    Booking[]
+  categoryId  String
+  category    Category     @relation(fields: [categoryId], references: [id])
+  tags        EventTag[]
+  isDeleted   Boolean      @default(false) @map("is_deleted")
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt      @map("updated_at")
+  
+  @@map("events")
+}
+
+model EventAttendee {
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  eventId   String   @map("event_id")
+  userId    String   @map("user_id")
+  event     Event    @relation(fields: [eventId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+  isDeleted Boolean  @default(false) @map("is_deleted")
+  
+  @@map("event_attendees")
+}
+
+model Ticket {
+  id            String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  type          String
+  price         Float
+  availableCount Int     @map("available_count")
+  event         Event    @relation(fields: [eventId], references: [id])
+  eventId       String   @map("event_id")
+  bookings      Booking[]
+  isDeleted     Boolean  @default(false) @map("is_deleted")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt      @map("updated_at")
+  
+  @@map("tickets")
+}
+
+model Booking {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId      String    @map("user_id")
+  eventId     String    @map("event_id")
+  ticketId    String    @map("ticket_id")
+  status      String    @default("booked") // "booked", "canceled", "checked-in"
+  qrCodeUrl   String    @map("qr_code_url")
+  user        User      @relation(fields: [userId], references: [id])
+  event       Event     @relation(fields: [eventId], references: [id])
+  ticket      Ticket    @relation(fields: [ticketId], references: [id])
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("bookings")
+}
+
+model Notification {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId      String    @map("user_id")
+  content     String
+  type        String    // "in-app", "push"
+  status      String    @default("pending") // "pending", "sent", "failed"
+  user        User      @relation(fields: [userId], references: [id])
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("notifications")
+}
+
+model ChatMessage {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  content     String
+  senderId    String    @map("sender_id")
+  sender      User      @relation(fields: [senderId], references: [id])
+  conversationId String @map("conversation_id")
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("chat_messages")
+}
+
+model Conversation {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  participants User[]   @relation("UserConversations")
+  messages     ChatMessage[]
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("conversations")
+}
+
+model AuditLog {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId      String?   @map("user_id")
+  action      String
+  details     String?
+  user        User?     @relation(fields: [userId], references: [id])
+  createdAt   DateTime  @default(now()) @map("created_at")
+  
+  @@map("audit_logs")
+}
+
+model Review {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  userId      String    @map("user_id")
+  rating      Int       @default(0) // Rating from 1 to 5
+  comment     String
+  user        User      @relation(fields: [userId], references: [id])
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("reviews")
+}
+
+model Category {
+  id          String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name        String    @unique
+  description String?
+  events      Event[]
+  isDeleted   Boolean   @default(false) @map("is_deleted")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt      @map("updated_at")
+  
+  @@map("categories")
+}
+
+model Tag {
+  id        String     @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  name      String     @unique
+  events    EventTag[]
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt      @map("updated_at")
+
+  @@map("tags")
+}
+
+model EventTag {
+  eventId String @map("event_id")
+  tagId   String @map("tag_id")
+  event   Event  @relation(fields: [eventId], references: [id])
+  tag     Tag    @relation(fields: [tagId], references: [id])
+
+  @@id([eventId, tagId])
+  @@map("event_tags")
 }
