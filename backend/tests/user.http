@@ -1,0 +1,101 @@
+# Register a new attendee (default role is ATTENDEE)
+POST http://localhost:5000/api/register
+Content-Type: application/json
+
+{
+  "email": "attendee@example.com",
+  "password": "password123",
+  "firstName": "John",
+  "lastName": "Doe",
+  "phone": "1234567890"
+}
+
+###
+
+# Register a new admin 
+POST http://localhost:5000/api/register
+Content-Type: application/json
+
+{
+  "email": "admin1@example.com",
+  "password": "password123",
+  "firstName": "Admin",
+  "lastName": "User",
+  "phone": "0987654321",
+  "role": "ADMIN"
+}
+
+###
+
+# Login as attendee
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "attendee@example.com",
+  "password": "password123"
+}
+
+###
+
+# Login as admin
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin1@example.com",
+  "password": "password123"
+}
+
+###
+
+# Get user details 
+GET http://localhost:5000/api/users/fa781dcb-d727-4386-aa85-7d6596c8f704
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+###
+
+# Promote attendee to manager (admin only)
+PUT http://localhost:5000/api/users/fa781dcb-d727-4386-aa85-7d6596c8f704/role
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+{
+  "role": "MANAGER"
+}
+
+###
+
+# Get all users (admin only)
+GET http://localhost:5000/api/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+
+###
+
+# Register a new attendee (Booking Tests)
+POST http://localhost:5000/api/register
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123",
+  "firstName": "Victor",
+  "lastName": "Preston",
+  "phone": "0705383588"
+}
+
+###
+
+
+
+# Login as attendee (Booking Tests)
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "testuser@example.com",
+  "password": "password123"
+}
+
+###

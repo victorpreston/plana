@@ -75,6 +75,7 @@ model TicketType {
   price     Float
   quantity  Int
   event     Event    @relation(fields: [eventId], references: [id])
+  bookings  Booking[] // Add inverse relation field
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
@@ -83,17 +84,21 @@ model TicketType {
 }
 
 model Booking {
-  id        String   @id @default(uuid())
-  userId    String
-  eventId   String
-  tickets   Int      // number of tickets booked
-  status    String   // e.g., "confirmed", "cancelled"
-  user      User     @relation(fields: [userId], references: [id])
-  event     Event    @relation(fields: [eventId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  isDeleted Boolean  @default(false)
-  logs      Log[]
+  id           String     @id @default(uuid())
+  userId       String
+  eventId      String
+  ticketTypeId String     // Add ticket type ID
+  tickets      Int
+  status       String
+  ticketCode   String     @unique
+  totalPrice   Float      // Add total price
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  isDeleted    Boolean    @default(false)
+  user         User       @relation(fields: [userId], references: [id])
+  event        Event      @relation(fields: [eventId], references: [id])
+  ticketType   TicketType @relation(fields: [ticketTypeId], references: [id])
+  logs         Log[]      // Add inverse relation field
 
   @@map("bookings")
 }

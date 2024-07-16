@@ -1,0 +1,92 @@
+# Create a new event
+POST http://localhost:5000/api/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+{
+  "title": "Tech Conference 2024",
+  "description": "A conference about the latest in tech.",
+  "date": "2024-08-01T09:00:00.000Z",
+  "time": "2024-08-01T09:00:00.000Z",
+  "location": "Nairobi",
+  "bannerImage": "https://example.com/banner.jpg",
+  "managerId": "fa781dcb-d727-4386-aa85-7d6596c8f704",
+  "categoryId": "5e2ae853-a8d1-42da-979c-97299f300e54",
+  "ticketTypes": [
+    {
+      "type": "VIP",
+      "price": 100.0,
+      "quantity": 50
+    },
+    {
+      "type": "Regular",
+      "price": 50.0,
+      "quantity": 100
+    }
+  ],
+  "tags": [
+    {
+      "tagId": "7e8b0a91-caf7-43f8-b0d5-14f6a8fe05f4"
+    },
+    {
+      "tagId": "25384e6a-764f-423a-9f41-820ca0c80bf3"
+    }
+  ]
+}
+
+###
+
+# Get all events
+GET http://localhost:5000/api/events
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+###
+
+# Get an event by ID
+GET http://localhost:5000/api/events/a18a4e4f-f57a-4514-9061-4dc17dedab44
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+###
+
+# Update an event
+PUT http://localhost:5000/api/events/a18a4e4f-f57a-4514-9061-4dc17dedab44
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+{
+  "title": "Tech Conference 2024 - Updated",
+  "description": "An updated description of the tech conference.",
+  "date": "2024-08-02T09:00:00.000Z",
+  "time": "2024-08-02T09:00:00.000Z",
+  "location": "Nairobi",
+  "bannerImage": "https://example.com/banner_updated.jpg",
+  "categoryId": "5e2ae853-a8d1-42da-979c-97299f300e54",
+  "ticketTypes": [
+    {
+      "id": "90e9a572-26b0-4803-be74-e62dd369c7db",
+      "type": "VIP",
+      "price": 120.0,
+      "quantity": 40
+    },
+    {
+      "id": "a4156c75-5088-49e4-a11c-1aa529b027f8",
+      "type": "General",
+      "price": 60.0,
+      "quantity": 90
+    }
+  ],
+  "tags": [
+    {
+      "tagId": "25384e6a-764f-423a-9f41-820ca0c80bf3"
+    },
+    {
+      "tagId": "7e8b0a91-caf7-43f8-b0d5-14f6a8fe05f4"
+    }
+  ]
+}
+
+###
+
+# Delete an event (soft delete)
+DELETE http://localhost:5000/api/events/<eventId>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA

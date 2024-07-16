@@ -1,33 +1,40 @@
 import express from 'express';
-import cors from 'cors';
 import bodyParser from 'body-parser';
-import { PORT } from './config/env.config';
-import prisma from './config/db'; 
-import userRoutes from './routes/user.routes'; 
+import cors from 'cors';
+import userRoutes from './routes/user.routes';
+import { env } from './config/env.config';
+import profileRoutes from './routes/profile.routes';
+import categoryRoutes from './routes/category.routes';
+import tagRoutes from './routes/tag.routes';
 import eventRoutes from './routes/event.routes';
+import bookingRoutes from './routes/booking.routes';
+import prisma from './config/database.config';
 
 const app = express();
+const port = env.port;
 
-app.use(cors());
+/**
+ * Configure CORS
+ */
+const corsOptions = {
+  origin: "http://localhost:4200",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Plana API is running!');
-});
-
-// Use user routes
 app.use('/api', userRoutes);
-// Use event routes
+app.use('/api', profileRoutes);
+app.use('/api', categoryRoutes);
+app.use('/api', tagRoutes);
 app.use('/api', eventRoutes);
+app.use('/api', bookingRoutes);
 
-// Global error handler
-app.use((err: any, req: any, res: any, next: any) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const server = app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
 
 /**

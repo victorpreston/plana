@@ -3,6 +3,8 @@ import { Booking } from './booking.interfaces';
 import { Event } from './event.interfaces';
 import { Log } from './log.interfaces';
 
+export { Profile };
+
 export interface User {
   id: string;
   email: string;

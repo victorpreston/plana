@@ -1,0 +1,59 @@
+# Create a new tag
+POST http://localhost:5000/api/tags
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+
+{
+  "name": "Tag1"
+}
+
+###
+
+# Create another new tag
+POST http://localhost:5000/api/tags
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+
+{
+  "name": "Tag2"
+}
+
+###
+
+# Create another new tag
+POST http://localhost:5000/api/tags
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+
+{
+  "name": "Tag3"
+}
+
+###
+
+# Get all tags
+GET http://localhost:5000/api/tags
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+###
+
+# Get a tag by ID 
+GET http://localhost:5000/api/tags/1558e683-d53b-4d43-b04e-a86923952805
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+
+###
+
+# Update a tag 
+PUT http://localhost:5000/api/tags/1558e683-d53b-4d43-b04e-a86923952805
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+
+{
+  "name": "Tag3-Updated"
+}
+
+###
+
+# Delete a tag (soft delete) 
+DELETE http://localhost:5000/api/tags/1558e683-d53b-4d43-b04e-a86923952805
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso

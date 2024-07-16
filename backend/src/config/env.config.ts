@@ -1,7 +1,9 @@
-import dotenv from 'dotenv';
-
+import * as dotenv from 'dotenv';
 dotenv.config();
 
-export const DATABASE_URL = process.env.DATABASE_URL || '';
-export const PORT = process.env.PORT || 5000;
-export const JWT_SECRET = process.env.JWT_SECRET || 'default_secret';
+export const env = {
+  databaseUrl: process.env.DATABASE_URL,
+  port: process.env.PORT || 5000,
+  jwtSecret: process.env.JWT_SECRET || 'default_secret',
+  logLevel: process.env.LOG_LEVEL || 'info',
+};

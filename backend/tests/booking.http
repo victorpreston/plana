@@ -1,0 +1,41 @@
+# Create a new booking
+POST http://localhost:5000/api/bookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+
+{
+  "userId": "e4f84392-dbdf-41f3-9c9d-24a48c8dcab7",
+  "eventId": "a18a4e4f-f57a-4514-9061-4dc17dedab44",
+  "ticketTypeId": "90e9a572-26b0-4803-be74-e62dd369c7db",
+  "tickets": 2
+}
+
+###
+
+# Get all bookings for the user
+GET http://localhost:5000/api/bookings
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+
+###
+
+# Get a booking by ID
+GET http://localhost:5000/api/bookings/49ca1a3f-ec5f-43c7-abc7-147c13cb9f9b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+
+###
+
+# Update a booking
+PUT http://localhost:5000/api/bookings/49ca1a3f-ec5f-43c7-abc7-147c13cb9f9b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+
+{
+  "tickets": 5,
+  "status": "confirmed"
+}
+
+###
+
+# Delete a booking (soft delete)
+DELETE http://localhost:5000/api/bookings/<bookingId>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I

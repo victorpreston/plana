@@ -1,0 +1,37 @@
+# Create a new category
+POST http://localhost:5000/api/categories
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+{
+  "name": "Soul Night Carnivore"
+}
+
+###
+
+# Get all categories
+GET http://localhost:5000/api/categories
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+
+###
+
+# Get a category by ID (Replace <categoryId> with actual category ID from creation response)
+GET http://localhost:5000/api/categories/da24d2b0-dbb2-4019-8db3-9435072780e2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+###
+
+# Update a category (Replace <categoryId> with actual category ID from creation response)
+PUT http://localhost:5000/api/categories/da24d2b0-dbb2-4019-8db3-9435072780e2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+
+{
+  "name": "Live Music Performance"
+}
+
+###
+
+# Delete a category (soft delete) (Replace <categoryId> with actual category ID from creation response)
+DELETE http://localhost:5000/api/categories/da24d2b0-dbb2-4019-8db3-9435072780e2
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
