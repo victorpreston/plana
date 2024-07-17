@@ -4,7 +4,11 @@ import { User, Role, Profile } from '../interfaces/user.interfaces';
 import { generateToken } from '../config/jwt.config';
 import { Prisma } from '@prisma/client';
 
-// Function to map Prisma Role to TypeScript Role
+/**
+ * Function to map Prisma Role to TypeScript Role
+ * @param prismaRole 
+ * @returns 
+ */
 const mapRole = (prismaRole: any): Role => {
   switch (prismaRole) {
     case 'ATTENDEE':
@@ -18,7 +22,12 @@ const mapRole = (prismaRole: any): Role => {
   }
 };
 
-// Function to map Prisma Profile to TypeScript Profile
+
+/**
+ * Function to map Prisma Profile to TypeScript Profile
+ * @param prismaProfile 
+ * @returns 
+ */
 export const mapProfile = (prismaProfile: any): Profile => {
   return {
     id: prismaProfile.id,
@@ -33,7 +42,17 @@ export const mapProfile = (prismaProfile: any): Profile => {
   };
 };
 
-// Function to register a new user
+
+/**
+ * Function to register a new user
+ * @param email 
+ * @param password 
+ * @param firstName 
+ * @param lastName 
+ * @param phone 
+ * @param role 
+ * @returns 
+ */
 export const registerUser = async (email: string, password: string, firstName: string, lastName: string, phone: string, role: Role = Role.ATTENDEE): Promise<User> => {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -42,7 +61,7 @@ export const registerUser = async (email: string, password: string, firstName: s
       data: {
         email,
         password: hashedPassword,
-        role,  // Use the role parameter
+        role,
         profile: {
           create: {
             firstName,
@@ -64,7 +83,9 @@ export const registerUser = async (email: string, password: string, firstName: s
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
-        // Handle unique constraint violation
+        /**
+         * Handle unique constraint violation error
+         */
         throw new Error(`A user with the email ${email} already exists.`);
       }
     }
@@ -72,7 +93,13 @@ export const registerUser = async (email: string, password: string, firstName: s
   }
 };
 
-// Function to login a user
+
+/**
+ * Function to login a user
+ * @param email 
+ * @param password 
+ * @returns 
+ */
 export const loginUser = async (email: string, password: string): Promise<{ user: User; token: string }> => {
   const user = await prisma.user.findUnique({
     where: { email },
@@ -95,7 +122,12 @@ export const loginUser = async (email: string, password: string): Promise<{ user
   };
 };
 
-// Function to fetch user details
+
+/**
+ * Function to get a user by ID
+ * @param userId 
+ * @returns 
+ */
 export const getUserById = async (userId: string): Promise<User | null> => {
   const user = await prisma.user.findUnique({
     where: { id: userId },
@@ -113,7 +145,13 @@ export const getUserById = async (userId: string): Promise<User | null> => {
   };
 };
 
-// Function to update user role
+
+/**
+ * Function to update a user's role
+ * @param userId 
+ * @param role 
+ * @returns 
+ */
 export const updateUserRole = async (userId: string, role: Role): Promise<User> => {
   const updatedUser = await prisma.user.update({
     where: { id: userId },
@@ -128,7 +166,11 @@ export const updateUserRole = async (userId: string, role: Role): Promise<User> 
   };
 };
 
-// Function to get all users
+
+/**
+ * Function to get all users
+ * @returns 
+ */
 export const getAllUsers = async (): Promise<User[]> => {
   const users = await prisma.user.findMany({
     where: { isDeleted: false },
@@ -142,7 +184,10 @@ export const getAllUsers = async (): Promise<User[]> => {
   }));
 };
 
-// Function to delete a user (soft delete)
+/**
+ * Function to delete a user (soft delete)
+ * @param userId 
+ */
 export const deleteUser = async (userId: string): Promise<void> => {
   await prisma.user.update({
     where: { id: userId },

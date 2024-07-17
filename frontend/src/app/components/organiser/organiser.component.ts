@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponentManager } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @Component({
   selector: 'app-organiser',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, SidebarComponent],
+  imports: [RouterOutlet, NavbarComponentManager, SidebarComponent],
   templateUrl: './organiser.component.html',
   styleUrl: './organiser.component.css'
 })

@@ -20,11 +20,14 @@ import { CategoriesComponent } from './components/admin/categories/categories.co
 import { ProfileSettingsComponent } from './components/admin/profile-settings/profile-settings.component';
 import { CalendarComponent } from './components/admin/calendar/calendar.component';
 import { MessagesComponent } from './components/admin/messages/messages.component';
+import { AttendeeComponent } from './components/attendee/attendee.component';
 export const routes: Routes = [
     { path: '', component: LandingComponent},
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent},
     { path: 'events', component: EventsComponent},
+    { path: 'register', component: RegisterComponent },
+    {path: 'attendee', component: AttendeeComponent},
     {
         path: 'organiser',
         component: OrganiserComponent,

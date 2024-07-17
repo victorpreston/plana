@@ -1,7 +1,11 @@
 import prisma from '../config/database.config';
 import { TicketType } from '../interfaces/ticket.interfaces';
 
-// Function to create a new ticket type
+/**
+ * Function to create a new ticket type
+ * @param ticketData 
+ * @returns 
+ */
 export const createTicketType = async (ticketData: Omit<TicketType, 'id' | 'createdAt' | 'updatedAt' | 'isDeleted' | 'event'>): Promise<TicketType> => {
   const newTicketType = await prisma.ticketType.create({
     data: {
@@ -15,7 +19,12 @@ export const createTicketType = async (ticketData: Omit<TicketType, 'id' | 'crea
   return newTicketType as TicketType;
 };
 
-// Function to update a ticket type
+
+/**
+ * Function to fetch a ticket type by ID
+ * @param id 
+ * @returns 
+ */
 export const updateTicketType = async (id: string, ticketData: Partial<TicketType>): Promise<TicketType> => {
   const { eventId, ...data } = ticketData;
 
@@ -30,7 +39,12 @@ export const updateTicketType = async (id: string, ticketData: Partial<TicketTyp
   return updatedTicketType as TicketType;
 };
 
-// Function to fetch all ticket types for an event
+
+/**
+ * Function to fetch a ticket type by ID
+ * @param id 
+ * @returns 
+ */
 export const getTicketTypesByEventId = async (eventId: string): Promise<TicketType[]> => {
   const ticketTypes = await prisma.ticketType.findMany({
     where: { eventId, isDeleted: false },
@@ -39,7 +53,10 @@ export const getTicketTypesByEventId = async (eventId: string): Promise<TicketTy
   return ticketTypes as TicketType[];
 };
 
-// Function to delete a ticket type (soft delete)
+/**
+ * Function to fetch a ticket type by ID
+ * @param id 
+ */
 export const deleteTicketType = async (id: string): Promise<void> => {
   await prisma.ticketType.update({
     where: { id },

@@ -1,7 +1,11 @@
 import prisma from '../config/database.config';
 import { Tag } from '../interfaces/tag.interfaces';
 
-// Function to map Prisma Tag to TypeScript Tag
+/**
+ * Function to map Prisma Tag to TypeScript Tag
+ * @param prismaTag 
+ * @returns 
+ */
 const mapTag = (prismaTag: any): Tag => {
   return {
     id: prismaTag.id,
@@ -13,7 +17,12 @@ const mapTag = (prismaTag: any): Tag => {
   };
 };
 
-// Function to create a new tag
+
+/**
+ * Function to create a new tag
+ * @param name 
+ * @returns 
+ */
 export const createTag = async (name: string): Promise<Tag> => {
   const newTag = await prisma.tag.create({
     data: {
@@ -24,7 +33,13 @@ export const createTag = async (name: string): Promise<Tag> => {
   return mapTag(newTag);
 };
 
-// Function to update a tag
+
+/**
+ * Function to update a tag
+ * @param id 
+ * @param name 
+ * @returns 
+ */
 export const updateTag = async (id: string, name: string): Promise<Tag> => {
   const updatedTag = await prisma.tag.update({
     where: { id },
@@ -34,7 +49,10 @@ export const updateTag = async (id: string, name: string): Promise<Tag> => {
   return mapTag(updatedTag);
 };
 
-// Function to fetch all tags
+/**
+ * Function to fetch all tags
+ * @returns 
+ */
 export const getAllTags = async (): Promise<Tag[]> => {
   const tags = await prisma.tag.findMany({
     where: { isDeleted: false },
@@ -44,7 +62,11 @@ export const getAllTags = async (): Promise<Tag[]> => {
   return tags.map(mapTag);
 };
 
-// Function to fetch a tag by ID
+/**
+ * Function to fetch a tag by ID
+ * @param id 
+ * @returns 
+ */
 export const getTagById = async (id: string): Promise<Tag | null> => {
   const tag = await prisma.tag.findUnique({
     where: { id },
@@ -54,7 +76,10 @@ export const getTagById = async (id: string): Promise<Tag | null> => {
   return tag ? mapTag(tag) : null;
 };
 
-// Function to delete a tag (soft delete)
+/**
+ * Function to delete a tag
+ * @param id 
+ */
 export const deleteTag = async (id: string): Promise<void> => {
   await prisma.tag.update({
     where: { id },

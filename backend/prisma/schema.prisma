@@ -36,7 +36,7 @@ model Profile {
   firstName String
   lastName  String
   phone     String?
-  imageUrl  String? // Image upload capability
+  imageUrl  String?
   user      User    @relation(fields: [userId], references: [id])
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
@@ -52,7 +52,7 @@ model Event {
   date        DateTime
   time        DateTime
   location    String
-  bannerImage String?    // Banner image for the event
+  bannerImage String?
   ticketTypes TicketType[]
   bookings    Booking[]
   managerId   String
@@ -75,7 +75,7 @@ model TicketType {
   price     Float
   quantity  Int
   event     Event    @relation(fields: [eventId], references: [id])
-  bookings  Booking[] // Add inverse relation field
+  bookings  Booking[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isDeleted Boolean  @default(false)
@@ -87,18 +87,18 @@ model Booking {
   id           String     @id @default(uuid())
   userId       String
   eventId      String
-  ticketTypeId String     // Add ticket type ID
+  ticketTypeId String     
   tickets      Int
   status       String
   ticketCode   String     @unique
-  totalPrice   Float      // Add total price
+  totalPrice   Float      
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   isDeleted    Boolean    @default(false)
   user         User       @relation(fields: [userId], references: [id])
   event        Event      @relation(fields: [eventId], references: [id])
   ticketType   TicketType @relation(fields: [ticketTypeId], references: [id])
-  logs         Log[]      // Add inverse relation field
+  logs         Log[]      
 
   @@map("bookings")
 }

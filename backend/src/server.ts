@@ -34,24 +34,21 @@ app.use('/api', eventRoutes);
 app.use('/api', bookingRoutes);
 
 const server = app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
 
 /**
  * Graceful shutdown
  */
-process.on('SIGTERM', () => {
-  console.log('SIGTERM signal received: closing HTTP server');
-  server.close(async () => {
-    console.log('HTTP server closed');
-    await prisma.$disconnect();
+const gracefulShutdown = (signal: string) => {
+  process.on(signal, () => {
+    console.log(`${signal} signal received: closing HTTP server`);
+    server.close(async () => {
+      console.log('HTTP server closed');
+      await prisma.$disconnect();
+    });
   });
-});
+};
 
-process.on('SIGINT', () => {
-  console.log('SIGINT signal received: closing HTTP server');
-  server.close(async () => {
-    console.log('HTTP server closed');
-    await prisma.$disconnect();
-  });
-});
+gracefulShutdown('SIGTERM');
+gracefulShutdown('SIGINT');

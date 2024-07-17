@@ -6,11 +6,15 @@ import { Role } from '../interfaces/user.interfaces';
 
 const router = Router();
 
-// Public routes
+/**
+ * public routes
+ */
 router.post('/register', register);
 router.post('/login', login);
 
-// Protected routes
+/**
+ * protected routes
+ */
 router.get('/users', authenticateJWT, authorizeRole(Role.ADMIN), getUsers);
 router.get('/users/:id', authenticateJWT, getUser);
 router.put('/users/:id/role', authenticateJWT, authorizeRole(Role.ADMIN), updateRole);
