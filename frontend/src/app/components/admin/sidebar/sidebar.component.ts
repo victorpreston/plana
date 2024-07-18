@@ -14,6 +14,13 @@ export class SidebarComponent {
 
   logout() {
     // Clear user data or token
-    this.router.navigate(['/']);
+    setTimeout(() => {
+      // Clear token
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      // Redirect after 2000 milliseconds
+      this.router.navigate(['/']);
+    }, 2000);
   }
 }

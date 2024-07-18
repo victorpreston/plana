@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { User } from '../../interfaces/user';
 
 @Injectable({
@@ -8,8 +8,15 @@ import { User } from '../../interfaces/user';
 })
 export class AuthService {
   private baseUrl = 'http://localhost:5000/api';
+  private userSubject = new BehaviorSubject<User | null>(null);
+  public user$ = this.userSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      this.userSubject.next(JSON.parse(storedUser));
+    }
+  }
 
   register(email: string, password: string, firstName: string, lastName: string, phone: string): Observable<User> {
     const url = `${this.baseUrl}/register`;
@@ -21,5 +28,17 @@ export class AuthService {
     const url = `${this.baseUrl}/login`;
     const body = { email, password };
     return this.http.post<{ user: User; token: string }>(url, body);
+  }
+
+  setUser(user: User, token: string): void {
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify(user));
+    this.userSubject.next(user);
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.userSubject.next(null);
   }
 }

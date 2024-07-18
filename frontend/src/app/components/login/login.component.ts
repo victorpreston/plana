@@ -30,6 +30,7 @@ export class LoginComponent {
       this.authService.login(email, password).subscribe({
         next: ({ user, token }) => {
           console.log('Login successful', user, token);
+          this.authService.setUser(user, token);
           this.handleRedirection(user);
         },
         error: (error) => {
@@ -43,13 +44,13 @@ export class LoginComponent {
   private handleRedirection(user: User) {
     switch (user.role) {
       case Role.ATTENDEE:
-        this.router.navigate(['/attendee']);
+        this.router.navigate(['/events']);
         break;
       case Role.MANAGER:
-        this.router.navigate(['/organiser']);
+        this.router.navigate(['/organiser/dashboard']);
         break;
       case Role.ADMIN:
-        this.router.navigate(['/admin']);
+        this.router.navigate(['/admin/analytics']);
         break;
       default:
         this.router.navigate(['/']);
