@@ -1,9 +1,13 @@
-// src/validations/userValidations.ts
-
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
 import { Role } from '../interfaces/user.interfaces';
 
+/**
+ * Schema for user registration validation.
+ * 
+ * @remarks
+ * This schema defines the validation rules for user registration data.
+ */
 const registerSchema = Joi.object({
   email: Joi.string().email().required().messages({
     'string.empty': 'Email is required',

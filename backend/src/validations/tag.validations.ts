@@ -1,5 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
+/**
+ * Validates the request body for creating a tag.
+ * 
+ * @param req - The request object.
+ * @param res - The response object.
+ * @param next - The next function.
+ */
 export const validateCreateTag = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
   

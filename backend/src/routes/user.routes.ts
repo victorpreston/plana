@@ -1,5 +1,13 @@
 import { Router } from 'express';
-import { register, login, getUser, updateRole, getUsers, removeUser, loginWithGoogle } from '../controllers/user.controllers';
+import { 
+    register, 
+    login, 
+    getUser, 
+    updateRole, 
+    getUsers, 
+    removeUser, 
+    loginWithGoogle 
+} from '../controllers/user.controllers';
 import { authenticateJWT } from '../middleware/auth.middleware';
 import { authorizeRole } from '../middleware/role.middleware';
 import { Role } from '../interfaces/user.interfaces';

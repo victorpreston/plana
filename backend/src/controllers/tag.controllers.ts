@@ -1,7 +1,18 @@
 import { Request, Response } from 'express';
-import { createTag, updateTag, getAllTags, getTagById, deleteTag } from '../services/tag.services';
+import { 
+  createTag, 
+  updateTag, 
+  getAllTags, 
+  getTagById, 
+  deleteTag 
+} from '../services/tag.services';
 
-// Create a new tag
+
+/**
+ * Create a new tag
+ * @param req 
+ * @param res 
+ */
 export const create = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
@@ -13,7 +24,12 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
-// Update a tag
+
+/**
+ * Update a tag
+ * @param req 
+ * @param res 
+ */
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -26,7 +42,13 @@ export const update = async (req: Request, res: Response) => {
   }
 };
 
-// Get all tags
+
+
+/**
+ * Get all tags
+ * @param req 
+ * @param res 
+ */
 export const getAll = async (req: Request, res: Response) => {
   try {
     const tags = await getAllTags();
@@ -37,7 +59,14 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-// Get a tag by ID
+
+
+/**
+ * Get a tag by ID
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -52,7 +81,12 @@ export const getById = async (req: Request, res: Response) => {
   }
 };
 
-// Delete a tag (soft delete)
+
+/**
+ * Delete a tag (soft delete)
+ * @param req 
+ * @param res 
+ */
 export const remove = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

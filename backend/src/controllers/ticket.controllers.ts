@@ -1,7 +1,16 @@
 import { Request, Response } from 'express';
-import { createTicketType, updateTicketType, getTicketTypesByEventId, deleteTicketType } from '../services/ticket.services';
+import { 
+  createTicketType, 
+  updateTicketType, 
+  getTicketTypesByEventId, 
+  deleteTicketType 
+} from '../services/ticket.services';
 
-// Create a new ticket type
+/**
+ * Create a new ticket type
+ * @param req 
+ * @param res 
+ */
 export const create = async (req: Request, res: Response) => {
   try {
     const ticketData = req.body;
@@ -13,7 +22,12 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
-// Update a ticket type
+
+/**
+ * Update a ticket type
+ * @param req 
+ * @param res 
+ */
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -26,7 +40,12 @@ export const update = async (req: Request, res: Response) => {
   }
 };
 
-// Get all ticket types for an event
+
+/**
+ * Get all ticket types for an event
+ * @param req 
+ * @param res 
+ */
 export const getByEventId = async (req: Request, res: Response) => {
   try {
     const { eventId } = req.params;
@@ -38,7 +57,12 @@ export const getByEventId = async (req: Request, res: Response) => {
   }
 };
 
-// Delete a ticket type (soft delete)
+
+/**
+ * Remove a ticket type
+ * @param req 
+ * @param res 
+ */
 export const remove = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

@@ -14,3 +14,7 @@ export interface EventTag {
   event: Event;
   tag: Tag;
 }
+
+/**
+ * Make event optional to avoid circular dependency issues
+ */

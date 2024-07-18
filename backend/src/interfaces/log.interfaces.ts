@@ -13,3 +13,7 @@ export interface Log {
   event?: Event;
   booking?: Booking;
 }
+
+/**
+ * Create a new log
+ */

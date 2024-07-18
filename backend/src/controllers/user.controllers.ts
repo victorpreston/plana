@@ -1,8 +1,20 @@
 import { Request, Response } from 'express';
-import { registerUser, loginUser, getUserById, updateUserRole, getAllUsers, deleteUser, loginUserWithGoogle } from '../services/user.services';
+import { 
+  registerUser, 
+  loginUser, 
+  getUserById, 
+  updateUserRole, 
+  getAllUsers, 
+  deleteUser, 
+  loginUserWithGoogle 
+} from '../services/user.services';
 import { Role } from '../interfaces/user.interfaces';
 
-// Register a new user
+/**
+ * Controller for registering a new user
+ * @param req 
+ * @param res 
+ */
 export const register = async (req: Request, res: Response) => {
   try {
     const { email, password, firstName, lastName, phone, role } = req.body;
@@ -14,7 +26,14 @@ export const register = async (req: Request, res: Response) => {
   }
 };
 
-// Login a user
+
+
+
+/**
+ * Login a user
+ * @param req 
+ * @param res 
+ */
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
@@ -26,7 +45,13 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 
-// Login a user with Google
+
+
+/**
+ * Login a user with Google
+ * @param req 
+ * @param res 
+ */
 export const loginWithGoogle = async (req: Request, res: Response) => {
   try {
     const { idToken } = req.body;
@@ -38,7 +63,14 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
   }
 };
 
-// Get user details
+
+
+/**
+ * Get user details
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -53,7 +85,14 @@ export const getUser = async (req: Request, res: Response) => {
   }
 };
 
-// Update user role
+
+
+/**
+ * Update user role
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const updateRole = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -69,7 +108,13 @@ export const updateRole = async (req: Request, res: Response) => {
   }
 };
 
-// Get all users
+
+
+/**
+ * Get all users
+ * @param req 
+ * @param res 
+ */
 export const getUsers = async (req: Request, res: Response) => {
   try {
     const users = await getAllUsers();
@@ -80,7 +125,13 @@ export const getUsers = async (req: Request, res: Response) => {
   }
 };
 
-// Delete user (soft delete)
+
+
+/**
+ * Delete user (soft delete)
+ * @param req 
+ * @param res 
+ */
 export const removeUser = async (req: Request, res: Response) => {
     try {
       const { id } = req.params;

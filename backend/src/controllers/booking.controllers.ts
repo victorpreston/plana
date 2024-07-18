@@ -9,7 +9,12 @@ import {
    getBookingById 
 } from '../services/booking.services';
 
-// Create a new booking
+
+/**
+ * Create a new booking
+ * @param req 
+ * @param res 
+ */
 export const create = async (req: Request, res: Response) => {
   try {
     const bookingData = req.body;
@@ -21,7 +26,13 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
-// Get recent bookings for a user
+
+
+/**
+ * Get recent bookings for a user
+ * @param req 
+ * @param res 
+ */
 export const getRecent = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
@@ -33,7 +44,13 @@ export const getRecent = async (req: Request, res: Response) => {
   }
 };
 
-// Cancel a booking
+
+
+/**
+ * Cancel a booking
+ * @param req 
+ * @param res 
+ */
 export const cancel = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -45,7 +62,13 @@ export const cancel = async (req: Request, res: Response) => {
   }
 };
 
-// Update a booking
+
+
+/**
+ * Update a booking
+ * @param req 
+ * @param res 
+ */
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -58,7 +81,14 @@ export const update = async (req: Request, res: Response) => {
   }
 };
 
-// Get a booking by ID
+
+
+/**
+ * Get a booking by ID
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -73,7 +103,13 @@ export const getById = async (req: Request, res: Response) => {
   }
 };
 
-// Get bookings for an event
+
+
+/**
+ * Get bookings for an event
+ * @param req 
+ * @param res 
+ */
 export const getForEvent = async (req: Request, res: Response) => {
   try {
     const { eventId } = req.params;
@@ -85,7 +121,14 @@ export const getForEvent = async (req: Request, res: Response) => {
   }
 };
 
-// Verify a ticket code
+
+
+/**
+ * Verify a ticket code
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const verify = async (req: Request, res: Response) => {
   try {
     const { ticketCode } = req.params;

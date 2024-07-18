@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { create, update, getAll, getById, remove } from '../controllers/event.controllers';
+import { 
+    create, 
+    update, 
+    getAll, 
+    getById, 
+    remove 
+} from '../controllers/event.controllers';
 import { authenticateJWT } from '../middleware/auth.middleware';
 import { authorizeRole } from '../middleware/role.middleware';
 import { Role } from '../interfaces/user.interfaces';

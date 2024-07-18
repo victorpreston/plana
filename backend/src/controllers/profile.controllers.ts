@@ -1,7 +1,18 @@
 import { Request, Response } from 'express';
-import { updateProfile, getProfileByUserId, updatePassword } from '../services/profile.services';
+import { 
+  updateProfile, 
+  getProfileByUserId, 
+  updatePassword 
+} from '../services/profile.services';
 
-// Get profile details
+
+
+/**
+ * Get profile by user ID
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getProfile = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
@@ -16,7 +27,13 @@ export const getProfile = async (req: Request, res: Response) => {
   }
 };
 
-// Update profile
+
+
+/**
+ * Update profile
+ * @param req 
+ * @param res 
+ */
 export const editProfile = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
@@ -29,7 +46,13 @@ export const editProfile = async (req: Request, res: Response) => {
   }
 };
 
-// Update password
+
+
+/**
+ * Update password
+ * @param req 
+ * @param res 
+ */
 export const changePassword = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;

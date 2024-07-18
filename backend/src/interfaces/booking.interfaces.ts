@@ -7,16 +7,16 @@ export interface Booking {
   id: string;
   userId: string;
   eventId: string;
-  ticketTypeId: string; // Add ticket type ID
-  tickets: number; // number of tickets booked
-  status: string; // e.g., "confirmed", "cancelled"
-  ticketCode: string; // ticket code for verification
-  totalPrice: number; // total price for the booking
+  ticketTypeId: string;
+  tickets: number;
+  status: string;
+  ticketCode: string;
+  totalPrice: number;
   createdAt: Date;
   updatedAt: Date;
   isDeleted: boolean;
   user: User;
   event: Event;
-  ticketType: TicketType; // Add ticket type relation
+  ticketType: TicketType;
   logs?: Log[];
 }

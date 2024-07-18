@@ -1,7 +1,12 @@
 import prisma from '../config/database.config';
 import { Category } from '../interfaces/category.interfaces';
 
-// Function to map Prisma Category to TypeScript Category
+
+/**
+ * Function to map Prisma Category to TypeScript Category
+ * @param prismaCategory 
+ * @returns 
+ */
 const mapCategory = (prismaCategory: any): Category => {
   return {
     id: prismaCategory.id,
@@ -13,7 +18,12 @@ const mapCategory = (prismaCategory: any): Category => {
   };
 };
 
-// Function to create a new category
+
+/**
+ * Function to create a new category
+ * @param name 
+ * @returns 
+ */
 export const createCategory = async (name: string): Promise<Category> => {
   const newCategory = await prisma.category.create({
     data: {
@@ -24,7 +34,14 @@ export const createCategory = async (name: string): Promise<Category> => {
   return mapCategory(newCategory);
 };
 
-// Function to update a category
+
+
+/**
+ * Function to update a category
+ * @param id 
+ * @param name 
+ * @returns 
+ */
 export const updateCategory = async (id: string, name: string): Promise<Category> => {
   const updatedCategory = await prisma.category.update({
     where: { id },
@@ -34,7 +51,11 @@ export const updateCategory = async (id: string, name: string): Promise<Category
   return mapCategory(updatedCategory);
 };
 
-// Function to fetch all categories
+
+/**
+ * Function to fetch all categories
+ * @returns 
+ */
 export const getAllCategories = async (): Promise<Category[]> => {
   const categories = await prisma.category.findMany({
     where: { isDeleted: false },
@@ -44,7 +65,13 @@ export const getAllCategories = async (): Promise<Category[]> => {
   return categories.map(mapCategory);
 };
 
-// Function to fetch a category by ID
+
+
+/**
+ * Function to fetch a category by ID
+ * @param id 
+ * @returns 
+ */
 export const getCategoryById = async (id: string): Promise<Category | null> => {
   const category = await prisma.category.findUnique({
     where: { id },
@@ -54,7 +81,12 @@ export const getCategoryById = async (id: string): Promise<Category | null> => {
   return category ? mapCategory(category) : null;
 };
 
-// Function to delete a category (soft delete)
+
+
+/**
+ * Function to delete a category (soft delete)
+ * @param id 
+ */
 export const deleteCategory = async (id: string): Promise<void> => {
   await prisma.category.update({
     where: { id },

@@ -46,7 +46,14 @@ export const createEvent = async (eventData: Partial<Event>): Promise<Event> => 
   return newEvent as Event;
 };
 
-// Function to update an event
+
+
+/**
+ * Function to update an event
+ * @param id 
+ * @param eventData 
+ * @returns 
+ */
 export const updateEvent = async (id: string, eventData: Partial<Event>): Promise<Event> => {
   const updatedEvent = await prisma.event.update({
     where: { id },
@@ -98,7 +105,11 @@ export const updateEvent = async (id: string, eventData: Partial<Event>): Promis
   return updatedEvent as Event;
 };
 
-// Function to fetch all events
+
+/**
+ * get all events
+ * @returns 
+ */
 export const getAllEvents = async (): Promise<Event[]> => {
   const events = await prisma.event.findMany({
     where: { isDeleted: false },
@@ -118,7 +129,13 @@ export const getAllEvents = async (): Promise<Event[]> => {
   return events as Event[];
 };
 
-// Function to fetch an event by ID
+
+
+/**
+ * Function to fetch an event by ID
+ * @param id 
+ * @returns 
+ */
 export const getEventById = async (id: string): Promise<Event | null> => {
   const event = await prisma.event.findUnique({
     where: { id },
@@ -138,7 +155,12 @@ export const getEventById = async (id: string): Promise<Event | null> => {
   return event ? (event as Event) : null;
 };
 
-// Function to delete an event (soft delete)
+
+
+/**
+ * Function to delete an event (soft delete)
+ * @param id 
+ */
 export const deleteEvent = async (id: string): Promise<void> => {
   await prisma.event.update({
     where: { id },

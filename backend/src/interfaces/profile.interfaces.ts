@@ -10,5 +10,10 @@ export interface Profile {
   createdAt: Date;
   updatedAt: Date;
   isDeleted: boolean;
-  user?: User; // Make user optional to avoid circular dependency issues
+  user?: User;
 }
+
+
+/**
+ * Make user optional to avoid circular dependency issues
+ */

@@ -2,7 +2,12 @@ import prisma from '../config/database.config';
 import { Booking } from '../interfaces/booking.interfaces';
 import { v4 as uuidv4 } from 'uuid';
 
-// Function to create a new booking
+
+/**
+ * Function to create a new booking
+ * @param bookingData 
+ * @returns 
+ */
 export const createBooking = async (bookingData: Partial<Booking>): Promise<Booking> => {
   const ticketType = await prisma.ticketType.findUnique({
     where: { id: bookingData.ticketTypeId! },
@@ -21,7 +26,7 @@ export const createBooking = async (bookingData: Partial<Booking>): Promise<Book
       ticketTypeId: bookingData.ticketTypeId!,
       tickets: bookingData.tickets!,
       status: 'confirmed',
-      ticketCode: uuidv4(), // Generate a unique ticket code
+      ticketCode: uuidv4(), /*Generate a unique ticket code*/
       totalPrice,
     },
     include: {
@@ -34,7 +39,13 @@ export const createBooking = async (bookingData: Partial<Booking>): Promise<Book
   return newBooking as Booking;
 };
 
-// Function to get recent bookings for a user
+
+
+/**
+ * Function to get recent bookings for a user
+ * @param userId 
+ * @returns 
+ */
 export const getRecentBookings = async (userId: string): Promise<Booking[]> => {
   const bookings = await prisma.booking.findMany({
     where: { userId, isDeleted: false },
@@ -49,7 +60,11 @@ export const getRecentBookings = async (userId: string): Promise<Booking[]> => {
   return bookings as Booking[];
 };
 
-// Function to cancel a booking
+
+/**
+ * Function to cancel a booking
+ * @param id 
+ */
 export const cancelBooking = async (id: string): Promise<void> => {
   await prisma.booking.update({
     where: { id },
@@ -58,7 +73,13 @@ export const cancelBooking = async (id: string): Promise<void> => {
 };
 
 
-// Function to update a booking
+
+/**
+ * Function to update a booking
+ * @param id 
+ * @param bookingData 
+ * @returns 
+ */
 export const updateBooking = async (id: string, bookingData: Partial<Booking>): Promise<Booking> => {
   const booking = await prisma.booking.findUnique({
     where: { id },
@@ -89,7 +110,12 @@ export const updateBooking = async (id: string, bookingData: Partial<Booking>): 
 };
 
 
-// Function to get a booking by ID
+
+/**
+ * Function to get a booking by ID
+ * @param id 
+ * @returns 
+ */
 export const getBookingById = async (id: string): Promise<Booking | null> => {
   const booking = await prisma.booking.findUnique({
     where: { id },
@@ -108,7 +134,11 @@ export const getBookingById = async (id: string): Promise<Booking | null> => {
 };
 
 
-// Function to get the number of bookings for an event
+/**
+ * Function to get the number of bookings for an event
+ * @param eventId 
+ * @returns 
+ */
 export const getBookingsForEvent = async (eventId: string): Promise<Booking[]> => {
   const bookings = await prisma.booking.findMany({
     where: { eventId, status: 'confirmed', isDeleted: false },
@@ -122,7 +152,12 @@ export const getBookingsForEvent = async (eventId: string): Promise<Booking[]> =
   return bookings as Booking[];
 };
 
-// Function to verify a ticket code
+
+/**
+ * Function to verify a ticket code
+ * @param ticketCode 
+ * @returns 
+ */
 export const verifyTicketCode = async (ticketCode: string): Promise<Booking | null> => {
   const booking = await prisma.booking.findUnique({
     where: { ticketCode },

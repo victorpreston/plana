@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import Joi from 'joi';
 
+/**
+ * Schema for validating event data.
+ */
 const eventSchema = Joi.object({
   title: Joi.string().required().messages({
     'string.empty': 'Title is required',

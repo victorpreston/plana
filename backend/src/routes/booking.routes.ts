@@ -14,13 +14,15 @@ import { authorizeRole } from '../middleware/role.middleware';
 
 const router = Router();
 
-// Protected routes for booking management
+/**
+ * Booking routes
+ */
 router.post('/bookings', authenticateJWT, create);
 router.get('/bookings', authenticateJWT, getRecent);
 router.delete('/bookings/:id', authenticateJWT, cancel);
 router.get('/bookings/verify/:ticketCode', verify);
 router.put('/bookings/:id', authenticateJWT, update);
-router.get('/bookings/:id', authenticateJWT, getById); // Added route to get booking by ID
+router.get('/bookings/:id', authenticateJWT, getById);
 router.get('/bookings/event/:eventId', authenticateJWT, authorizeRole(Role.MANAGER),getForEvent);
 
 export default router;

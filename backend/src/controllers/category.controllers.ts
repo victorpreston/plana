@@ -1,7 +1,18 @@
 import { Request, Response } from 'express';
-import { createCategory, updateCategory, getAllCategories, getCategoryById, deleteCategory } from '../services/category.services';
+import { 
+  createCategory, 
+  updateCategory, 
+  getAllCategories, 
+  getCategoryById,
+  deleteCategory 
+} from '../services/category.services';
 
-// Create a new category
+
+/**
+ * Create a new category
+ * @param req 
+ * @param res 
+ */
 export const create = async (req: Request, res: Response) => {
   try {
     const { name } = req.body;
@@ -13,7 +24,12 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
-// Update a category
+
+/**
+ * Update a category
+ * @param req 
+ * @param res 
+ */
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -26,7 +42,12 @@ export const update = async (req: Request, res: Response) => {
   }
 };
 
-// Get all categories
+
+/**
+ * Get all categories
+ * @param req 
+ * @param res 
+ */
 export const getAll = async (req: Request, res: Response) => {
   try {
     const categories = await getAllCategories();
@@ -37,7 +58,14 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-// Get a category by ID
+
+
+/**
+ * Get a category by ID
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -52,7 +80,13 @@ export const getById = async (req: Request, res: Response) => {
   }
 };
 
-// Delete a category (soft delete)
+
+
+/**
+ * Delete a category (soft delete)
+ * @param req 
+ * @param res 
+ */
 export const remove = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

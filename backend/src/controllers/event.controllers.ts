@@ -1,7 +1,19 @@
 import { Request, Response } from 'express';
-import { createEvent, updateEvent, getAllEvents, getEventById, deleteEvent } from '../services/event.services';
+import { 
+  createEvent, 
+  updateEvent, 
+  getAllEvents, 
+  getEventById, 
+  deleteEvent 
+} from '../services/event.services';
 
-// Create a new event
+
+
+/**
+ * Create a new event
+ * @param req 
+ * @param res 
+ */
 export const create = async (req: Request, res: Response) => {
   try {
     const eventData = req.body;
@@ -13,7 +25,12 @@ export const create = async (req: Request, res: Response) => {
   }
 };
 
-// Update an event
+
+/**
+ * Update an event
+ * @param req 
+ * @param res 
+ */
 export const update = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -26,7 +43,12 @@ export const update = async (req: Request, res: Response) => {
   }
 };
 
-// Get all events
+
+/**
+ * Get all events
+ * @param req 
+ * @param res 
+ */
 export const getAll = async (req: Request, res: Response) => {
   try {
     const events = await getAllEvents();
@@ -37,7 +59,13 @@ export const getAll = async (req: Request, res: Response) => {
   }
 };
 
-// Get an event by ID
+
+/**
+ * Get an event by ID
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const getById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -52,7 +80,14 @@ export const getById = async (req: Request, res: Response) => {
   }
 };
 
-// Delete an event (soft delete)
+
+
+/**
+ * Delete an event (soft delete)
+ * @param req 
+ * @param res 
+ * @returns 
+ */
 export const remove = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;

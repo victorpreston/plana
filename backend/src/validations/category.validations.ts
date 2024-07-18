@@ -1,5 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 
+/**
+ * Validates the request body for creating a category.
+ * 
+ * @param req - The request object.
+ * @param res - The response object.
+ * @param next - The next function to call.
+ */
 export const validateCreateCategory = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
   
