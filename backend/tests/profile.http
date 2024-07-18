@@ -7,14 +7,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4N
 ### Update user profile
 PUT http://localhost:5000/api/profiles/e4f84392-dbdf-41f3-9c9d-24a48c8dcab7
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNWFlY2I0NS0wZWE4LTQzMzYtOTFkMi1lNTUxNDI5NjQ4N2QiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjEyMzQwMzIsImV4cCI6MTcyMTIzNzYzMn0.weasDe4_63656tdqYblWvRQYYyQZKpNQjrrwzjCAkEs
 
 {
   "firstName": "Victor",
   "lastName": "Preston",
   "phone": "0705383588",
   "imageUrl": "https://example.com/profile.jpg",
-  "email": "vp.prestonvictor@gmail.com"
+  "role": "ADMIN"
 }
 
 ###

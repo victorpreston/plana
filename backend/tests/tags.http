@@ -1,10 +1,10 @@
 # Create a new tag
 POST http://localhost:5000/api/tags
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NjgwNywiZXhwIjoxNzIxMTYwNDA3fQ.UBjgQzkEMZVJxo2MgNHxilvP3ml-jTPMgqJ8u1ZXJso
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTMwNjg3MCwiZXhwIjoxNzIxMzEwNDcwfQ.T25RvU57wFaK_bvhGQ6HPhRBLxdpIrlnCo26y-wUWrk
 
 {
-  "name": "Tag1"
+  "name": "#Tag-2"
 }
 
 ###

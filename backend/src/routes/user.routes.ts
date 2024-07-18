@@ -1,16 +1,20 @@
 import { Router } from 'express';
-import { register, login, getUser, updateRole, getUsers, removeUser } from '../controllers/user.controllers';
+import { register, login, getUser, updateRole, getUsers, removeUser, loginWithGoogle } from '../controllers/user.controllers';
 import { authenticateJWT } from '../middleware/auth.middleware';
 import { authorizeRole } from '../middleware/role.middleware';
 import { Role } from '../interfaces/user.interfaces';
+import { validateRegister, validateLogin, validateUpdateRole } from '../validations/user.validations';
+
 
 const router = Router();
 
 /**
  * public routes
  */
-router.post('/register', register);
+router.post('/register', validateRegister, register);
 router.post('/login', login);
+router.post('/google-login', validateLogin, loginWithGoogle);
+
 
 /**
  * protected routes

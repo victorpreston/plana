@@ -3,6 +3,9 @@ import prisma from '../config/database.config';
 import { User, Role, Profile } from '../interfaces/user.interfaces';
 import { generateToken } from '../config/jwt.config';
 import { Prisma } from '@prisma/client';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client('1058339365976-4g5a1ni6ukr1a26pf27e9mt1hj14egpl.apps.googleusercontent.com');
 
 /**
  * Function to map Prisma Role to TypeScript Role
@@ -108,6 +111,87 @@ export const loginUser = async (email: string, password: string): Promise<{ user
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     throw new Error('Invalid email or password');
+  }
+
+  const token = generateToken(user.id, user.role);
+
+  return {
+    user: {
+      ...user,
+      role: mapRole(user.role),
+      profile: user.profile ? mapProfile(user.profile) : undefined,
+    },
+    token,
+  };
+};
+
+
+/**
+ * Function to handle Google Sign-In
+ * @param idToken 
+ * @returns 
+ */
+export const loginUserWithGoogle = async (idToken: string): Promise<{ user: User; token: string }> => {
+  const ticket = await client.verifyIdToken({
+    idToken,
+    audience: '1058339365976-4g5a1ni6ukr1a26pf27e9mt1hj14egpl.apps.googleusercontent.com', // Google Client ID
+  });
+
+  const payload = ticket.getPayload();
+  if (!payload) {
+    throw new Error('Invalid Google ID token');
+  }
+
+  const { sub: googleId, email, given_name, family_name, picture } = payload;
+
+  const firstName = given_name || '';
+  const lastName = family_name || '';
+  const imageUrl = picture || '';
+
+  let user = await prisma.user.findUnique({
+    where: { email: email! },
+    include: { profile: true },
+  });
+
+  if (!user) {
+    // Register the user if they do not exist
+    user = await prisma.user.create({
+      data: {
+        email: email!,
+        password: '', // No password since they are using Google Sign-In
+        role: Role.ATTENDEE,
+        profile: {
+          create: {
+            firstName,
+            lastName,
+            imageUrl,
+            phone: '',
+          },
+        },
+      },
+      include: {
+        profile: true,
+      },
+    });
+  }
+
+  if (!user.profile) {
+    user = await prisma.user.update({
+      where: { id: user.id },
+      data: {
+        profile: {
+          create: {
+            firstName,
+            lastName,
+            imageUrl,
+            phone: '',
+          },
+        },
+      },
+      include: {
+        profile: true,
+      },
+    });
   }
 
   const token = generateToken(user.id, user.role);

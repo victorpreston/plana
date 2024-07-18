@@ -1,7 +1,11 @@
 import prisma from '../config/database.config';
 import { Event } from '../interfaces/event.interfaces';
 
-// Function to create a new event
+/**
+ * Function to create an event
+ * @param eventData 
+ * @returns 
+ */
 export const createEvent = async (eventData: Partial<Event>): Promise<Event> => {
   const newEvent = await prisma.event.create({
     data: {
