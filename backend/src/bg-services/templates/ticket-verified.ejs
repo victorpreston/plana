@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ticket Verification</title>
+  <style>
+    body {
+      background-color: #f4f4f9;
+      font-family: Arial, sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 50px auto;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background-color: #0f3462;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .header img {
+      height: 50px;
+      margin-bottom: 10px;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .content {
+      padding: 20px 40px;
+    }
+
+    .content h1 {
+      color: #0f3462;
+      text-align: center;
+      margin-bottom: 25px;
+      text-transform: uppercase;
+      font-size: 22px;
+    }
+
+    .content p {
+      margin: 0;
+      padding-bottom: 15px;
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    .content p strong {
+      color: #0f3462;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 0;
+      background-color: #f4f4f9;
+      border-top: 1px solid #ccc;
+      font-size: 14px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://i.postimg.cc/JzzfSKnN/oig.png" alt="Plana Logo">
+      <h2><i>Plana</i> <span style="color: indigo;">Ticket Verification</span></h2>
+    </div>
+    <div class="content">
+      <h1>Ticket Verified Successfully</h1>
+      <p>
+        <strong>Event:</strong> <%= event.title %><br>
+        <strong>Date:</strong> <%= event.date %><br>
+        <strong>Location:</strong> <%= event.location %><br>
+        <strong>Ticket Type:</strong> <%= booking.ticketType.type %><br>
+      </p>
+      <p>
+        Thank you for verifying your ticket with Plana! We look forward to seeing you at the event.
+      </p>
+    </div>
+    <div class="footer">
+      &copy; 2024 Plana. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>

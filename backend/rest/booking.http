@@ -1,10 +1,10 @@
 # Create a new booking
 POST http://localhost:5000/api/bookings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMzk4ZWYwZS0wOWRlLTQ2NWItYmQyMS0yN2NmZGE2ODE2YTgiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjEzNDQzMTQsImV4cCI6MTcyMTM0NzkxNH0.i8VyIIe7X01JCntg2DpD9J_Ddvy-Y3Rp8XfPNWeDt4M
 
 {
-  "userId": "e4f84392-dbdf-41f3-9c9d-24a48c8dcab7",
+  "userId": "0398ef0e-09de-465b-bd21-27cfda6816a8",
   "eventId": "a18a4e4f-f57a-4514-9061-4dc17dedab44",
   "ticketTypeId": "90e9a572-26b0-4803-be74-e62dd369c7db",
   "tickets": 2
@@ -39,3 +39,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4N
 # Delete a booking (soft delete)
 DELETE http://localhost:5000/api/bookings/<bookingId>
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+
+
+###
+# Verify Ticket Code
+GET http://localhost:5000/api/bookings/verify/TVBCbwjial
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+

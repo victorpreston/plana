@@ -2,8 +2,46 @@ import { Request, Response } from 'express';
 import { 
   updateProfile, 
   getProfileByUserId, 
-  updatePassword 
+  updatePassword,
+  requestPasswordReset as requestPasswordResetService,
+  resetPassword as resetPasswordService
 } from '../services/profile.services';
+
+
+
+
+/**
+ * Function to request password reset
+ * @param req 
+ * @param res 
+ */
+export const requestPasswordReset = async (req: Request, res: Response) => {
+  try {
+    const { email } = req.body;
+    await requestPasswordResetService(email);
+    res.status(200).json({ message: 'Password reset code sent to email' });
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ error: err.message });
+  }
+};
+
+
+/**
+ * Function to reset password
+ * @param req 
+ * @param res 
+ */
+export const resetPassword = async (req: Request, res: Response) => {
+  try {
+    const { email, resetCode, newPassword } = req.body;  // Correct key name
+    await resetPasswordService(email, resetCode, newPassword);  // Correct key name
+    res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ error: err.message });
+  }
+};
 
 
 

@@ -12,7 +12,7 @@ export interface Event {
   date: Date;
   time: Date;
   location: string;
-  bannerImage?: string;
+  bannerImage?: string | null;
   ticketTypes: TicketType[];
   bookings: Booking[];
   managerId: string;

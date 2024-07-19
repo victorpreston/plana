@@ -5,8 +5,7 @@ import {
   getUserById, 
   updateUserRole, 
   getAllUsers, 
-  deleteUser, 
-  loginUserWithGoogle 
+  deleteUser
 } from '../services/user.services';
 import { Role } from '../interfaces/user.interfaces';
 
@@ -44,25 +43,6 @@ export const login = async (req: Request, res: Response) => {
     res.status(401).json({ error: err.message });
   }
 };
-
-
-
-/**
- * Login a user with Google
- * @param req 
- * @param res 
- */
-export const loginWithGoogle = async (req: Request, res: Response) => {
-  try {
-    const { idToken } = req.body;
-    const { user, token } = await loginUserWithGoogle(idToken);
-    res.status(200).json({ user, token });
-  } catch (error) {
-    const err = error as Error;
-    res.status(401).json({ error: err.message });
-  }
-};
-
 
 
 /**

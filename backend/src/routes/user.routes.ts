@@ -5,8 +5,7 @@ import {
     getUser, 
     updateRole, 
     getUsers, 
-    removeUser, 
-    loginWithGoogle 
+    removeUser 
 } from '../controllers/user.controllers';
 import { authenticateJWT } from '../middleware/auth.middleware';
 import { authorizeRole } from '../middleware/role.middleware';
@@ -21,7 +20,6 @@ const router = Router();
  */
 router.post('/register', validateRegister, register);
 router.post('/login', login);
-router.post('/google-login', validateLogin, loginWithGoogle);
 
 
 /**

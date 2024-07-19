@@ -9,5 +9,5 @@ export interface TicketType {
   createdAt: Date;
   updatedAt: Date;
   isDeleted: boolean;
-  event: Event;
+  event?: Event;
 }

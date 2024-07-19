@@ -3,12 +3,13 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-  "email": "attendee2@example.com",
+  "email": "vp.victorpreston@gmail.com",
   "password": "jay@2019PT",
-  "firstName": "VIP",
-  "lastName": "PR",
+  "firstName": "Victor",
+  "lastName": "Preston",
   "phone": "0705383588"
 }
+
 
 ###
 
@@ -94,8 +95,8 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "email": "testuser@example.com",
-  "password": "password123"
+  "email": "vp.victorpreston@gmail.com",
+  "password": "jay@2019pt"
 }
 
 ###

@@ -19,7 +19,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNWFlY
 
 ###
 
-### Change user password
+### Change user password (While logged in)
 PUT http://localhost:5000/api/profiles/e4f84392-dbdf-41f3-9c9d-24a48c8dcab7/password
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
@@ -27,3 +27,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4N
 {
   "newPassword": "jay@2019PT"
 }
+
+
+### Request Password Reset (Forgot Password)
+POST http://localhost:5000/api/reset-password-request
+Content-Type: application/json
+
+{
+    "email": "vp.victorpreston@gmail.com"
+}
+
+### Reset Password
+POST http://localhost:5000/api/reset-password
+Content-Type: application/json
+
+{
+    "resetCode": "VHDC7E",
+    "email": "vp.victorpreston@gmail.com",
+    "newPassword": "jay@2019PT"
+}
+
+
+
+

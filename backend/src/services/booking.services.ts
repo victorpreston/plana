@@ -1,7 +1,24 @@
+import { getBookingDetails } from '../bg-services/booking.helper';
+import { sendBookingConfirmationEmail } from '../bg-services/mails/booking';
+import { sendTicketVerificationEmail } from '../bg-services/mails/ticket-verified';
 import prisma from '../config/database.config';
 import { Booking } from '../interfaces/booking.interfaces';
-import { v4 as uuidv4 } from 'uuid';
 
+
+/**
+ * Function to generate a random alphanumeric string
+ * @param length 
+ * @returns 
+ */
+const generateRandomCode = (length: number): string => {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};
 
 /**
  * Function to create a new booking
@@ -18,6 +35,7 @@ export const createBooking = async (bookingData: Partial<Booking>): Promise<Book
   }
 
   const totalPrice = ticketType.price * bookingData.tickets!;
+  const ticketCode = generateRandomCode(10);
 
   const newBooking = await prisma.booking.create({
     data: {
@@ -26,7 +44,7 @@ export const createBooking = async (bookingData: Partial<Booking>): Promise<Book
       ticketTypeId: bookingData.ticketTypeId!,
       tickets: bookingData.tickets!,
       status: 'confirmed',
-      ticketCode: uuidv4(), /*Generate a unique ticket code*/
+      ticketCode,
       totalPrice,
     },
     include: {
@@ -36,10 +54,16 @@ export const createBooking = async (bookingData: Partial<Booking>): Promise<Book
     },
   });
 
+  const bookingDetails = await getBookingDetails(newBooking.id);
+
+   if (bookingDetails) {
+    sendBookingConfirmationEmail(bookingDetails).catch(error => {
+      console.error('Failed to send booking confirmation email:', error.message || error);
+    });
+   }
+
   return newBooking as Booking;
 };
-
-
 
 /**
  * Function to get recent bookings for a user
@@ -172,5 +196,14 @@ export const verifyTicketCode = async (ticketCode: string): Promise<Booking | nu
     return null;
   }
 
+
+  const bookingDetails = await getBookingDetails(booking.id);
+
+  if (bookingDetails) {
+    sendTicketVerificationEmail(bookingDetails).catch(error => {
+      console.error('Failed to send ticket verification email:', error.message || error);
+    });
+  }
+  
   return booking as Booking;
 };

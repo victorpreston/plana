@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "D:\\Angular\\plana\\backend\\logs\\.db4e2c72c2800ab18790a35b0ec42205fdbb3043-audit.json",
+    "files": [
+        {
+            "date": 1721328036429,
+            "name": "D:\\Angular\\plana\\backend\\logs\\application-2024-07-18.log",
+            "hash": "cfe2c83d108e8ec3b1ca43a814c01cc2321febb7ea4d1a3c115885706e3cd2d8"
+        },
+        {
+            "date": 1721338032277,
+            "name": "D:\\Angular\\plana\\backend\\logs\\application-2024-07-19.log",
+            "hash": "c81ca48e257a14986ed09b345bc4e86540e4f5e020439ac2e3e488395b62075e"
+        }
+    ],
+    "hashType": "sha256"
+}
