@@ -95,8 +95,8 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "email": "vp.victorpreston@gmail.com",
-  "password": "jay@2019pt"
+  "email": "preston.learning25@gmail.com",
+  "password": "jay@2019PT"
 }
 
 ###

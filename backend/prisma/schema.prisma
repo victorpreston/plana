@@ -28,6 +28,7 @@ model User {
   passwordResetToken      String?
   passwordResetTokenExpiry DateTime?
   logs      Log[]
+  roleChangeRequests    RoleChangeRequest[]
 
   @@map("users")
 }
@@ -151,8 +152,26 @@ model Log {
   @@map("logs")
 }
 
+model RoleChangeRequest {
+  id          String   @id @default(uuid())
+  userId      String
+  newRole     Role
+  status      RequestStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("role_change_requests")
+}
+
 enum Role {
   ATTENDEE
   MANAGER
   ADMIN
+}
+
+enum RequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }

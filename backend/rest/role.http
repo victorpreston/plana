@@ -1,0 +1,26 @@
+### Create a Role Change Request (User Action)
+POST http://localhost:5000/api/roles/request
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjEzNjM2NjUsImV4cCI6MTcyMTM2NzI2NX0.DEeG1FrmsGTRndg1zybzcsxSrwVG0UuOvbAF3HYbFLc
+
+{
+    "newRole": "MANAGER"
+}
+
+### Approve a Role Change Request (Admin Action)
+PUT http://localhost:5000/api/roles/approve/05437beb-8772-4573-b3fb-e003f69cd477
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzNjM3MjgsImV4cCI6MTcyMTM2NzMyOH0.L0tHFUmPmBIL5lkci9Tjly_h_FGiY62w8XUW-5Pn3-g
+
+### Reject a Role Change Request (Admin Action)
+PUT http://localhost:5000/api/roles/request/{{}}/reject
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzNjM3MjgsImV4cCI6MTcyMTM2NzMyOH0.L0tHFUmPmBIL5lkci9Tjly_h_FGiY62w8XUW-5Pn3-g
+
+### Get All Role Change Requests (Admin Action)
+GET http://localhost:5000/api/roles/requests
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzNjM3MjgsImV4cCI6MTcyMTM2NzMyOH0.L0tHFUmPmBIL5lkci9Tjly_h_FGiY62w8XUW-5Pn3-g
+
+### Get Role Change Request by ID (Admin Action)
+GET http://localhost:5000/api/roles/request/{{}}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzNjM3MjgsImV4cCI6MTcyMTM2NzMyOH0.L0tHFUmPmBIL5lkci9Tjly_h_FGiY62w8XUW-5Pn3-g

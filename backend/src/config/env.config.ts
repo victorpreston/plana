@@ -11,4 +11,5 @@ export const env = {
   emailPort: Number(process.env.EMAIL_PORT) || 587,
   emailUser: process.env.EMAIL_USER || '',
   emailPass: process.env.EMAIL_PASS || '',
+  adminEmail: process.env.ADMIN_EMAIL || '',
 };

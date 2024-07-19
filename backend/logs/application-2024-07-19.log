@@ -139,3 +139,15 @@
 2024-07-19T02:24:22.908Z [info]: Email template rendered successfully
 2024-07-19T02:24:22.909Z [info]: Sending email to:
 2024-07-19T02:24:25.501Z [info]: Email sent successfully:
+2024-07-19T04:54:41.184Z [info]: Creating transport...
+2024-07-19T04:54:41.213Z [info]: Transport created successfully
+2024-07-19T04:54:41.216Z [info]: Rendering email template...
+2024-07-19T04:54:41.222Z [info]: Email template rendered successfully
+2024-07-19T04:54:41.225Z [info]: Sending email to:
+2024-07-19T04:54:44.197Z [info]: Email sent successfully:
+2024-07-19T04:57:28.691Z [info]: Creating transport...
+2024-07-19T04:57:28.692Z [info]: Transport created successfully
+2024-07-19T04:57:28.694Z [info]: Rendering email template...
+2024-07-19T04:57:28.696Z [info]: Email template rendered successfully
+2024-07-19T04:57:28.696Z [info]: Sending email to:
+2024-07-19T04:57:31.155Z [info]: Email sent successfully:
