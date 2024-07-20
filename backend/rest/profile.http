@@ -14,7 +14,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNWFlY
   "lastName": "Preston",
   "phone": "0705383588",
   "imageUrl": "https://example.com/profile.jpg",
-  "role": "ADMIN"
 }
 
 ###

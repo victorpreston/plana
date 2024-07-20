@@ -1,10 +1,10 @@
 # Create a new booking
 POST http://localhost:5000/api/bookings
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwMzk4ZWYwZS0wOWRlLTQ2NWItYmQyMS0yN2NmZGE2ODE2YTgiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjEzNDQzMTQsImV4cCI6MTcyMTM0NzkxNH0.i8VyIIe7X01JCntg2DpD9J_Ddvy-Y3Rp8XfPNWeDt4M
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzNzZjMTBiMi05YWEzLTQ5OGUtOTQzZi1mNDdhMDhiMjE4YzUiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjEzOTYwNDIsImV4cCI6MTcyMTM5OTY0Mn0.M4QfBFFDn5Qy91K0xsgxA7FoaablV04NYAGZ847aXRA
 
 {
-  "userId": "0398ef0e-09de-465b-bd21-27cfda6816a8",
+  "userId": "376c10b2-9aa3-498e-943f-f47a08b218c5",
   "eventId": "a18a4e4f-f57a-4514-9061-4dc17dedab44",
   "ticketTypeId": "90e9a572-26b0-4803-be74-e62dd369c7db",
   "tickets": 2

@@ -1,0 +1,21 @@
+### Deactivate Account
+PUT http://localhost:5000/api/account/deactivate
+Authorization: Bearer <your-token>
+
+### Send Activation Code
+POST http://localhost:5000/api/account/send-activation
+Content-Type: application/json
+
+{
+  "email": "user@example.com"
+}
+
+### Activate Account
+POST http://localhost:5000/api/account/activate
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "activationCode": "123456",
+  "newPassword": "newpassword123"
+}

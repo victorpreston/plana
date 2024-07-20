@@ -67,6 +67,8 @@ model Event {
   updatedAt   DateTime   @updatedAt
   isDeleted   Boolean    @default(false)
   logs        Log[]
+  isActive                 Boolean   @default(true)
+  activationCode           String?
 
   @@map("events")
 }

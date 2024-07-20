@@ -19,7 +19,7 @@ const router = Router();
  * public routes
  */
 router.post('/register', validateRegister, register);
-router.post('/login', login);
+router.post('/login', validateLogin, login);
 
 
 /**

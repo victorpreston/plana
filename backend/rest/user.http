@@ -3,7 +3,7 @@ POST http://localhost:5000/api/register
 Content-Type: application/json
 
 {
-  "email": "vp.victorpreston@gmail.com",
+  "email": "testuser1@gmail.com",
   "password": "jay@2019PT",
   "firstName": "Victor",
   "lastName": "Preston",
@@ -33,9 +33,10 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-  "email": "attendee2@example.com",
+  "email": "testuser1@gmail.com",
   "password": "jay@2019PT"
 }
+
 
 ###
 
@@ -52,8 +53,7 @@ Content-Type: application/json
 
 # Get user details 
 GET http://localhost:5000/api/users/fa781dcb-d727-4386-aa85-7d6596c8f704
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzODM3NjYsImV4cCI6MTcyMTM4NzM2Nn0.wIvC_L8x6O245GDWiFj8CZZyDe8YR2ITZjVA9DNqp10
 ###
 
 # Promote attendee to manager (admin only)
@@ -69,7 +69,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2N
 
 # Get all users (admin only)
 GET http://localhost:5000/api/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzODM3NjYsImV4cCI6MTcyMTM4NzM2Nn0.wIvC_L8x6O245GDWiFj8CZZyDe8YR2ITZjVA9DNqp10
 
 
 ###

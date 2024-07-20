@@ -151,3 +151,54 @@
 2024-07-19T04:57:28.696Z [info]: Email template rendered successfully
 2024-07-19T04:57:28.696Z [info]: Sending email to:
 2024-07-19T04:57:31.155Z [info]: Email sent successfully:
+2024-07-19T07:04:04.376Z [info]: Server running on http://localhost:5000
+2024-07-19T07:15:30.545Z [info]: Server running on http://localhost:5000/api/events
+2024-07-19T07:16:07.377Z [info]: Server running on http://localhost:5000
+2024-07-19T07:43:09.268Z [info]: Server running on http://localhost:5000
+2024-07-19T07:51:35.308Z [info]: Server running on http://localhost:5000
+2024-07-19T08:17:53.099Z [info]: Server running on http://localhost:5000
+2024-07-19T08:23:29.070Z [info]: Server running on http://localhost:5000
+2024-07-19T08:23:39.423Z [info]: A user with the email vp.victorpreston@gmail.com already exists.
+2024-07-19T08:24:04.282Z [info]: Server running on http://localhost:5000
+2024-07-19T08:58:34.976Z [info]: Server running on http://localhost:5000
+2024-07-19T09:06:18.475Z [info]: Server running on http://localhost:5000
+2024-07-19T09:09:19.184Z [info]: Server running on http://localhost:5000
+2024-07-19T09:22:56.359Z [info]: Creating transport...
+2024-07-19T09:22:56.373Z [info]: Transport created successfully
+2024-07-19T09:22:56.374Z [info]: Rendering email template...
+2024-07-19T09:22:56.378Z [info]: Email template rendered successfully
+2024-07-19T09:22:56.379Z [info]: Sending email to:
+2024-07-19T09:22:59.897Z [info]: Email sent successfully:
+2024-07-19T09:24:49.992Z [info]: Server running on http://localhost:5000
+2024-07-19T09:25:00.418Z [info]: Creating transport...
+2024-07-19T09:25:00.440Z [info]: Transport created successfully
+2024-07-19T09:25:00.441Z [info]: Rendering email template...
+2024-07-19T09:25:00.468Z [info]: Email template rendered successfully
+2024-07-19T09:25:00.561Z [info]: Sending email to:
+2024-07-19T09:25:04.185Z [info]: Email sent successfully:
+2024-07-19T09:37:06.759Z [info]: Server running on http://localhost:5000
+2024-07-19T09:37:57.746Z [info]: Server running on http://localhost:5000
+2024-07-19T09:53:35.971Z [info]: Server running on http://localhost:5000
+2024-07-19T09:58:26.436Z [info]: Server running on http://localhost:5000
+2024-07-19T09:59:10.111Z [info]: Server running on http://localhost:5000
+2024-07-19T10:00:01.225Z [info]: Server running on http://localhost:5000
+2024-07-19T10:07:47.113Z [info]: Creating transport...
+2024-07-19T10:07:47.127Z [info]: Transport created successfully
+2024-07-19T10:07:47.128Z [info]: Rendering email template...
+2024-07-19T10:07:47.131Z [info]: Email template rendered successfully
+2024-07-19T10:07:47.132Z [info]: Sending email to:
+2024-07-19T10:07:50.049Z [info]: Email sent successfully:
+2024-07-19T10:16:32.363Z [info]: Creating transport...
+2024-07-19T10:16:32.365Z [info]: Transport created successfully
+2024-07-19T10:16:32.365Z [info]: Rendering email template...
+2024-07-19T10:16:32.367Z [info]: Email template rendered successfully
+2024-07-19T10:16:32.367Z [info]: Sending email to:
+2024-07-19T10:16:36.543Z [info]: Email sent successfully:
+2024-07-19T13:05:43.059Z [info]: Server running on http://localhost:5000
+2024-07-19T13:32:56.650Z [info]: Server running on http://localhost:5000
+2024-07-19T13:35:03.458Z [info]: Creating transport...
+2024-07-19T13:35:03.476Z [info]: Transport created successfully
+2024-07-19T13:35:03.476Z [info]: Rendering email template...
+2024-07-19T13:35:03.479Z [info]: Email template rendered successfully
+2024-07-19T13:35:03.480Z [info]: Sending email to:
+2024-07-19T13:35:11.306Z [info]: Email sent successfully:

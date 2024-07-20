@@ -1,7 +1,7 @@
 # Create a new event
 POST http://localhost:5000/api/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4MWRjYi1kNzI3LTQzODYtYWE4NS03ZDY1OTZjOGY3MDQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTE1NzU0MiwiZXhwIjoxNzIxMTYxMTQyfQ.Ur-Qfu8c_3B-F3qRaP1fv_6Us0c5CEcLeySHeNDWHKA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTM4Mzk2MiwiZXhwIjoxNzIxMzg3NTYyfQ.9YHND_xLhyIUmTVWdoMO6ppIQ-WHFjw5BW8bLjva3cw
 
 {
   "title": "Tech Conference 2024",
@@ -10,7 +10,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmYTc4M
   "time": "2024-08-01T09:00:00.000Z",
   "location": "Nairobi",
   "bannerImage": "https://example.com/banner.jpg",
-  "managerId": "fa781dcb-d727-4386-aa85-7d6596c8f704",
+  "managerId": "24f6ac29-3835-4b80-a3f7-3a1499bba6ad",
   "categoryId": "5e2ae853-a8d1-42da-979c-97299f300e54",
   "ticketTypes": [
     {

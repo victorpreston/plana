@@ -1,0 +1,23 @@
+### Search for users
+GET http://localhost:5000/api/search/users?query=John
+Authorization: Bearer <auth-token>
+
+### Search for events
+GET http://localhost:5000/api/search/events?query=Concert
+Authorization: Bearer <auth-token>
+
+### Search for bookings
+GET http://localhost:5000/api/search/bookings?query=XYZ123
+Authorization: Bearer <auth-token>
+
+### Search for categories
+GET http://localhost:5000/api/search/categories?query=Music
+Authorization: Bearer <auth-token>
+
+### Search for tags
+GET http://localhost:5000/api/search/tags?query=Festival
+Authorization: Bearer <auth-token>
+
+### Search for tickets
+GET http://localhost:5000/api/search/tickets?query=VIP
+Authorization: Bearer <auth-token>

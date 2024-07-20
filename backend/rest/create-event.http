@@ -1,0 +1,35 @@
+### Create a new event
+POST http://localhost:5000/api/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTM4Mjk3MCwiZXhwIjoxNzIxMzg2NTcwfQ.ZuHYALjuPEjiAunxIrQfvqS4Fcf1e5IyAMxv3NY1u8s
+
+{
+  "title": "Tech Conference 2024",
+  "description": "A conference about the latest in tech.",
+  "date": "2024-08-01T09:00:00.000Z",
+  "time": "2024-08-01T09:00:00.000Z",
+  "location": "Nairobi",
+  "bannerImage": "https://example.com/banner.jpg",
+  "managerId": "fa781dcb-d727-4386-aa85-7d6596c8f704",
+  "categoryId": "5e2ae853-a8d1-42da-979c-97299f300e54",
+  "ticketTypes": [
+    {
+      "type": "VIP",
+      "price": 100.0,
+      "quantity": 50
+    },
+    {
+      "type": "Regular",
+      "price": 50.0,
+      "quantity": 100
+    }
+  ],
+  "tags": [
+    {
+      "tag": { "name": "Technology" }
+    },
+    {
+      "tag": { "name": "Conference" }
+    }
+  ]
+}

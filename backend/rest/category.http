@@ -1,10 +1,10 @@
 # Create a new category
 POST http://localhost:5000/api/categories
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjExNTIwNjcsImV4cCI6MTcyMTE1NTY2N30.ZFnPugHg84Cby5FY05cm75jsjgSRsP6TJCpVJEfJOr4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YzU2NmI3Ni1mZjZlLTQzM2ItYTZhMi02NWQ5ZjQwMDk4ZmIiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3MjEzODM3NjYsImV4cCI6MTcyMTM4NzM2Nn0.wIvC_L8x6O245GDWiFj8CZZyDe8YR2ITZjVA9DNqp10
 
 {
-  "name": "Soul Night Carnivore"
+  "name": "Category Test"
 }
 
 ###

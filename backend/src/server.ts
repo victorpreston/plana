@@ -10,6 +10,8 @@ import eventRoutes from './routes/event.routes';
 import bookingRoutes from './routes/booking.routes';
 import prisma from './config/database.config';
 import roleRoutes from './routes/role.routes';
+import searchRoutes from './routes/search.routes';
+import logger from './config/logger.config';
 
 const app = express();
 const port = env.port;
@@ -34,9 +36,10 @@ app.use('/api', tagRoutes);
 app.use('/api', eventRoutes);
 app.use('/api', bookingRoutes);
 app.use('/api', roleRoutes);
+app.use('/api', searchRoutes);
 
 const server = app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  logger.info(`Server running on http://localhost:${port}`);
 });
 
 /**

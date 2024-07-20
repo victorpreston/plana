@@ -9,7 +9,7 @@ export interface Booking {
   eventId: string;
   ticketTypeId: string;
   tickets: number;
-  status: string;
+  status: string; /** confirmed, cancelled, reinstated*/
   ticketCode: string;
   totalPrice: number;
   createdAt: Date;

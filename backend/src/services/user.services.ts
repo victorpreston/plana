@@ -4,6 +4,7 @@ import { User, Role, Profile } from '../interfaces/user.interfaces';
 import { generateToken } from '../config/jwt.config';
 import { Prisma } from '@prisma/client';
 import { sendWelcomeEmail } from '../bg-services/mails/welcome';
+import logger from '../config/logger.config';
 
 
 /**
