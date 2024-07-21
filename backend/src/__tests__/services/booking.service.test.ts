@@ -49,7 +49,15 @@ describe('Booking Services', () => {
         status: 'confirmed',
         ticketCode: 'ABC1234567',
         totalPrice: 200,
-        user: { id: 'user-1', email: 'user@example.com', role: 'USER', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+        user: 
+        { 
+          id: 'user-1', 
+          email: 'user@example.com', 
+          role: 'USER', 
+          createdAt: new Date(), 
+          updatedAt: new Date(), 
+          isDeleted: false 
+        },
         event: {
           id: 'event-1',
           title: 'Test Event',
@@ -62,14 +70,39 @@ describe('Booking Services', () => {
           categoryId: 'category-1',
           ticketTypes: [],
           bookings: [],
-          manager: { id: 'manager-1', email: 'manager@example.com', role: 'MANAGER', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
-          category: { id: 'category-1', name: 'Test Category', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+          manager: 
+          { 
+            id: 'manager-1', 
+            email: 'manager@example.com',
+            role: 'MANAGER', 
+            createdAt: new Date(), 
+            updatedAt: new Date(), 
+            isDeleted: false 
+          },
+          category: 
+          { 
+            id: 'category-1', 
+            name: 'Test Category', 
+            createdAt: new Date(), 
+            updatedAt: new Date(), 
+            isDeleted: false 
+          },
           tags: [],
           createdAt: new Date(),
           updatedAt: new Date(),
           isDeleted: false,
         },
-        ticketType: { id: 'ticket-1', eventId: 'event-1', type: 'VIP', price: 100, quantity: 50, createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+        ticketType: 
+        { 
+          id: 'ticket-1', 
+          eventId: 'event-1', 
+          type: 'VIP', 
+          price: 100, 
+          quantity: 50, 
+          createdAt: new Date(), 
+          updatedAt: new Date(), 
+          isDeleted: false 
+        },
         createdAt: new Date(),
         updatedAt: new Date(),
         isDeleted: false,
@@ -132,7 +165,15 @@ describe('Booking Services', () => {
         status: 'confirmed',
         ticketCode: 'ABC1234567',
         totalPrice: 200,
-        user: { id: 'user-1', email: 'user@example.com', role: 'USER', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+        user: 
+        { 
+          id: 'user-1', 
+          email: 'user@example.com', 
+          role: 'USER', 
+          createdAt: new Date(), 
+          updatedAt: new Date(), 
+          isDeleted: false 
+        },
         event: {
           id: 'event-1',
           title: 'Test Event',
@@ -145,14 +186,39 @@ describe('Booking Services', () => {
           categoryId: 'category-1',
           ticketTypes: [],
           bookings: [],
-          manager: { id: 'manager-1', email: 'manager@example.com', role: 'MANAGER', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
-          category: { id: 'category-1', name: 'Test Category', createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+          manager: 
+          { 
+            id: 'manager-1', 
+            email: 'manager@example.com', 
+            role: 'MANAGER', 
+            createdAt: new Date(), 
+            updatedAt: new Date(), 
+            isDeleted: false 
+          },
+          category: 
+          { 
+            id: 'category-1',
+            name: 'Test Category',
+            createdAt: new Date(), 
+            updatedAt: new Date(), 
+            isDeleted: false
+          },
           tags: [],
           createdAt: new Date(),
           updatedAt: new Date(),
           isDeleted: false,
         },
-        ticketType: { id: 'ticket-1', eventId: 'event-1', type: 'VIP', price: 100, quantity: 50, createdAt: new Date(), updatedAt: new Date(), isDeleted: false },
+        ticketType: 
+        { 
+          id: 'ticket-1', 
+          eventId: 'event-1', 
+          type: 'VIP', 
+          price: 100, 
+          quantity: 50, 
+          createdAt: new Date(), 
+          updatedAt: new Date(), 
+          isDeleted: false 
+        },
         createdAt: new Date(),
         updatedAt: new Date(),
         isDeleted: false,

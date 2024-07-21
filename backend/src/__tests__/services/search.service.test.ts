@@ -40,7 +40,13 @@ describe('Search Service', () => {
 
   describe('searchUsers', () => {
     it('should search users by query', async () => {
-      const mockUsers = [{ id: '1', email: 'test@example.com', profile: { firstName: 'John', lastName: 'Doe' } }];
+      const mockUsers = [
+        { 
+          id: '1', 
+          email: 'test@example.com', 
+          profile: { firstName: 'John', lastName: 'Doe' } 
+        }
+      ];
       (prisma.user.findMany as jest.Mock).mockResolvedValue(mockUsers);
 
       const result = await searchUsers('test');
@@ -61,7 +67,14 @@ describe('Search Service', () => {
 
   describe('searchEvents', () => {
     it('should search events by query', async () => {
-      const mockEvents = [{ id: '1', title: 'Event Title', description: 'Event Description', location: 'Location' }];
+      const mockEvents = [
+        { 
+          id: '1',
+          title: 'Event Title', 
+          description: 'Event Description', 
+          location: 'Location' 
+        }
+      ];
       (prisma.event.findMany as jest.Mock).mockResolvedValue(mockEvents);
 
       const result = await searchEvents('event');
@@ -81,7 +94,15 @@ describe('Search Service', () => {
 
   describe('searchBookings', () => {
     it('should search bookings by query', async () => {
-      const mockBookings = [{ id: '1', ticketCode: 'ABC123', user: { email: 'user@example.com' }, event: { title: 'Event Title' }, ticketType: { type: 'VIP' } }];
+      const mockBookings = [
+        { 
+          id: '1', 
+          ticketCode: 'ABC123', 
+          user: { email: 'user@example.com' }, 
+          event: { title: 'Event Title' }, 
+          ticketType: { type: 'VIP' } 
+        }
+      ];
       (prisma.booking.findMany as jest.Mock).mockResolvedValue(mockBookings);
 
       const result = await searchBookings('ABC');

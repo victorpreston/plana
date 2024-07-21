@@ -40,7 +40,15 @@ describe('Profile Services', () => {
 
   describe('requestPasswordReset', () => {
     it('should request a password reset and send an email', async () => {
-      const mockUser = { id: 'user-1', email: 'test@example.com', password: '', role: Role.ATTENDEE, createdAt: new Date(), updatedAt: new Date(), isDeleted: false } as User;
+      const mockUser = {
+        id: 'user-1',
+        email: 'test@example.com',
+        password: '',
+        role: Role.ATTENDEE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false
+      } as User;
       (prisma.user.findUnique as jest.Mock).mockResolvedValue(mockUser);
       (bcrypt.hash as jest.Mock).mockResolvedValue('hashedCode');
       (sendPasswordResetEmail as jest.Mock).mockResolvedValue(undefined);
@@ -67,7 +75,17 @@ describe('Profile Services', () => {
 
   describe('resetPassword', () => {
     it('should reset the password if code is valid', async () => {
-      const mockUser = { id: 'user-1', email: 'test@example.com', passwordResetToken: 'hashedCode', passwordResetTokenExpiry: new Date(Date.now() + 300000), password: '', role: Role.ATTENDEE, createdAt: new Date(), updatedAt: new Date(), isDeleted: false } as User;
+      const mockUser = {
+        id: 'user-1',
+        email: 'test@example.com',
+        passwordResetToken: 'hashedCode',
+        passwordResetTokenExpiry: new Date(Date.now() + 300000),
+        password: '',
+        role: Role.ATTENDEE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false
+      } as User;
       (prisma.user.findFirst as jest.Mock).mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(true);
       (bcrypt.hash as jest.Mock).mockResolvedValue('newHashedPassword');
@@ -93,11 +111,22 @@ describe('Profile Services', () => {
     });
 
     it('should throw an error if code is invalid', async () => {
-      const mockUser = { id: 'user-1', email: 'test@example.com', passwordResetToken: 'hashedCode', passwordResetTokenExpiry: new Date(Date.now() + 300000), password: '', role: Role.ATTENDEE, createdAt: new Date(), updatedAt: new Date(), isDeleted: false } as User;
+      const mockUser = {
+        id: 'user-1',
+        email: 'test@example.com',
+        passwordResetToken: 'hashedCode',
+        passwordResetTokenExpiry: new Date(Date.now() + 300000),
+        password: '',
+        role: Role.ATTENDEE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false
+      } as User;
       (prisma.user.findFirst as jest.Mock).mockResolvedValue(mockUser);
       (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-      await expect(resetPassword('test@example.com', 'invalidCode', 'newPassword')).rejects.toThrow('Invalid or expired password reset code');
+      await expect(resetPassword('test@example.com', 'invalidCode', 'newPassword'))
+        .rejects.toThrow('Invalid or expired password reset code');
     });
 
     it('should throw an error if user or token is not found', async () => {
@@ -109,7 +138,15 @@ describe('Profile Services', () => {
 
   describe('updateProfile', () => {
     it('should update the profile and email', async () => {
-      const mockUser = { id: 'user-1', email: 'test@example.com', password: '', role: Role.ATTENDEE, createdAt: new Date(), updatedAt: new Date(), isDeleted: false } as User;
+      const mockUser = {
+        id: 'user-1',
+        email: 'test@example.com',
+        password: '',
+        role: Role.ATTENDEE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false
+      } as User;
       const mockProfile = { userId: 'user-1', firstName: 'John', lastName: 'Doe', phone: '1234567890' } as Profile;
       (prisma.user.update as jest.Mock).mockResolvedValue(mockUser);
       (prisma.profile.update as jest.Mock).mockResolvedValue(mockProfile);
@@ -175,7 +212,15 @@ describe('Profile Services', () => {
 
   describe('updatePassword', () => {
     it('should update the user\'s password', async () => {
-      const mockUser = { id: 'user-1', email: 'test@example.com', password: '', role: Role.ATTENDEE, createdAt: new Date(), updatedAt: new Date(), isDeleted: false } as User;
+      const mockUser = {
+        id: 'user-1',
+        email: 'test@example.com',
+        password: '',
+        role: Role.ATTENDEE,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isDeleted: false
+      } as User;
       (bcrypt.hash as jest.Mock).mockResolvedValue('newHashedPassword');
       (prisma.user.update as jest.Mock).mockResolvedValue(mockUser);
 

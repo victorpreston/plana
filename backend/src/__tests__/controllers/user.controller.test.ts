@@ -15,7 +15,9 @@ import { sendWelcomeEmail } from '../../bg-services/mails/welcome';
 import { generateToken } from '../../config/jwt.config';
 import { Role } from '../../interfaces/user.interfaces';
 
-// Create an Express app for testing
+/**
+ * Mock Express server
+ */
 const app: Application = express();
 app.use(bodyParser.json());
 app.post('/register', register);
@@ -25,7 +27,9 @@ app.put('/user/:id/role', updateRole);
 app.get('/users', getUsers);
 app.delete('/user/:id', removeUser);
 
-// Mock Prisma client
+/**
+ * Mock Prisma client
+ */
 jest.mock('../../config/database.config', () => {
   return {
     user: {

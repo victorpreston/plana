@@ -1,7 +1,13 @@
 import request from 'supertest';
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import { create, update, getAll, getById, remove } from '../../controllers/tag.controllers';
+import { 
+  create, 
+  update, 
+  getAll, 
+  getById, 
+  remove 
+} from '../../controllers/tag.controllers';
 import { 
   createTag, 
   updateTag, 

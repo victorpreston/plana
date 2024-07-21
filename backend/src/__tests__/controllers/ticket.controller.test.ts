@@ -1,7 +1,12 @@
 import request from 'supertest';
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import { create, update, getByEventId, remove } from '../../controllers/ticket.controllers';
+import { 
+  create, 
+  update, 
+  getByEventId, 
+  remove 
+} from '../../controllers/ticket.controllers';
 import { 
   createTicketType, 
   updateTicketType, 
