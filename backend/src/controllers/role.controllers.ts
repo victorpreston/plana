@@ -11,7 +11,7 @@ import { Role } from '../interfaces/user.interfaces';
 export const requestRoleChange = async (req: AuthRequest, res: Response) => {
   try {
     const { newRole } = req.body;
-    const userId = req.user?.userId; // Assuming user ID is set on req.user by the authentication middleware
+    const userId = req.user?.userId; //user ID is set on req.user by the auth middleware
     if (!userId) {
       return res.status(400).json({ error: 'User ID is missing' });
     }
