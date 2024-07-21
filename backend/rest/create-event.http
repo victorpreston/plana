@@ -1,7 +1,7 @@
 ### Create a new event
 POST http://localhost:5000/api/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTM4Mjk3MCwiZXhwIjoxNzIxMzg2NTcwfQ.ZuHYALjuPEjiAunxIrQfvqS4Fcf1e5IyAMxv3NY1u8s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTUwNjk3MSwiZXhwIjoxNzIxNTEwNTcxfQ.JHnuBpx5MIKk6k-dTwghOqdbXQY0bEafAwzdyzZa-Hk
 
 {
   "title": "Tech Conference 2024",

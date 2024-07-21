@@ -1,4 +1,4 @@
-
+import { Event } from './event.interfaces';
 export interface Tag {
   id: string;
   name: string;
