@@ -38,6 +38,9 @@ app.use('/api', bookingRoutes);
 app.use('/api', roleRoutes);
 app.use('/api', searchRoutes);
 
+app.get('/api/health', (req, res) => res.status(200).json({ message: 'OK' })); 
+
+/* Health check endpoint */
 const server = app.listen(port, () => {
   logger.info(`Server running on http://localhost:${port}`);
 });
