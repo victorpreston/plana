@@ -33,8 +33,12 @@ describe('Tag Controllers', () => {
 
   describe('create', () => {
     it('should create a new tag', async () => {
-      const mockTag = { id: 'tag-1', name: 'Technology' };
-      (createTag as jest.Mock).mockResolvedValue(mockTag);
+      const mockTag = { 
+        id: 'tag-1', 
+        name: 'Technology' 
+      };
+      (createTag as jest.Mock)
+      .mockResolvedValue(mockTag);
 
       const response = await request(app)
         .post('/tags')
@@ -42,25 +46,32 @@ describe('Tag Controllers', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(mockTag);
-      expect(createTag).toHaveBeenCalledWith('Technology');
+      expect(createTag)
+      .toHaveBeenCalledWith('Technology');
     });
 
     it('should return 400 if there is an error', async () => {
-      (createTag as jest.Mock).mockRejectedValue(new Error('Failed to create tag'));
+      (createTag as jest.Mock)
+      .mockRejectedValue(new Error('Failed to create tag'));
 
       const response = await request(app)
         .post('/tags')
         .send({ name: 'Technology' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Failed to create tag');
+      expect(response.body.error)
+      .toBe('Failed to create tag');
     });
   });
 
   describe('update', () => {
     it('should update a tag', async () => {
-      const mockTag = { id: 'tag-1', name: 'Tech' };
-      (updateTag as jest.Mock).mockResolvedValue(mockTag);
+      const mockTag = { 
+        id: 'tag-1', 
+        name: 'Tech' 
+      };
+      (updateTag as jest.Mock)
+      .mockResolvedValue(mockTag);
 
       const response = await request(app)
         .put('/tags/tag-1')
@@ -68,40 +79,52 @@ describe('Tag Controllers', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockTag);
-      expect(updateTag).toHaveBeenCalledWith('tag-1', 'Tech');
+      expect(updateTag)
+      .toHaveBeenCalledWith('tag-1', 'Tech');
     });
 
     it('should return 400 if there is an error', async () => {
-      (updateTag as jest.Mock).mockRejectedValue(new Error('Failed to update tag'));
+      (updateTag as jest.Mock)
+      .mockRejectedValue(new Error('Failed to update tag'));
 
       const response = await request(app)
         .put('/tags/tag-1')
         .send({ name: 'Tech' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Failed to update tag');
+      expect(response.body.error)
+      .toBe('Failed to update tag');
     });
   });
 
   describe('getAll', () => {
     it('should get all tags', async () => {
-      const mockTags = [{ id: 'tag-1', name: 'Technology' }];
-      (getAllTags as jest.Mock).mockResolvedValue(mockTags);
+      const mockTags = [
+        { 
+          id: 'tag-1', 
+          name: 'Technology' 
+        }
+      ];
+      (getAllTags as jest.Mock)
+      .mockResolvedValue(mockTags);
 
       const response = await request(app).get('/tags');
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockTags);
-      expect(getAllTags).toHaveBeenCalled();
+      expect(getAllTags)
+      .toHaveBeenCalled();
     });
 
     it('should return 400 if there is an error', async () => {
-      (getAllTags as jest.Mock).mockRejectedValue(new Error('Failed to get tags'));
+      (getAllTags as jest.Mock)
+      .mockRejectedValue(new Error('Failed to get tags'));
 
       const response = await request(app).get('/tags');
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Failed to get tags');
+      expect(response.body.error)
+      .toBe('Failed to get tags');
     });
   });
 

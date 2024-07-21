@@ -36,56 +36,81 @@ describe('Search Controllers', () => {
 
   describe('searchForUsers', () => {
     it('should return users matching the search query', async () => {
-      const mockUsers = [{ id: 'user-1', name: 'John Doe' }];
-      (searchUsers as jest.Mock).mockResolvedValue(mockUsers);
+      const mockUsers = [
+        { 
+          id: 'user-1', 
+          name: 'John Doe' 
+        }
+      ];
+      (searchUsers as jest.Mock)
+      .mockResolvedValue(mockUsers);
 
-      const response = await request(app).get('/search/users').query({ query: 'John' });
+      const response = await request(app)
+      .get('/search/users').query({ query: 'John' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockUsers);
-      expect(searchUsers).toHaveBeenCalledWith('John');
+      expect(searchUsers)
+      .toHaveBeenCalledWith('John');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/users').query({ query: '' });
+      const response = await request(app)
+      .get('/search/users').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchUsers as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchUsers as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/users').query({ query: 'John' });
+      const response = await request(app)
+      .get('/search/users').query({ query: 'John' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Search error');
+      expect(response.body.error)
+      .toBe('Search error');
     });
   });
 
   describe('searchForEvents', () => {
     it('should return events matching the search query', async () => {
-      const mockEvents = [{ id: 'event-1', title: 'Tech Conference' }];
-      (searchEvents as jest.Mock).mockResolvedValue(mockEvents);
+      const mockEvents = [
+        { 
+          id: 'event-1', 
+          title: 'Tech Conference' 
+        }
+      ];
+      (searchEvents as jest.Mock)
+      .mockResolvedValue(mockEvents);
 
-      const response = await request(app).get('/search/events').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/events').query({ query: 'Tech' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockEvents);
-      expect(searchEvents).toHaveBeenCalledWith('Tech');
+      expect(searchEvents)
+      .toHaveBeenCalledWith('Tech');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/events').query({ query: '' });
+      const response = await request(app)
+      .get('/search/events').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchEvents as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchEvents as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/events').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/events').query({ query: 'Tech' });
 
       expect(response.status).toBe(400);
       expect(response.body.error).toBe('Search error');
@@ -94,114 +119,155 @@ describe('Search Controllers', () => {
 
   describe('searchForBookings', () => {
     it('should return bookings matching the search query', async () => {
-      const mockBookings = [{ id: 'booking-1', userId: 'user-1' }];
-      (searchBookings as jest.Mock).mockResolvedValue(mockBookings);
+      const mockBookings = [
+        { 
+          id: 'booking-1', 
+          userId: 'user-1' 
+        }
+      ];
+      (searchBookings as jest.Mock)
+      .mockResolvedValue(mockBookings);
 
-      const response = await request(app).get('/search/bookings').query({ query: 'user-1' });
+      const response = await request(app)
+      .get('/search/bookings').query({ query: 'user-1' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockBookings);
-      expect(searchBookings).toHaveBeenCalledWith('user-1');
+      expect(searchBookings)
+      .toHaveBeenCalledWith('user-1');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/bookings').query({ query: '' });
+      const response = await request(app)
+      .get('/search/bookings').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchBookings as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchBookings as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/bookings').query({ query: 'user-1' });
+      const response = await request(app)
+      .get('/search/bookings').query({ query: 'user-1' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Search error');
+      expect(response.body.error)
+      .toBe('Search error');
     });
   });
 
   describe('searchForCategories', () => {
     it('should return categories matching the search query', async () => {
-      const mockCategories = [{ id: 'category-1', name: 'Technology' }];
-      (searchCategories as jest.Mock).mockResolvedValue(mockCategories);
+      const mockCategories = [
+        { 
+          id: 'category-1', 
+          name: 'Technology' 
+        }
+      ];
+      (searchCategories as jest.Mock)
+      .mockResolvedValue(mockCategories);
 
-      const response = await request(app).get('/search/categories').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/categories').query({ query: 'Tech' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockCategories);
-      expect(searchCategories).toHaveBeenCalledWith('Tech');
+      expect(searchCategories)
+      .toHaveBeenCalledWith('Tech');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/categories').query({ query: '' });
+      const response = await request(app)
+      .get('/search/categories').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchCategories as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchCategories as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/categories').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/categories').query({ query: 'Tech' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Search error');
+      expect(response.body.error)
+      .toBe('Search error');
     });
   });
 
   describe('searchForTags', () => {
     it('should return tags matching the search query', async () => {
       const mockTags = [{ id: 'tag-1', name: 'Technology' }];
-      (searchTags as jest.Mock).mockResolvedValue(mockTags);
+      (searchTags as jest.Mock)
+      .mockResolvedValue(mockTags);
 
-      const response = await request(app).get('/search/tags').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/tags').query({ query: 'Tech' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockTags);
-      expect(searchTags).toHaveBeenCalledWith('Tech');
+      expect(searchTags)
+      .toHaveBeenCalledWith('Tech');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/tags').query({ query: '' });
+      const response = await request(app)
+      .get('/search/tags').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchTags as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchTags as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/tags').query({ query: 'Tech' });
+      const response = await request(app)
+      .get('/search/tags').query({ query: 'Tech' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Search error');
+      expect(response.body.error)
+      .toBe('Search error');
     });
   });
 
   describe('searchForTickets', () => {
     it('should return tickets matching the search query', async () => {
       const mockTickets = [{ id: 'ticket-1', code: 'ABC123' }];
-      (searchTickets as jest.Mock).mockResolvedValue(mockTickets);
+      (searchTickets as jest.Mock)
+      .mockResolvedValue(mockTickets);
 
-      const response = await request(app).get('/search/tickets').query({ query: 'ABC123' });
+      const response = await request(app)
+      .get('/search/tickets').query({ query: 'ABC123' });
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockTickets);
-      expect(searchTickets).toHaveBeenCalledWith('ABC123');
+      expect(searchTickets)
+      .toHaveBeenCalledWith('ABC123');
     });
 
     it('should return 400 for invalid search query', async () => {
-      const response = await request(app).get('/search/tickets').query({ query: '' });
+      const response = await request(app)
+      .get('/search/tickets').query({ query: '' });
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Invalid search query');
+      expect(response.body.error)
+      .toBe('Invalid search query');
     });
 
     it('should return 400 if there is an error', async () => {
-      (searchTickets as jest.Mock).mockRejectedValue(new Error('Search error'));
+      (searchTickets as jest.Mock)
+      .mockRejectedValue(new Error('Search error'));
 
-      const response = await request(app).get('/search/tickets').query({ query: 'ABC123' });
+      const response = await request(app)
+      .get('/search/tickets').query({ query: 'ABC123' });
 
       expect(response.status).toBe(400);
       expect(response.body.error).toBe('Search error');

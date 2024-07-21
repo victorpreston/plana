@@ -40,7 +40,13 @@ describe('Booking Controllers', () => {
 
   describe('create', () => {
     it('should create a new booking', async () => {
-      const mockBooking = { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' };
+      const mockBooking = { 
+        id: 'booking-1', 
+        eventId: 'event-1', 
+        userId: 'user-1', 
+        tickets: 2, 
+        status: 'confirmed' 
+      };
       (createBooking as jest.Mock).mockResolvedValue(mockBooking);
 
       const response = await request(app)
@@ -49,11 +55,19 @@ describe('Booking Controllers', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(mockBooking);
-      expect(createBooking).toHaveBeenCalledWith({ eventId: 'event-1', userId: 'user-1', tickets: 2 });
+      expect(createBooking)
+      .toHaveBeenCalledWith(
+        { 
+          eventId: 'event-1', 
+          userId: 'user-1', 
+          tickets: 2 
+        }
+      );
     });
 
     it('should return 400 if there is an error', async () => {
-      (createBooking as jest.Mock).mockRejectedValue(new Error('Create booking error'));
+      (createBooking as jest.Mock)
+      .mockRejectedValue(new Error('Create booking error'));
 
       const response = await request(app)
         .post('/bookings')
@@ -67,7 +81,13 @@ describe('Booking Controllers', () => {
   describe('getRecent', () => {
     it('should get recent bookings for a user', async () => {
       const mockBookings = [
-        { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' }
+        { 
+          id: 'booking-1', 
+          eventId: 'event-1', 
+          userId: 'user-1', 
+          tickets: 2, 
+          status: 'confirmed' 
+        }
       ];
       (getRecentBookings as jest.Mock).mockResolvedValue(mockBookings);
 
@@ -80,7 +100,8 @@ describe('Booking Controllers', () => {
     });
 
     it('should return 400 if there is an error', async () => {
-      (getRecentBookings as jest.Mock).mockRejectedValue(new Error('Get recent bookings error'));
+      (getRecentBookings as jest.Mock)
+      .mockRejectedValue(new Error('Get recent bookings error'));
 
       const response = await request(app)
         .get('/bookings/recent/user-1');
@@ -102,7 +123,8 @@ describe('Booking Controllers', () => {
     });
 
     it('should return 400 if there is an error', async () => {
-      (cancelBooking as jest.Mock).mockRejectedValue(new Error('Cancel booking error'));
+      (cancelBooking as jest.Mock)
+      .mockRejectedValue(new Error('Cancel booking error'));
 
       const response = await request(app)
         .delete('/bookings/booking-1');
@@ -114,7 +136,13 @@ describe('Booking Controllers', () => {
 
   describe('update', () => {
     it('should update a booking', async () => {
-      const mockBooking = { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' };
+      const mockBooking = { 
+        id: 'booking-1', 
+        eventId: 'event-1', 
+        userId: 'user-1', 
+        tickets: 2, 
+        status: 'confirmed' 
+      };
       (updateBooking as jest.Mock).mockResolvedValue(mockBooking);
 
       const response = await request(app)
@@ -127,7 +155,8 @@ describe('Booking Controllers', () => {
     });
 
     it('should return 400 if there is an error', async () => {
-      (updateBooking as jest.Mock).mockRejectedValue(new Error('Update booking error'));
+      (updateBooking as jest.Mock)
+      .mockRejectedValue(new Error('Update booking error'));
 
       const response = await request(app)
         .put('/bookings/booking-1')
@@ -140,7 +169,13 @@ describe('Booking Controllers', () => {
 
   describe('getById', () => {
     it('should get a booking by ID', async () => {
-      const mockBooking = { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' };
+      const mockBooking = { 
+        id: 'booking-1',
+        eventId: 'event-1', 
+        userId: 'user-1', 
+        tickets: 2, 
+        status: 'confirmed' 
+      };
       (getBookingById as jest.Mock).mockResolvedValue(mockBooking);
 
       const response = await request(app)
@@ -175,7 +210,13 @@ describe('Booking Controllers', () => {
   describe('getForEvent', () => {
     it('should get bookings for an event', async () => {
       const mockBookings = [
-        { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' }
+        { 
+          id: 'booking-1', 
+          eventId: 'event-1', 
+          userId: 'user-1', 
+          tickets: 2, 
+          status: 'confirmed' 
+        }
       ];
       (getBookingsForEvent as jest.Mock).mockResolvedValue(mockBookings);
 
@@ -188,7 +229,8 @@ describe('Booking Controllers', () => {
     });
 
     it('should return 400 if there is an error', async () => {
-      (getBookingsForEvent as jest.Mock).mockRejectedValue(new Error('Get bookings for event error'));
+      (getBookingsForEvent as jest.Mock)
+      .mockRejectedValue(new Error('Get bookings for event error'));
 
       const response = await request(app)
         .get('/bookings/event/event-1');
@@ -200,7 +242,13 @@ describe('Booking Controllers', () => {
 
   describe('verify', () => {
     it('should verify a ticket code', async () => {
-      const mockBooking = { id: 'booking-1', eventId: 'event-1', userId: 'user-1', tickets: 2, status: 'confirmed' };
+      const mockBooking = { 
+        id: 'booking-1', 
+        eventId: 'event-1', 
+        userId: 'user-1', 
+        tickets: 2, 
+        status: 'confirmed' 
+      };
       (verifyTicketCode as jest.Mock).mockResolvedValue(mockBooking);
 
       const response = await request(app)
@@ -222,7 +270,8 @@ describe('Booking Controllers', () => {
     });
 
     it('should return 400 if there is an error', async () => {
-      (verifyTicketCode as jest.Mock).mockRejectedValue(new Error('Verify ticket error'));
+      (verifyTicketCode as jest.Mock)
+      .mockRejectedValue(new Error('Verify ticket error'));
 
       const response = await request(app)
         .get('/bookings/verify/ABC123');

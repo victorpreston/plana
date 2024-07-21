@@ -35,8 +35,14 @@ describe('Role Controllers', () => {
 
       app.post('/role/change-request', requestRoleChange);
 
-      const mockRequest = { id: 'request-1', userId: 'user-1', newRole: Role.MANAGER, status: 'pending' };
-      (createRoleChangeRequest as jest.Mock).mockResolvedValue(mockRequest);
+      const mockRequest = { 
+        id: 'request-1', 
+        userId: 'user-1', 
+        newRole: Role.MANAGER, 
+        status: 'pending' 
+      };
+      (createRoleChangeRequest as jest.Mock)
+      .mockResolvedValue(mockRequest);
 
       const response = await request(app)
         .post('/role/change-request')
@@ -45,7 +51,8 @@ describe('Role Controllers', () => {
 
       expect(response.status).toBe(201);
       expect(response.body).toEqual(mockRequest);
-      expect(createRoleChangeRequest).toHaveBeenCalledWith('user-1', Role.MANAGER);
+      expect(createRoleChangeRequest)
+      .toHaveBeenCalledWith('user-1', Role.MANAGER);
     });
 
     it('should return 400 if user ID is missing', async () => {
@@ -72,7 +79,8 @@ describe('Role Controllers', () => {
 
       app.post('/role/change-request', requestRoleChange);
 
-      (createRoleChangeRequest as jest.Mock).mockRejectedValue(new Error('Create request error'));
+      (createRoleChangeRequest as jest.Mock)
+      .mockRejectedValue(new Error('Create request error'));
 
       const response = await request(app)
         .post('/role/change-request')
@@ -88,8 +96,14 @@ describe('Role Controllers', () => {
     it('should approve a role change request', async () => {
       app.put('/role/change-request/approve/:requestId', approveRoleChange);
 
-      const mockRequest = { id: 'request-1', userId: 'user-1', newRole: Role.MANAGER, status: 'approved' };
-      (approveRoleChangeRequest as jest.Mock).mockResolvedValue(mockRequest);
+      const mockRequest = {
+         id: 'request-1', 
+         userId: 'user-1', 
+         newRole: Role.MANAGER, 
+         status: 'approved' 
+        };
+      (approveRoleChangeRequest as jest.Mock)
+      .mockResolvedValue(mockRequest);
 
       const response = await request(app)
         .put('/role/change-request/approve/request-1')
@@ -97,13 +111,15 @@ describe('Role Controllers', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockRequest);
-      expect(approveRoleChangeRequest).toHaveBeenCalledWith('request-1');
+      expect(approveRoleChangeRequest)
+      .toHaveBeenCalledWith('request-1');
     });
 
     it('should return 400 if there is an error', async () => {
       app.put('/role/change-request/approve/:requestId', approveRoleChange);
 
-      (approveRoleChangeRequest as jest.Mock).mockRejectedValue(new Error('Approve request error'));
+      (approveRoleChangeRequest as jest.Mock)
+      .mockRejectedValue(new Error('Approve request error'));
 
       const response = await request(app)
         .put('/role/change-request/approve/request-1')
@@ -118,8 +134,14 @@ describe('Role Controllers', () => {
     it('should reject a role change request', async () => {
       app.put('/role/change-request/reject/:requestId', rejectRoleChange);
 
-      const mockRequest = { id: 'request-1', userId: 'user-1', newRole: Role.MANAGER, status: 'rejected' };
-      (rejectRoleChangeRequest as jest.Mock).mockResolvedValue(mockRequest);
+      const mockRequest = { 
+        id: 'request-1', 
+        userId: 'user-1', 
+        newRole: Role.MANAGER, 
+        status: 'rejected' 
+      };
+      (rejectRoleChangeRequest as jest.Mock)
+      .mockResolvedValue(mockRequest);
 
       const response = await request(app)
         .put('/role/change-request/reject/request-1')
@@ -127,13 +149,15 @@ describe('Role Controllers', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockRequest);
-      expect(rejectRoleChangeRequest).toHaveBeenCalledWith('request-1');
+      expect(rejectRoleChangeRequest)
+      .toHaveBeenCalledWith('request-1');
     });
 
     it('should return 400 if there is an error', async () => {
       app.put('/role/change-request/reject/:requestId', rejectRoleChange);
 
-      (rejectRoleChangeRequest as jest.Mock).mockRejectedValue(new Error('Reject request error'));
+      (rejectRoleChangeRequest as jest.Mock)
+      .mockRejectedValue(new Error('Reject request error'));
 
       const response = await request(app)
         .put('/role/change-request/reject/request-1')
@@ -148,8 +172,16 @@ describe('Role Controllers', () => {
     it('should get all role change requests', async () => {
       app.get('/role/change-requests', getAllRoleChangeRequests);
 
-      const mockRequests = [{ id: 'request-1', userId: 'user-1', newRole: Role.MANAGER, status: 'pending' }];
-      (getRoleChangeRequests as jest.Mock).mockResolvedValue(mockRequests);
+      const mockRequests = [
+        {
+           id: 'request-1', 
+           userId: 'user-1', 
+           newRole: Role.MANAGER, 
+           status: 'pending' 
+          }
+        ];
+      (getRoleChangeRequests as jest.Mock)
+      .mockResolvedValue(mockRequests);
 
       const response = await request(app)
         .get('/role/change-requests')
@@ -157,20 +189,23 @@ describe('Role Controllers', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(mockRequests);
-      expect(getRoleChangeRequests).toHaveBeenCalled();
+      expect(getRoleChangeRequests)
+      .toHaveBeenCalled();
     });
 
     it('should return 400 if there is an error', async () => {
       app.get('/role/change-requests', getAllRoleChangeRequests);
 
-      (getRoleChangeRequests as jest.Mock).mockRejectedValue(new Error('Get requests error'));
+      (getRoleChangeRequests as jest.Mock)
+      .mockRejectedValue(new Error('Get requests error'));
 
       const response = await request(app)
         .get('/role/change-requests')
         .set('Authorization', 'Bearer valid-token');
 
       expect(response.status).toBe(400);
-      expect(response.body.error).toBe('Get requests error');
+      expect(response.body.error)
+      .toBe('Get requests error');
     });
   });
 });
