@@ -1,0 +1,8 @@
+.profile-dropdown {
+    display: none;
+  }
+
+  .relative:hover .profile-dropdown {
+    display: block;
+    opacity: 1;
+}

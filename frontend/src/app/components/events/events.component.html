@@ -1,3 +1,5 @@
+<!-- src/app/components/events/events.component.html -->
+
 <div class="font-[sans-serif]">
   <app-navbar></app-navbar>
   <div class="container mx-auto px-4 py-8 mt-16">
@@ -9,19 +11,15 @@
           <div class="mb-4">
             <h3 class="text-lg font-semibold mb-2 flex items-center"><i class="pi pi-map-marker mr-2"></i>Location</h3>
             <select formControlName="location" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
-              <option>All Locations</option>
-              <option>Nairobi</option>
-              <option>Mombasa</option>
-              <option>Kisumu</option>
+              <option value="">All locations</option>
+              <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
             </select>
           </div>
           <div class="mb-4">
             <h3 class="text-lg font-semibold mb-2 flex items-center"><i class="pi pi-tags mr-2"></i>Category</h3> 
-            <select formControlName="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50 place">
-              <option>All Categories</option>
-              <option>Music</option>
-              <option>Sports</option>
-              <option>Conferences</option>
+            <select formControlName="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50">
+              <option value="">All categories</option>
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
             </select>
           </div>
           <div class="mb-4">
@@ -53,39 +51,32 @@
               </div>
             </div>
           </div>
-          <div class="mb-4">
-            <h3 class="text-lg font-semibold mb-2">Price Range</h3>
-            <div class="flex justify-between text-sm text-gray-700 mb-2">
-              <span>$0</span>
-              <span>$500</span>
-            </div>
-            <input formControlName="price" type="range" min="0" max="500" step="10" class="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-200 focus:ring-opacity-50">
-          </div>
         </form>
       </div>
 
       <!-- Search Bar and Content Area -->
       <div class="w-full lg:w-5/6">
-        <!-- Search Bar -->
-        <div class="flex justify-between items-center mb-6">
-          <div class="flex w-full items-center relative">
-            <i class="pi pi-search absolute left-3 text-gray-400"></i>
-            <input formControlName="search" type="text" class="w-3/4 pl-10 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50" placeholder="Search for events..." />
-            <button type="button" (click)="onClearFilters()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 ml-4 flex items-center h-full"><i class="pi pi-times mr-2"></i>Clear Filters</button>
+        <form [formGroup]="filterForm">
+          <!-- Search Bar -->
+          <div class="flex justify-between items-center mb-6">
+            <div class="flex w-full items-center relative">
+              <i class="pi pi-search absolute left-3 text-gray-400"></i>
+              <input formControlName="search" type="text" class="w-3/4 pl-10 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:border-indigo-700 focus:ring-2 focus:ring-indigo-700 focus:ring-opacity-50" placeholder="Search for events..." />
+              <button type="button" (click)="onClearFilters()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-400 ml-4 flex items-center h-full"><i class="pi pi-times mr-2"></i>Clear Filters</button>
+            </div>
           </div>
-        </div>
+        </form>
 
         <!-- Main Content -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          <!-- Card 1 -->
-          <div class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
-            <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" src="assets/event1.jpg" alt="Event 1 Image" />
+        <div *ngIf="filteredEvents.length > 0; else noEvents" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div *ngFor="let event of filteredEvents" class="w-full sm:w-56 mb-4 bg-white rounded-lg shadow-lg flex flex-col">
+            <img class="rounded-t-lg w-full h-32 sm:h-40 object-cover" [src]="event.bannerImage || 'assets/default-event.jpg'" alt="Event Image" />
             <div class="flex justify-between items-start px-4 pt-0 pb-2">
-              <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight">Soul Night Carnivore Grounds</h2>
+              <h2 class="hover:cursor-pointer text-gray-900 font-bold text-lg sm:text-xl tracking-tight">{{ event.title }}</h2>
               <div class="flex flex-col items-center bg-indigo-100 text-indigo-800 p-2 font-extrabold flex-shrink-0" style="width: 80px; margin-right: -16px; margin-top: 5px; border-radius: 2px;">
-                <span class="text-lg font-bold">30</span>
-                <span class="text-sm font-bold">Sep</span>
-                <span class="text-sm font-bold">2024</span>
+                <span class="text-lg font-bold">{{ event.date | date: 'dd' }}</span>
+                <span class="text-sm font-bold">{{ event.date | date: 'MMM' }}</span>
+                <span class="text-sm font-bold">{{ event.date | date: 'yyyy' }}</span>
               </div>
             </div>
             <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
@@ -93,13 +84,24 @@
               <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
               <div class="flex items-center ml-4">
                 <i class="pi pi-users text-gray-600 mr-2"></i>
-                <span class="text-gray-900 font-semibold">300</span>
+                <span class="text-gray-900 font-semibold">{{ event.bookings.length }}</span>
                 <span class="text-gray-500 ml-1 text-sm">attending</span>
               </div>
             </div>
           </div>
-          <!-- Additional Cards -->
-          <!-- Repeat similar card structure for more events -->
+        </div>
+        <ng-template #noEvents>
+          <div class="flex flex-col items-center justify-center text-center text-gray-500">
+            <img src="assets/notfound.webp" alt="No Events Found" class="w-64 h-64 mb-4" />
+            <p class="text-xl font-semibold">Sorry, no events found for you.</p>
+          </div>
+        </ng-template>
+
+        <!-- Tags Section -->
+        <div class="flex flex-wrap mt-4 sticky bottom-0">
+          <span *ngFor="let tag of tags" (click)="onTagSelect(tag)" class="mr-2 mb-2 px-3 py-1 bg-gray-200 rounded-full cursor-pointer hover:bg-indigo-600 hover:text-white" [ngClass]="{'bg-indigo-600 text-white': selectedTags.includes(tag.id)}">
+            {{ tag.name }}
+          </span>
         </div>
       </div>
     </div>
