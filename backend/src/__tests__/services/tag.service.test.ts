@@ -1,4 +1,10 @@
-import { createTag, updateTag, getAllTags, getTagById, deleteTag } from '../../services/tag.services';
+import { 
+  createTag, 
+  updateTag, 
+  getAllTags, 
+  getTagById, 
+  deleteTag 
+} from '../../services/tag.services';
 import { Tag } from '../../interfaces/tag.interfaces';
 
 jest.mock('../../config/database.config', () => ({

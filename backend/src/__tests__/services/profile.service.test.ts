@@ -1,5 +1,11 @@
 import prisma from '../../config/database.config';
-import { requestPasswordReset, resetPassword, updateProfile, getProfileByUserId, updatePassword } from '../../services/profile.services';
+import { 
+  requestPasswordReset, 
+  resetPassword, 
+  updateProfile, 
+  getProfileByUserId, 
+  updatePassword 
+} from '../../services/profile.services';
 import { sendPasswordResetEmail } from '../../bg-services/mails/password-reset';
 import bcrypt from 'bcrypt';
 import { mapProfile } from '../../services/user.services';

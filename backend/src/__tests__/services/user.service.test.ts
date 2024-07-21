@@ -1,5 +1,12 @@
 import bcrypt from 'bcrypt';
-import { registerUser, loginUser, getUserById, updateUserRole, getAllUsers, deleteUser } from '../../services/user.services';
+import { 
+  registerUser, 
+  loginUser, 
+  getUserById, 
+  updateUserRole, 
+  getAllUsers, 
+  deleteUser 
+} from '../../services/user.services';
 import { Role } from '../../interfaces/user.interfaces';
 import { generateToken } from '../../config/jwt.config';
 import { sendWelcomeEmail } from '../../bg-services/mails/welcome';

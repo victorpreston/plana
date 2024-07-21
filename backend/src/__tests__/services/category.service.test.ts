@@ -1,4 +1,10 @@
-import { createCategory, updateCategory, getAllCategories, getCategoryById, deleteCategory } from '../../services/category.services';
+import { 
+  createCategory, 
+  updateCategory, 
+  getAllCategories, 
+  getCategoryById, 
+  deleteCategory 
+} from '../../services/category.services';
 import { Category } from '../../interfaces/category.interfaces';
 
 jest.mock('../../config/database.config', () => ({

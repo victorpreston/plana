@@ -1,5 +1,11 @@
 import {
-  createBooking, getRecentBookings, cancelBooking, updateBooking, getBookingById, getBookingsForEvent, verifyTicketCode
+  createBooking, 
+  getRecentBookings, 
+  cancelBooking, 
+  updateBooking, 
+  getBookingById, 
+  getBookingsForEvent, 
+  verifyTicketCode
 } from '../../services/booking.services';
 import { Booking } from '../../interfaces/booking.interfaces';
 import { sendBookingConfirmationEmail } from '../../bg-services/mails/booking';

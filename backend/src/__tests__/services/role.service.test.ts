@@ -4,7 +4,10 @@ import {
   rejectRoleChangeRequest,
   getRoleChangeRequests,
 } from '../../services/role.services';
-import { RoleChangeRequest, RequestStatus } from '../../interfaces/role.interfaces';
+import { 
+  RoleChangeRequest, 
+  RequestStatus 
+} from '../../interfaces/role.interfaces';
 import { Role } from '../../interfaces/user.interfaces';
 import {
   sendRoleChangeRequestEmail,

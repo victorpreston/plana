@@ -1,5 +1,10 @@
 import prisma from '../../config/database.config';
-import { createTicketType, updateTicketType, getTicketTypesByEventId, deleteTicketType } from '../../services/ticket.services';
+import { 
+  createTicketType, 
+  updateTicketType, 
+  getTicketTypesByEventId, 
+  deleteTicketType 
+} from '../../services/ticket.services';
 import { TicketType } from '../../interfaces/ticket.interfaces';
 
 jest.mock('../../config/database.config', () => ({

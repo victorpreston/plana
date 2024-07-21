@@ -1,7 +1,14 @@
 import request from 'supertest';
 import express, { Application } from 'express';
 import bodyParser from 'body-parser';
-import { register, login, getUser, updateRole, getUsers, removeUser } from '../../controllers/user.controllers';
+import { 
+  register, 
+  login, 
+  getUser, 
+  updateRole, 
+  getUsers, 
+  removeUser 
+} from '../../controllers/user.controllers';
 import prisma from '../../config/database.config';
 import bcrypt from 'bcrypt';
 import { sendWelcomeEmail } from '../../bg-services/mails/welcome';
