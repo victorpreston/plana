@@ -1,0 +1,47 @@
+.booking-form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .booking-form-container h2 {
+    text-align: center;
+  }
+  
+  .booking-form-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .booking-form-container .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .booking-form-container label {
+    margin-bottom: 0.5rem;
+  }
+  
+  .booking-form-container .flex {
+    display: flex;
+    align-items: center;
+  }
+  
+  .booking-form-container .flex .button-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .booking-form-container .button-group button {
+    padding: 0.5rem 1rem;
+  }
+  
+  .booking-form-container .button-group button i {
+    font-size: 1rem;
+  }
+  
+  .booking-form-container .flex input {
+    text-align: center;
+    width: 3rem;
+    border-left: none;
+    border-right: none;
+  }  

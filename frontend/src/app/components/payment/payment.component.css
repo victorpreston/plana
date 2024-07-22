@@ -1,0 +1,49 @@
+.container {
+    font-family: 'Arial', sans-serif;
+    margin-top: 4rem; /* Ensure it's not hidden behind the navbar */
+  }
+  
+  input {
+    font-size: 1rem;
+    max-width: 100%; /* Ensure full-width responsiveness */
+  }
+  
+  button {
+    font-size: 1rem;
+  }
+  
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+  }
+  
+  .max-w-md {
+    max-width: 20rem; /* Adjust this value as needed for your design */
+  }
+  
+  .max-w-xs {
+    max-width: 10rem; /* Adjust this value as needed for your design */
+  }
+  
+  form {
+    max-width: 600px;
+    margin: 0 auto; /* Center the form */
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  button {
+    margin-left: 0;
+  }
+  
+  .flex.space-x-4 > .w-1:first-child {
+    margin-right: 0.5rem;
+  }
+  
+  .flex.space-x-4 > .w-1:last-child {
+    margin-left: 0.5rem;
+  }  

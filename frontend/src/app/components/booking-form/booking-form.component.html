@@ -1,0 +1,39 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-1/3">
+      <div class="flex items-center justify-center mb-4">
+        <img src="assets/tickets.png" alt="Ticket Icon" class="h-12 w-12 mr-2">
+        <h2 class="text-xl font-bold">Book Tickets</h2>
+      </div>
+      <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <label for="ticketType" class="text-gray-700 flex items-center">
+            Ticket Type
+          </label>
+          <select formControlName="ticketType" class="w-full sm:w-11/12 mt-1 p-2 border border-gray-300 rounded-md">
+            <option *ngFor="let ticket of event?.ticketTypes" [value]="ticket.id">{{ ticket.type }}</option>
+          </select>
+        </div>
+        <div class="mb-4 flex items-center justify-center">
+          <label for="quantity" class="text-gray-700 mr-4 flex items-center">
+            <i class="pi pi-users mr-2"></i> Persons
+          </label>
+          <button type="button" class="p-2 bg-gray-200 rounded-md flex items-center justify-center" (click)="decrementQuantity()">
+            <i class="pi pi-minus"></i>
+          </button>
+          <input type="number" formControlName="quantity" class="w-12 mx-2 text-center p-2 border border-gray-300 rounded-md" readonly [value]="ticketQuantity">
+          <button type="button" class="p-2 bg-gray-200 rounded-md flex items-center justify-center" (click)="incrementQuantity()">
+            <i class="pi pi-plus"></i>
+          </button>
+        </div>
+        <div class="flex justify-end">
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-4 py-2 rounded-md mr-2 flex items-center justify-center">
+            <i class="pi pi-check mr-2"></i> Book
+          </button>
+          <button type="button" (click)="onClose()" class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-md flex items-center justify-center">
+            <i class="pi pi-times mr-2"></i> Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

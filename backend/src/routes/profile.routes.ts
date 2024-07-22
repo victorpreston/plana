@@ -14,7 +14,7 @@ const router = Router();
 /**
  * Profile routes
  */
-router.get('/profiles/:userId', authenticateJWT, getProfile);
+router.get('/profiles/:userId', getProfile);
 router.put('/profiles/:userId', authenticateJWT, editProfile);
 router.put('/profiles/:userId/password', authenticateJWT, changePassword);
 router.post('/reset-password-request', requestPasswordReset);

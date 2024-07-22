@@ -1,6 +1,7 @@
 import { User } from './user';
 import { TicketType } from './ticket';
 import { Log } from './log';
+import { Event } from './event';
 
 
 export interface Booking {

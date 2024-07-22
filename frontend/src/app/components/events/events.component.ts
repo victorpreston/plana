@@ -162,4 +162,7 @@ export class EventsComponent implements OnInit {
     }
     this.filterEvents();
   }
+  getAttendeeCount(event: Event): number {
+    return event.bookings.reduce((sum, booking) => sum + booking.tickets, 0);
+  }
 }

@@ -81,10 +81,10 @@
             </div>
             <div class="flex-grow"></div> <!-- Spacer to push the button and attendees to the bottom -->
             <div class="flex justify-between items-center px-4 py-2">
-              <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm">Details</button>
+              <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 text-sm" [routerLink]="['/events', event.id]">Details</button>
               <div class="flex items-center ml-4">
                 <i class="pi pi-users text-gray-600 mr-2"></i>
-                <span class="text-gray-900 font-semibold">{{ event.bookings.length }}</span>
+                <span class="text-gray-900 font-semibold">{{ getAttendeeCount(event) }}</span>
                 <span class="text-gray-500 ml-1 text-sm">attending</span>
               </div>
             </div>
