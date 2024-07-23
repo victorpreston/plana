@@ -1,12 +1,12 @@
 # Create a new event
 POST http://localhost:5000/api/events
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTUwNjk3MSwiZXhwIjoxNzIxNTEwNTcxfQ.JHnuBpx5MIKk6k-dTwghOqdbXQY0bEafAwzdyzZa-Hk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2YWMyOS0zODM1LTRiODAtYTNmNy0zYTE0OTliYmE2YWQiLCJyb2xlIjoiTUFOQUdFUiIsImlhdCI6MTcyMTc0MTM1MywiZXhwIjoxNzIxNzQ0OTUzfQ.BrBEIvFkbaGuqFKTnuCz3UjqB4ego2GPwvpnOmDuXYg
 
 {
-  "title": "Tech Conference 2024",
-  "description": "A conference about the latest in tech.",
-  "date": "2024-08-01T09:00:00.000Z",
+  "title": "Music Audition",
+  "description": "A Live Performance",
+  "date": "2024-07-23T09:00:00.000Z",
   "time": "2024-08-01T09:00:00.000Z",
   "location": "Nairobi",
   "bannerImage": "https://example.com/banner.jpg",
@@ -20,6 +20,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNGY2Y
     },
     {
       "type": "Regular",
+      "price": 50.0,
+      "quantity": 100
+    },
+    {
+      "type": "Couple",
       "price": 50.0,
       "quantity": 100
     }

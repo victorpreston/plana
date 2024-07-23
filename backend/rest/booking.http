@@ -13,8 +13,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIzNzZjM
 ###
 
 # Get all bookings for the user
-GET http://localhost:5000/api/bookings
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJlNGY4NDM5Mi1kYmRmLTQxZjMtOWM5ZC0yNGE0OGM4ZGNhYjciLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjExNjQzODgsImV4cCI6MTcyMTE2Nzk4OH0.8RSMmmMaBA_sNNANA4lXrAFsJrAyGYcsGqxT8LXUX2I
+GET http://localhost:5000/api/bookings/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkODRiZGY1OS05N2E0LTRiYmEtYWNhNy03ODhhNjQ1OThkMDEiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjE3NDIyODYsImV4cCI6MTcyMTc0NTg4Nn0.J6BV6MHUCwNu6UTdx5sSdxx7F-wAKSVqUnxd_CtORUA
+
+###
+
+# Get all bookings for the user
+GET http://localhost:5000/api/bookings/user
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkODRiZGY1OS05N2E0LTRiYmEtYWNhNy03ODhhNjQ1OThkMDEiLCJyb2xlIjoiQVRURU5ERUUiLCJpYXQiOjE3MjE3NDg2NzQsImV4cCI6MTcyMTc1MjI3NH0.aZn3n8PqA0zL7UPpc6yv6r3YBbFsCTioW23QE11HHjI
 
 ###
 

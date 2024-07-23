@@ -1,0 +1,51 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Add any global font styles you need */
+  }
+  
+  .fixed-bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: indigo-900;
+    padding: 1rem;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fixed-bottom-nav .card {
+    max-width: 640px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+  }
+  
+  .fixed-bottom-nav .flex {
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .fixed-bottom-nav a {
+    text-decoration: none;
+    color: inherit;
+    margin: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .fixed-bottom-nav i {
+    font-size: 1.5rem;
+  }
+  
+  .fixed-bottom-nav p {
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+  }
+  
+  /* Adjust the margin-top for the main container */
+  .container {
+    margin-top: 6rem; /* Adjust the value as needed */
+  }  

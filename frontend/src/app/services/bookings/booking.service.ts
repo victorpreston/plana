@@ -19,26 +19,44 @@ export class BookingService {
   }
 
   getRecentBookings(): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.baseUrl}/bookings`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings`, { headers });
   }
 
   getBookingById(id: string): Observable<Booking> {
-    return this.http.get<Booking>(`${this.baseUrl}/bookings/${id}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking>(`${this.baseUrl}/bookings/${id}`, { headers });
+  }
+
+  getUserBookings(): Observable<Booking[]> { 
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/user`, { headers });
   }
 
   updateBooking(id: string, booking: Booking): Observable<Booking> {
-    return this.http.put<Booking>(`${this.baseUrl}/bookings/${id}`, booking);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<Booking>(`${this.baseUrl}/bookings/${id}`, booking, { headers });
   }
 
   deleteBooking(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/bookings/${id}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<void>(`${this.baseUrl}/bookings/${id}`, { headers });
   }
 
   verifyTicketCode(ticketCode: string): Observable<Booking> {
-    return this.http.get<Booking>(`${this.baseUrl}/bookings/verify/${ticketCode}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking>(`${this.baseUrl}/bookings/verify/${ticketCode}`, { headers });
   }
 
   getBookingsForEvent(eventId: string): Observable<Booking[]> {
-    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/event/${eventId}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/event/${eventId}`, { headers });
   }
 }

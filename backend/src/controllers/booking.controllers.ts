@@ -6,8 +6,11 @@ import {
    cancelBooking, 
    getBookingsForEvent, 
    verifyTicketCode,
-   getBookingById 
+   getBookingById,
+   getUserBookings
 } from '../services/booking.services';
+import { AuthRequest } from '../middleware/auth.middleware';
+
 
 
 /**
@@ -36,6 +39,7 @@ export const create = async (req: Request, res: Response) => {
 export const getRecent = async (req: Request, res: Response) => {
   try {
     const { userId } = req.params;
+    console.log(userId)
     const bookings = await getRecentBookings(userId);
     res.status(200).json(bookings);
   } catch (error) {
@@ -122,7 +126,21 @@ export const getForEvent = async (req: Request, res: Response) => {
 };
 
 
-
+/**
+ * Get bookings for a specific user
+ * @param req 
+ * @param res 
+ */
+export const getUserBookingsController = async (req: AuthRequest, res: Response) => {
+  try {
+    const userId = req.user!.userId; // Assuming req.user contains the authenticated user's details
+    const bookings = await getUserBookings(userId);
+    res.status(200).json(bookings);
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ error: err.message });
+  }
+};
 /**
  * Verify a ticket code
  * @param req 

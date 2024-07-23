@@ -244,6 +244,40 @@ export const getBookingsForEvent = async (eventId: string): Promise<Booking[]> =
 };
 
 /**
+ * Function to get all bookings for a user:
+ * @param userId 
+ * @returns 
+ */
+export const getUserBookings = async (userId: string): Promise<Booking[]> => {
+  const bookings = await prisma.booking.findMany({
+    where: {
+      userId: userId,
+      isDeleted: false,
+    },
+    include: {
+      user: true,
+      event: {
+        include: {
+          ticketTypes: true,
+          bookings: true,
+          manager: true,
+          category: true,
+          tags: {
+            include: {
+              tag: true,
+            },
+          },
+        },
+      },
+      ticketType: true,
+    },
+  });
+
+  return bookings.map(mapBooking);
+};
+
+
+/**
  * Function to verify a ticket code
  * @param ticketCode 
  * @returns 

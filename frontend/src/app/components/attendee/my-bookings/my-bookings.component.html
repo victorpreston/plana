@@ -1,1 +1,177 @@
-<p>my-bookings works!</p>
+<app-navbar></app-navbar>
+<div class="container mx-auto px-4 py-8 mt-24 relative">
+  <h2 class="text-2xl font-bold mb-4 text-center">My Bookings</h2>
+
+  <!-- Booking Counts -->
+  <div class="absolute top-0 right-0 mt-4 mr-4 flex space-x-4">
+    <div class="relative w-16 h-16">
+      <div class="absolute inset-0 flex items-center justify-center bg-indigo-700 text-white rounded-full animate-ping"></div>
+      <div class="absolute inset-0 flex items-center justify-center bg-indigo-700 text-white rounded-full">
+        <i class="pi pi-check-circle mr-2"></i>
+        {{ activeBookings.length }}
+      </div>
+      <p class="text-center text-xs mt-2">Active</p>
+    </div>
+    <div class="relative w-16 h-16">
+      <div class="absolute inset-0 flex items-center justify-center bg-red-600 text-white rounded-full animate-ping"></div>
+      <div class="absolute inset-0 flex items-center justify-center bg-red-600 text-white rounded-full">
+        <i class="pi pi-times-circle mr-2"></i>
+        {{ cancelledBookings.length }}
+      </div>
+      <p class="text-center text-xs mt-2">Cancelled</p>
+    </div>
+  </div>
+
+  <div class="flex justify-center mb-4">
+    <button class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-900 mr-12" (click)="toggleBookings(false)">
+      <i class="pi pi-check-circle"></i>
+      Active Bookings
+    </button>
+    <button class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-900" (click)="toggleBookings(true)">
+      <i class="pi pi-times-circle"></i>
+      Cancelled Bookings
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <i class="pi pi-spin pi-spinner text-4xl text-indigo-800"></i>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div *ngIf="!showCancelled" class="mb-8">
+      <div class="font-[sans-serif] overflow-x-auto">
+        <table class="min-w-[80%] mx-auto bg-white">
+          <thead class="whitespace-nowrap">
+            <tr>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950"></th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Event</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Status</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Persons</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Total Price</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Action</th>
+            </tr>
+          </thead>
+          <tbody class="whitespace-nowrap">
+            <tr *ngFor="let booking of paginatedActiveBookings" class="odd:bg-blue-50">
+              <td class="p-4 text-sm text-gray-800">
+                <img [src]="booking.event.bannerImage" alt="{{ booking.event.title }}" class="w-16 h-16 object-cover rounded-md">
+              </td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.event.title }}</td>
+              <td class="p-4 text-sm text-gray-800">
+                <span class="w-[68px] block text-center py-1 border border-green-500 text-green-600 rounded text-xs">{{ booking.status }}</span>
+              </td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.tickets }}</td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.totalPrice | currency }}</td>
+              <td class="p-4 text-sm text-gray-800">
+                <button class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600" (click)="cancelBooking(booking.id)">Cancel</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="flex space-x-3 justify-center mt-8">
+          <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="previousPage('active')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+              <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+            </svg>
+          </li>
+          <li *ngFor="let page of visibleActivePages" class="flex items-center justify-center shrink-0 cursor-pointer text-sm font-bold text-[#333] w-9 h-8 rounded" 
+              [class.bg-indigo-800]="page === activePage"
+              [class.text-white]="page === activePage" 
+              (click)="setPage('active', page)">
+            {{page}}
+          </li>
+          <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="nextPage('active')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+              <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div *ngIf="showCancelled">
+      <div class="font-[sans-serif] overflow-x-auto">
+        <table class="min-w-[80%] mx-auto bg-white">
+          <thead class="whitespace-nowrap">
+            <tr>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950"></th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Event</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Status</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Persons</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Total Price</th>
+              <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Action</th>
+            </tr>
+          </thead>
+          <tbody class="whitespace-nowrap">
+            <tr *ngFor="let booking of paginatedCancelledBookings" class="odd:bg-blue-50">
+              <td class="p-4 text-sm text-gray-800">
+                <img [src]="booking.event.bannerImage" alt="{{ booking.event.title }}" class="w-16 h-16 object-cover rounded-md">
+              </td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.event.title }}</td>
+              <td class="p-4 text-sm text-gray-800">
+                <span class="w-[68px] block text-center py-1 border border-red-500 text-red-600 rounded text-xs">{{ booking.status }}</span>
+              </td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.tickets }}</td>
+              <td class="p-4 text-sm text-gray-800">{{ booking.totalPrice | currency }}</td>
+              <td class="p-4 text-sm text-gray-800">
+                <button class="bg-gray-500 text-white py-1 px-3 rounded-md hover:bg-gray-600" (click)="deleteBooking(booking.id)">Delete
+                  <i class="pi pi-trash ml-2 text-red-600 fill-red-600"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ul class="flex space-x-3 justify-center mt-8">
+          <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="previousPage('cancelled')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+              <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+            </svg>
+          </li>
+          <li *ngFor="let page of visibleCancelledPages" class="flex items-center justify-center shrink-0 cursor-pointer text-sm font-bold text-[#333] w-9 h-8 rounded" 
+              [class.bg-indigo-800]="page === cancelledPage" 
+              [class.text-white]="page === cancelledPage" 
+              (click)="setPage('cancelled', page)">
+            {{page}}
+          </li>
+          <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="nextPage('cancelled')">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+              <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1-7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+            </svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Icons -->
+  <div class="fixed bottom-0 left-0 w-full bg-white py-4 shadow-lg">
+    <div class="max-w-xl mx-auto bg-slate-950 rounded-lg shadow-lg p-4">
+      <div class="flex justify-center">
+        <a routerLink="/dashboard" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-th-large text-3xl"></i>
+          <p class="text-center text-sm">Dashboard</p>
+        </a>
+        <a routerLink="/my-settings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-cog text-3xl"></i>
+          <p class="text-center text-sm">Settings</p>
+        </a>
+        <a routerLink="/my-bookings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-calendar text-3xl"></i>
+          <p class="text-center text-sm">Bookings</p>
+        </a>
+        <a routerLink="/my-tickets" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-wallet text-3xl"></i>
+          <p class="text-center text-sm">Tickets</p>
+        </a>
+        <a routerLink="/my-notifications" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-bell text-3xl"></i>
+          <p class="text-center text-sm">Notifications</p>
+        </a>
+        <a routerLink="/my-calendar" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-calendar-clock text-3xl"></i>
+          <p class="text-center text-sm">Calendar</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,91 @@
+<!-- <nav class="fixed left-0 top-0 z-20 w-full border-b border-gray-200 bg-slate-950 dark:border-gray-600 dark:bg-slate-950">
+  <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
+    <a href="/" class="flex items-center">
+      <img src="assets/oig.png" class="mr-2 h-16 w-20" alt="Evento Logo" />
+      <span class="self-center whitespace-nowrap text-2xl text-white font-semibold dark:text-white">Plana</span>
+    </a>
+    <div class="hidden w-full items-center justify-end md:flex md:w-auto md:order-1" id="navbar-sticky">
+    </div>
+    <div class="flex md:order-2">
+      <a routerLink="/events">
+        <button type="button" class="mr-2 rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+          <i class="pi pi-search mr-2 font-bold"></i>Find Events
+        </button>
+      </a>
+      <a *ngIf="!user" routerLink="/login">
+        <button type="button" class="mr-2 rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+          Sign In
+        </button>
+      </a>
+      <a *ngIf="!user" routerLink="/register">
+        <button type="button" class="mr-2 rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+          Sign Up
+        </button>
+      </a>
+      <a *ngIf="user" routerLink="/create-event">
+        <button type="button" class="mr-2 flex items-center rounded-lg bg-indigo-700 px-4 py-2 text-center text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800">
+          <i class="pi pi-plus mr-2 font-bold"></i>Create Event
+        </button>
+      </a>
+      <div *ngIf="user" class="relative">
+        <img [src]="user.profile?.imageUrl || 'assets/profile.png'" class="w-8 h-8 rounded-full cursor-pointer" alt="User Avatar" />
+        <i class="pi pi-angle-down absolute top-0 right-0 transform translate-x-2 -translate-y-1/2 text-white text-sm"></i>
+        <div class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg opacity-0 transition-opacity duration-300 ease-in-out profile-dropdown">
+          <div class="p-4 border-b">
+            <div class="flex items-center">
+              <img [src]="user.profile?.imageUrl || 'assets/profile.png'" class="w-12 h-12 rounded-full" alt="User Avatar" />
+              <div class="ml-3">
+                <p class="text-gray-800 font-semibold">{{ user.profile?.firstName }} {{ user.profile?.lastName }}</p>
+                <p class="text-gray-600 text-sm">{{ user.email }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="py-2">
+            <a routerLink="/my-settings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-spin pi-cog mr-2"></i>Settings
+            </a>
+            <a routerLink="/my-bookings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-calendar mr-2"></i> Bookings
+            </a>
+            <a routerLink="/my-tickets" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-wallet mr-2"></i> Tickets
+            </a>
+            <a routerLink="/my-notifications" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-bell mr-2"></i> Notifications
+              <span class="ml-auto bg-red-600 text-white rounded-full px-2 py-1 text-xs font-bold">3</span>
+            </a>
+            <a routerLink="/my-calendar" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-calendar-clock mr-2"></i> Calendar
+            </a>
+            <a routerLink="/my-dashboard" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-th-large mr-2"></i> Dashboard
+            </a>
+          </div>
+          <div class="border-t py-2">
+            <div class="px-4 py-2">
+              
+              <div class="flex justify-between text-gray-800">
+                <span>Events</span>
+                <span>{{ user.events?.length || 0 }}</span>
+              </div>
+              <div class="flex justify-between text-gray-800">
+                <span>Bookings</span>
+                <span>{{ user.bookings?.length || 0 }}</span>
+              </div>
+            </div>
+            <a routerLink="/help" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-question-circle mr-2"></i> Help
+            </a>
+            <button (click)="logout()" class="flex items-center w-full text-left px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-sign-out mr-2"></i> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav> -->
+
 <nav class="fixed left-0 top-0 z-20 w-full border-b border-gray-200 bg-slate-950 dark:border-gray-600 dark:bg-slate-950">
   <div class="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between">
     <a href="/" class="flex items-center">
@@ -41,39 +129,35 @@
             </div>
           </div>
           <div class="py-2">
-            <a routerLink="/profile-settings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+            <a routerLink="/my-settings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
               <i class="pi pi-spin pi-cog mr-2"></i>Settings
             </a>
-            <a routerLink="/bookings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+            <a routerLink="/my-bookings" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
               <i class="pi pi-calendar mr-2"></i> Bookings
             </a>
-            <a routerLink="/tickets" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
-              <i class="pi pi-ticket mr-2"></i> Tickets
+            <a routerLink="/my-tickets" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+              <i class="pi pi-wallet mr-2"></i> Tickets
             </a>
-            <a routerLink="/notifications" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+            <a routerLink="/my-notifications" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
               <i class="pi pi-bell mr-2"></i> Notifications
               <span class="ml-auto bg-red-600 text-white rounded-full px-2 py-1 text-xs font-bold">3</span>
             </a>
-            <a routerLink="/calendar" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+            <a routerLink="/my-calendar" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
               <i class="pi pi-calendar-clock mr-2"></i> Calendar
             </a>
-            <a routerLink="/dashboard" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
+            <a routerLink="/my-dashboard" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
               <i class="pi pi-th-large mr-2"></i> Dashboard
             </a>
           </div>
           <div class="border-t py-2">
             <div class="px-4 py-2">
-              <!-- <div class="flex justify-between text-gray-800">
-                <span>Tickets</span>
-                <span>{{ user.bookings?.length || 0 }}</span>
-              </div> -->
               <div class="flex justify-between text-gray-800">
-                <span>Events</span>
-                <span>{{ user.events?.length || 0 }}</span>
+                <span>Tickets</span>
+                <span class="text-indigo-800 text-2xl font-bold">{{ totalTickets }}</span>
               </div>
               <div class="flex justify-between text-gray-800">
-                <span>Bookings</span>
-                <span>{{ user.bookings?.length || 0 }}</span>
+                <span>Events</span>
+                <span class="text-indigo-800 text-2xl font-bold">{{ totalEvents }}</span>
               </div>
             </div>
             <a routerLink="/help" class="flex items-center px-4 py-2 text-gray-800 hover:bg-indigo-600 hover:text-white transition-colors duration-200">
@@ -89,7 +173,7 @@
   </div>
 </nav>
 
-<!-- <style>
+<style>
   .profile-dropdown {
     display: none;
   }
@@ -98,4 +182,4 @@
     display: block;
     opacity: 1;
   }
-</style> -->
+</style>

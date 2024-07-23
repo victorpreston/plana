@@ -1,1 +1,128 @@
-<p>my-settings works!</p>
+<app-navbar></app-navbar>
+<div class="container mx-auto px-4 py-10 mt-24">
+  <div class="flex justify-center items-center mb-4 px-4">
+    <h2 class="text-2xl font-bold mr-80">Profile Settings</h2>
+    <button (click)="toggleEdit()" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center" [disabled]="isLoading">
+      <i *ngIf="!isLoading" class="pi pi-user-edit mr-2"></i>
+      <i *ngIf="isLoading" class="pi pi-spin pi-spinner mr-2"></i>
+      {{ isLoading ? 'Loading...' : 'Edit' }}
+    </button>
+  </div>
+  
+  <div class="flex flex-col md:flex-row justify-center items-center">
+    <!-- Profile Card -->
+    <div *ngIf="!isEditing" class="w-full md:w-2/3 p-6 flex flex-col md:flex-row items-center min-h-[500px]">
+      <!-- Left column -->
+      <div class="md:w-1/3 text-center mb-4 md:mb-0 flex flex-col items-center">
+        <img [src]="userProfile?.imageUrl || 'assets/profile.png'" class="w-24 h-24 rounded-full" alt="avatar">
+        <h6 class="mt-2 text-lg font-medium">{{ userProfile?.firstName }} {{ userProfile?.lastName }}</h6>
+        <p class="text-gray-600">{{ email }}</p>
+      </div>
+      
+      <!-- Profile details column -->
+      <div class="md:w-2/3 md:pl-8">
+        <div class="space-y-4 max-w-md mx-auto">
+          <div class="flex flex-col relative">
+            <label class="font-medium flex items-center"><i class="pi pi-user mr-2"></i>Username</label>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ userProfile?.firstName }} {{ userProfile?.lastName }}</p>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium flex items-center"><i class="pi pi-envelope mr-2"></i>Email</label>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ email }}</p>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium flex items-center"><i class="pi pi-phone mr-2"></i>Phone Number</label>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ userProfile?.phone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Profile Card -->
+    <div *ngIf="isEditing" class="w-full md:w-2/3 p-4 flex flex-col md:flex-row items-center">
+      <!-- Left column -->
+      <div class="md:w-1/3 text-center mb-4 md:mb-0 flex flex-col items-center">
+        <img [src]="userProfile?.imageUrl || 'assets/profile.png'" class="w-24 h-24 rounded-full" alt="avatar">
+        <h6 class="mt-2 text-lg font-medium">Upload a different photo...</h6>
+        <div class="relative mt-2 w-full">
+          <label class="flex items-center justify-center w-full p-2 bg-gray-100 text-gray-500 border border-gray-300 rounded cursor-pointer hover:bg-gray-200">
+            <i class="pi pi-cloud-upload mr-2"></i>
+            <span>Choose File</span>
+            <input type="file" class="hidden">
+          </label>
+        </div>
+      </div>
+
+      <!-- Edit form column -->
+      <div class="md:w-2/3 md:pl-8">
+        <form class="space-y-4 max-w-md mx-auto" [formGroup]="profileForm">
+          <div class="flex flex-col relative">
+            <label class="font-medium">Username</label>
+            <input formControlName="username" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter username" type="text">
+            <i class="pi pi-user absolute right-2 top-9"></i>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium">Email</label>
+            <input formControlName="email" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter email" type="text">
+            <i class="pi pi-envelope absolute right-2 top-9"></i>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium">Phone Number</label>
+            <input formControlName="phone" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter phone number" type="text">
+            <i class="pi pi-phone absolute right-2 top-9"></i>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium">Password</label>
+            <input formControlName="password" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter password" type="password">
+            <i class="pi pi-lock absolute right-2 top-9"></i>
+          </div>
+          <div class="flex flex-col relative">
+            <label class="font-medium">Confirm Password</label>
+            <input formControlName="confirmPassword" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Confirm password" type="password">
+            <i class="pi pi-eye absolute right-2 top-9"></i>
+          </div>
+          <div class="flex justify-end space-x-4 mt-4">
+            <button type="button" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center" (click)="saveChanges()">
+              Save Changes
+            </button>
+            <button type="button" (click)="cancelEdit()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 flex items-center">
+              <i class="pi pi-times mr-2"></i>Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Icons -->
+  <div class="fixed bottom-0 left-0 w-full bg-white py-4 shadow-lg">
+    <div class="max-w-xl mx-auto bg-slate-950 rounded-lg shadow-lg p-4">
+      <div class="flex justify-center">
+        <a routerLink="/dashboard" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-th-large text-3xl"></i>
+          <p class="text-center text-sm">Dashboard</p>
+        </a>
+        <a routerLink="/my-settings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-spin pi-cog text-3xl"></i>
+          <p class="text-center text-sm">Settings</p>
+        </a>
+        <a routerLink="/my-bookings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-calendar text-3xl"></i>
+          <p class="text-center text-sm">Bookings</p>
+        </a>
+        <a routerLink="/my-tickets" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-wallet text-3xl"></i>
+          <p class="text-center text-sm">Tickets</p>
+        </a>
+        <a routerLink="/my-notifications" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-bell text-3xl"></i>
+          <p class="text-center text-sm">Notifications</p>
+        </a>
+        <a routerLink="/my-calendar" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+          <i class="pi pi-calendar-clock text-3xl"></i>
+          <p class="text-center text-sm">Calendar</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

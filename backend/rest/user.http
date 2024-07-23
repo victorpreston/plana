@@ -100,3 +100,14 @@ Content-Type: application/json
 }
 
 ###
+
+# Login as attendee (Booking Tests)
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "testuser2@gmail.com",
+  "password": "jay@2019PT"
+}
+
+###

@@ -22,6 +22,11 @@ import { CalendarComponent } from './components/admin/calendar/calendar.componen
 import { MessagesComponent } from './components/admin/messages/messages.component';
 import { EventDetailsComponent } from './components/event-details/event-details.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { MySettingsComponent } from './components/attendee/my-settings/my-settings.component';
+import { MyBookingsComponent } from './components/attendee/my-bookings/my-bookings.component';
+import { MyTicketsComponent } from './components/attendee/my-tickets/my-tickets.component';
+import { MyNotificationsComponent } from './components/attendee/my-notifications/my-notifications.component';
+import { MyCalendarComponent } from './components/attendee/my-calendar/my-calendar.component';
 export const routes: Routes = [
     { path: '', component: LandingComponent},
     { path: 'login', component: LoginComponent },
@@ -30,6 +35,11 @@ export const routes: Routes = [
     { path: 'events/:id', component: EventDetailsComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'payment', component: PaymentComponent },
+    { path: 'my-settings', component: MySettingsComponent },
+    { path: 'my-bookings', component: MyBookingsComponent },
+    { path: 'my-tickets', component: MyTicketsComponent },
+    { path: 'my-notifications', component: MyNotificationsComponent },
+    { path: 'my-calendar', component: MyCalendarComponent },
     {
         path: 'organiser',
         component: OrganiserComponent,
