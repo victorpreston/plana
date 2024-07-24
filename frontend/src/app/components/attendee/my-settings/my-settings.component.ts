@@ -6,94 +6,135 @@ import { AuthService } from '../../../services/auth/auth.service';
 import { Profile } from '../../../interfaces/profile';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { FooterComponent } from '../../footer/footer.component';
+import { RouterLink } from '@angular/router';
+import { User } from '../../../interfaces/user';
 
 @Component({
   selector: 'app-my-settings',
   standalone: true,
-  imports: [CommonModule, NavbarComponent, FooterComponent, ReactiveFormsModule],
+  imports: [CommonModule, NavbarComponent, FooterComponent, ReactiveFormsModule, RouterLink],
   templateUrl: './my-settings.component.html',
   styleUrls: ['./my-settings.component.css']
 })
 export class MySettingsComponent implements OnInit {
-  isEditing: boolean = false;
-  isLoading: boolean = false;
-  userProfile: Profile | null = null;
   profileForm: FormGroup;
-  email: string = '';
+  user: User | null = null;
+  profile: Profile | null = null;
+  isLoading: boolean = false;
+  isEditing: boolean = false;
+  alertMessage: string = '';
+  alertType: 'success' | 'error' = 'success';
 
   constructor(
-    private profileService: ProfileService,
+    private fb: FormBuilder,
     private authService: AuthService,
-    private fb: FormBuilder
+    private profileService: ProfileService
   ) {
     this.profileForm = this.fb.group({
-      username: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
-      password: [''],
-      confirmPassword: ['']
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      phone: [''],
+      imageUrl: ['']
     });
   }
 
   ngOnInit(): void {
     this.authService.user$.subscribe(user => {
-      if (user) {
-        this.email = user.email;
-        this.profileService.getProfile(user.id).subscribe(profile => {
-          this.userProfile = profile;
-          this.profileForm.patchValue({
-            username: profile.firstName + ' ' + profile.lastName,
-            email: user.email, // Get email from the user
-            phone: profile.phone
-          });
-        });
+      this.user = user;
+      if (this.user) {
+        this.fetchProfile(this.user.id);
       }
     });
   }
 
-  toggleEdit() {
+  fetchProfile(userId: string): void {
     this.isLoading = true;
-    setTimeout(() => {
-      this.isEditing = !this.isEditing;
-      this.isLoading = false;
-    }, 1000); // 1 second delay
+    this.profileService.getProfile(userId).subscribe({
+      next: (profile) => {
+        this.profile = profile;
+        this.loadProfile(profile);
+        this.isLoading = false;
+      },
+      error: () => {
+        this.showAlert('Failed to load profile. Please try again.', 'error');
+        this.isLoading = false;
+      }
+    });
   }
 
-  cancelEdit() {
+  loadProfile(profile: Profile): void {
+    this.profileForm.patchValue({
+      firstName: profile.firstName,
+      lastName: profile.lastName,
+      phone: profile.phone,
+      imageUrl: profile.imageUrl
+    });
+  }
+
+  enableEditing(): void {
+    this.isEditing = true;
+  }
+
+  disableEditing(): void {
     this.isEditing = false;
   }
 
-  saveChanges() {
-    if (this.profileForm.valid && this.userProfile) {
-      const updatedProfile: Profile = {
-        ...this.userProfile,
-        firstName: this.profileForm.value.username.split(' ')[0],
-        lastName: this.profileForm.value.username.split(' ')[1],
-        phone: this.profileForm.value.phone
-      };
+  onSubmit(): void {
+    if (this.profileForm.invalid || !this.user) return;
+    this.isLoading = true;
 
-      this.profileService.editProfile(this.userProfile.id, updatedProfile).subscribe({
-        next: () => {
-          this.isEditing = false;
-          this.userProfile = updatedProfile;
-        },
-        error: (err) => {
-          console.error('Error updating profile', err);
-          // Add error handling logic here
-        }
-      });
+    this.profileService.editProfile(this.user.id, this.profileForm.value).subscribe({
+      next: (profile) => {
+        const updatedUser = { ...this.user, profile } as User;
+        this.authService.setUser(updatedUser, localStorage.getItem('token')!);
+        this.showAlert('Profile updated successfully!', 'success');
+        this.profile = profile;
+        this.disableEditing();
+      },
+      error: () => {
+        this.showAlert('Failed to update profile. Please try again.', 'error');
+      },
+      complete: () => (this.isLoading = false)
+    });
+  }
 
-      if (this.profileForm.value.password && this.profileForm.value.password === this.profileForm.value.confirmPassword) {
-        this.profileService.changePassword(this.userProfile.id, this.profileForm.value.password).subscribe({
-          next: () => {
-            console.log('Password changed successfully');
-          },
-          error: (err) => {
-            console.error('Error changing password', err);
-            // Add error handling logic here
-          }
-        });
-      }
+  onImageUpload(event: any): void {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadImageToCloudinary(file);
     }
+  }
+
+  uploadImageToCloudinary(file: File): void {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 't2gtalks');
+    formData.append('cloud_name', 'dtn9kzx2v');
+
+    this.isLoading = true;
+
+    fetch('https://api.cloudinary.com/v1_1/dtn9kzx2v/image/upload', {
+      method: 'POST',
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.profileForm.patchValue({ imageUrl: data.secure_url });
+        this.profile!.imageUrl = data.secure_url;  // Update the profile image immediately
+        this.isLoading = false;
+        this.showAlert('Image uploaded successfully!', 'success');
+      })
+      .catch(() => {
+        this.isLoading = false;
+        this.showAlert('Failed to upload image. Please try again.', 'error');
+      });
+  }
+
+  showAlert(message: string, type: 'success' | 'error'): void {
+    this.alertMessage = message;
+    this.alertType = type;
+    setTimeout(() => {
+      this.alertMessage = '';
+    }, 5000);
   }
 }

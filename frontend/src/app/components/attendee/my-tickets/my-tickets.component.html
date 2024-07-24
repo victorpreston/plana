@@ -1,18 +1,74 @@
+<div class="mb-8">
 <app-navbar></app-navbar>
-<div class="container mx-auto px-4 py-10 mt-24">
-  <h2 class="text-2xl font-bold mb-4 text-center"> My Tickets</h2>
-  <!-- Your content here -->
+</div>
+<div class="container mx-auto px-4 py-10 mt-1"> 
+  <h2 class="text-2xl font-bold mb-8 text-center">My Tickets</h2>
+
+  <div *ngIf="isLoading" class="text-center">
+    <i class="pi pi-spin pi-spinner text-4xl text-indigo-900 mt-12"></i>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <div>
+      <button>
+        <h3 class="text-xl font-semibold mb-2">
+          <i class="pi pi-clone mr-2"></i>
+          Single Tickets
+        </h3>
+      </button>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let ticket of individualTickets" class="bg-white shadow-lg rounded-lg p-4 relative transition transform hover:scale-105 hover:shadow-xl"> <!-- Reduced padding to p-4 -->
+          <h4 class="text-lg font-bold">{{ ticket.event.title }}</h4>
+          <!-- <p class="text-gray-600">{{ ticket.event.description }}</p> -->
+          <p class="text-gray-600"><i class="pi pi-calendar mr-2"></i>{{ ticket.event.date | date: 'longDate' }}</p>
+          <!-- <p class="text-gray-600"><i class="pi pi-map-marker mr-2 text-red-700"></i>{{ ticket.event.location }}</p> -->
+          <p class="text-gray-600"><i class="pi pi-wallet mr-2"></i>Ticket Code: {{ ticket.ticketCode }}</p>
+          <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ ticket.ticketCode }}&size=100x100" alt="QR Code">
+          </div>
+          <button (click)="downloadTicket(ticket)" class="mt-4 bg-indigo-700 text-white py-2 px-4 rounded hover:bg-indigo-800">
+            <i class="pi pi-download mr-2"></i>Download
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      <button >
+        <h4 class="text-xl font-semibold mb-2">
+          <i class="pi pi-clone mr-2"></i>
+          Group Tickets
+        </h4>
+      </button>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div *ngFor="let ticket of groupTickets" class="bg-white shadow-lg rounded-lg p-4 relative transition transform hover:scale-105 hover:shadow-xl"> <!-- Reduced padding to p-4 -->
+          <h4 class="text-lg font-bold">{{ ticket.event.title }}</h4>
+          <!-- <p class="text-gray-600">{{ ticket.event.description }}</p> -->
+          <p class="text-gray-600"><i class="pi pi-calendar mr-2"></i>{{ ticket.event.date | date: 'longDate' }}</p>
+          <!-- <p class="text-gray-600"><i class="pi pi-map-marker mr-2 text-red-700"></i>{{ ticket.event.location }}</p> -->
+          <p class="text-gray-600"><i class="pi pi-wallet mr-2"></i>Ticket Code: {{ ticket.ticketCode }}</p>
+          <p class="text-gray-600"><i class="pi pi-users mr-2"></i>Persons: {{ ticket.tickets }}</p>
+          <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data={{ ticket.ticketCode }}&size=100x100" alt="QR Code">
+          </div>
+          <button (click)="downloadGroupTickets(ticket)" class="mt-4 bg-indigo-700 text-white py-2 px-4 rounded hover:bg-indigo-800">
+            <i class="pi pi-download mr-2"></i>Download
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Navigation Icons -->
   <div class="fixed bottom-0 left-0 w-full bg-white py-4 shadow-lg">
     <div class="max-w-xl mx-auto bg-slate-950 rounded-lg shadow-lg p-4">
       <div class="flex justify-center">
-        <a routerLink="/dashboard" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
+        <a routerLink="/my-bookings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
           <i class="pi pi-th-large text-3xl"></i>
           <p class="text-center text-sm">Dashboard</p>
         </a>
         <a routerLink="/my-settings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">
-          <i class="pi pi-cog text-3xl"></i>
+          <i class="pi pi-spin pi-cog text-3xl"></i>
           <p class="text-center text-sm">Settings</p>
         </a>
         <a routerLink="/my-bookings" class="text-white hover:text-indigo-900 mx-4 flex flex-col items-center">

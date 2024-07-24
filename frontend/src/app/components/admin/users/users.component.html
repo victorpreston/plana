@@ -1,1 +1,63 @@
-<p>users works!</p>
+ <div class="container mx-auto px-4  mt-10">
+    <div *ngIf="alertMessage" class="mb-4 p-4 rounded-lg" [ngClass]="{'bg-green-100 text-green-800': alertType === 'success', 'bg-red-100 text-red-800': alertType === 'error'}">
+      {{ alertMessage }}
+    </div>
+  
+    <h2 class="text-2xl font-bold mb-8">Users</h2>
+  
+    <div class="font-[sans-serif] overflow-x-auto">
+      <table class="min-w-[80%] mx-auto bg-white shadow-md rounded-lg">
+        <thead class="whitespace-nowrap">
+          <tr>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950"></th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">First Name</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Last Name</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Email</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Role Request Status</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="whitespace-nowrap">
+          <tr *ngFor="let user of paginatedUsers" class="odd:bg-blue-50">
+            <td class="p-4 text-sm text-gray-800">
+              <img *ngIf="user.profile?.imageUrl; else defaultImage" [src]="user.profile?.imageUrl" alt="Profile Image" class="w-10 h-10 object-cover rounded-full">
+              <ng-template #defaultImage>
+                <img src="assets/profile.png" alt="Default Profile Image" class="w-10 h-10 object-cover rounded-full">
+              </ng-template>
+            </td>
+            <td class="p-4 text-sm text-gray-800">{{ user.profile?.firstName }}</td>
+            <td class="p-4 text-sm text-gray-800">{{ user.profile?.lastName }}</td>
+            <td class="p-4 text-sm text-gray-800">{{ user.email }}</td>
+            <td class="p-4 text-sm text-gray-800">
+              <span *ngIf="getRequestStatus(user.id) === 'PENDING'" class="w-[68px] block text-center py-1 border border-yellow-500 text-yellow-600 rounded text-xs">Pending</span>
+              <span *ngIf="getRequestStatus(user.id) === 'APPROVED'" class="w-[68px] block text-center py-1 border border-green-500 text-green-600 rounded text-xs">Approved</span>
+              <span *ngIf="getRequestStatus(user.id) === 'REJECTED'" class="w-[68px] block text-center py-1 border border-red-500 text-red-600 rounded text-xs">Rejected</span>
+            </td>
+            <td class="p-4 text-sm text-gray-800">
+              <button *ngIf="hasPendingRequest(user.id)" (click)="approveRequest(getRoleChangeRequest(user.id)!)" class="bg-green-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-green-600">Approve</button>
+              <button *ngIf="hasPendingRequest(user.id)" (click)="rejectRequest(getRoleChangeRequest(user.id)!)" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <ul class="flex space-x-3 justify-center mt-8">
+        <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="previousPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+            <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+          </svg>
+        </li>
+        <li *ngFor="let page of visiblePages" class="flex items-center justify-center shrink-0 cursor-pointer text-sm font-bold text-[#333] w-9 h-8 rounded" 
+            [class.bg-indigo-800]="page === currentPage"
+            [class.text-white]="page === currentPage" 
+            (click)="setPage(page)">
+          {{page}}
+        </li>
+        <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="nextPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+            <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+          </svg>
+        </li>
+      </ul>
+    </div>
+  </div>  

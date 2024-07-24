@@ -1,20 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-interface Event {
-  id: number;
-  banner: string;
-  title: string;
-  location: string;
-  date: string;
-  visible: boolean;
-  vipPrice: number;
-  regularPrice: number;
-  numberOfTickets: number;
-  description: string;
-  image: string;
-}
+import { EventService } from '../../../services/events/event.service';
+import { Event } from '../../../interfaces/event';
 
 @Component({
   selector: 'app-all-events',
@@ -23,50 +11,75 @@ interface Event {
   templateUrl: './all-events.component.html',
   styleUrls: ['./all-events.component.css']
 })
-export class AllEventsComponent {
-  events: Event[] = [
-    {
-      id: 1,
-      banner: 'assets/event1.jpg',
-      title: 'Summer Festival',
-      location: 'New York City',
-      date: '2024-07-15',
-      visible: true,
-      vipPrice: 50,
-      regularPrice: 30,
-      numberOfTickets: 100,
-      description: 'A great summer festival',
-      image: 'assets/event1.jpg'
-    },
-    {
-      id: 2,
-      banner: 'assets/event1.jpg',
-      title: 'Tech Conference',
-      location: 'San Francisco',
-      date: '2024-08-10',
-      visible: false,
-      vipPrice: 150,
-      regularPrice: 100,
-      numberOfTickets: 200,
-      description: 'A great tech conference',
-      image: 'assets/event2.jpg'
-    }
-  ];
+export class AllEventsComponent implements OnInit {
+  events: Event[] = [];
+  paginatedEvents: Event[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  visiblePages: number[] = [];
 
   isViewing = false;
   selectedEvent: Event | null = null;
+  vipPrice: number | null = null;
+  regularPrice: number | null = null;
+  totalTickets: number | null = null;
+
+  constructor(private eventService: EventService) {}
+
+  ngOnInit(): void {
+    this.loadEvents();
+  }
+
+  loadEvents(): void {
+    this.eventService.getAllEvents().subscribe(events => {
+      this.events = events;
+      this.updatePagination();
+    });
+  }
+
+  updatePagination(): void {
+    const totalPages = Math.ceil(this.events.length / this.itemsPerPage);
+    this.visiblePages = Array.from({ length: totalPages }, (_, i) => i + 1);
+    this.setPage(this.currentPage);
+  }
+
+  setPage(page: number): void {
+    if (page < 1 || page > this.visiblePages.length) return;
+    this.currentPage = page;
+    const startIndex = (page - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedEvents = this.events.slice(startIndex, endIndex);
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.setPage(this.currentPage - 1);
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.visiblePages.length) {
+      this.setPage(this.currentPage + 1);
+    }
+  }
 
   toggleEventVisibility(event: Event): void {
-    event.visible = !event.visible;
+    event.isDeleted = !event.isDeleted;
   }
 
   showViewEventModal(event: Event): void {
     this.selectedEvent = event;
+    this.vipPrice = event.ticketTypes.find(t => t.type === 'VIP')?.price || null;
+    this.regularPrice = event.ticketTypes.find(t => t.type === 'Regular')?.price || null;
+    this.totalTickets = event.ticketTypes.reduce((total, t) => total + t.quantity, 0) || null;
     this.isViewing = true;
   }
 
   closeViewEventModal(): void {
     this.isViewing = false;
     this.selectedEvent = null;
+    this.vipPrice = null;
+    this.regularPrice = null;
+    this.totalTickets = null;
   }
 }

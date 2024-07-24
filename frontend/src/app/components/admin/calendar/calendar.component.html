@@ -1,2 +1,9 @@
+<div class="container">
+  <div *ngIf="isLoading" class="text-center">
+    <i class="pi pi-spin pi-spinner text-4xl text-indigo-800"></i>
+  </div>
+  <div *ngIf="!isLoading" class="calendar-container">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div>
 
-<div #calendar class="calendar-container"></div>
+</div>

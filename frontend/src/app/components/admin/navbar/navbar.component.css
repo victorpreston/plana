@@ -1,0 +1,29 @@
+nav {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  nav input {
+    background-color: #f9f9f9;
+  }
+  
+  nav .relative:hover .absolute {
+    display: block;
+  }
+  
+  .absolute {
+    display: none;
+  }
+  
+  .absolute .flex {
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .absolute .flex img {
+    margin-bottom: 10px;
+  }
+  
+  .absolute .flex p {
+    margin: 5px 0;
+  }  

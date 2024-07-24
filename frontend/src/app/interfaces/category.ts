@@ -1,3 +1,4 @@
+import { Event } from './event';
 export interface Category {
     id: string;
     name: string;

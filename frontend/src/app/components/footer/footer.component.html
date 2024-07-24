@@ -85,19 +85,18 @@
 </footer>
 <!-- Footer Ends Here -->
 
-
 <!-- Modal -->
 <div *ngIf="isModalOpen" class="fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50 modal-enter-active">
-  <div class="relative bg-white p-3 rounded-lg max-w-4xl max-h-screen-60 overflow-y-auto mx-auto">
+  <div class="relative bg-white p-6 rounded-lg max-w-4xl w-full mx-auto">
     <button (click)="toggleModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">
       <i class="pi pi-times h-6 w-6 font-extrabold text-indigo-600"></i>
     </button>
     <div class="text-center px-6">
       <h2 class="text-gray-800 text-3xl font-extrabold">Contact Us</h2>
-      <!-- <p class="text-sm text-gray-500 mt-4">Have some big idea of an event and need help?</p> -->
+      <p class="text-sm text-gray-500 mt-4">Have some big idea of an event and need help?</p>
     </div>
-    <div class="grid lg:grid-cols-3 items-start gap-4 p-1 shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-lg mt-12">
-      <div class="bg-slate-950 rounded-lg p-2 h-full max-lg:order-1">
+    <div class="grid lg:grid-cols-3 items-start gap-4 p-4 mt-12">
+      <div class="bg-slate-950 rounded-lg p-4 h-full max-lg:order-1">
         <h2 class="text-xl text-white">Contact Information</h2>
         <p class="text-sm text-gray-300 mt-4">Have some big idea of an event and need help?</p>
         <ul class="mt-16 space-y-8">
@@ -116,47 +115,47 @@
         </ul>
       </div>
       <div class="p-4 lg:col-span-2">
-        <form>
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <div class="grid sm:grid-cols-2 gap-8">
             <div class="relative flex items-center">
-              <input type="text" placeholder="First Name" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
+              <input formControlName="firstName" type="text" placeholder="First Name" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
               <i class="pi pi-user h-4 w-4 text-gray-400 absolute right-2"></i>
             </div>
             <div class="relative flex items-center">
-              <input type="text" placeholder="Last Name" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
+              <input formControlName="lastName" type="text" placeholder="Last Name" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
               <i class="pi pi-user h-4 w-4 text-gray-400 absolute right-2"></i>
             </div>
             <div class="relative flex items-center">
-              <input type="number" placeholder="Phone No." class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
+              <input formControlName="phone" type="number" placeholder="Phone No." class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
               <i class="pi pi-phone h-4 w-4 text-gray-400 absolute right-2"></i>
             </div>
             <div class="relative flex items-center">
-              <input type="email" placeholder="Email" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
+              <input formControlName="email" type="email" placeholder="Email" class="px-2 py-1 bg-white w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none" />
               <i class="pi pi-envelope h-4 w-4 text-gray-400 absolute right-2"></i>
             </div>
             <div class="relative flex items-center sm:col-span-2">
-              <textarea placeholder="Write Message" class="px-2 pt-1 bg-white  w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none"></textarea>
+              <textarea formControlName="message" placeholder="Write Message" class="px-2 pt-1 bg-white  w-full text-sm text-gray-800 border-b border-gray-300 focus:text-indigo-600 outline-none"></textarea>
               <i class="pi pi-envelope h-4 w-4 text-gray-400 absolute right-2"></i>
             </div>
             <div class="col-span-full">
               <h6 class="text-sm text-gray-800">Select Subject</h6>
               <div class="flex max-lg:flex-col gap-6 mt-4">
                 <div class="flex items-center">
-                  <input id="radio1" type="radio" name="value1" class="hidden peer" checked />
+                  <input id="radio1" formControlName="subject" type="radio" value="general" class="hidden peer" checked />
                   <label for="radio1" class="relative p-0.5 flex items-center justify-center shrink-0 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer border-2 border-[#011c2b] rounded-full overflow-hidden">
                     <span class="border-[4px] border-[#011c2b] rounded-full w-full h-full"></span>
                   </label>
                   <p class="text-sm text-gray-500 ml-4">General Inquiry</p>
                 </div>
                 <div class="flex items-center">
-                  <input id="radio2" type="radio" name="value1" class="hidden peer" />
+                  <input id="radio2" formControlName="subject" type="radio" value="technical" class="hidden peer" />
                   <label for="radio2" class="relative p-0.5 flex items-center justify-center shrink-0 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer border-2 border-[#011c2b] rounded-full overflow-hidden">
                     <span class="border-[4px] border-[#011c2b] rounded-full w-full h-full"></span>
                   </label>
                   <p class="text-sm text-gray-500 ml-4">Technical Support</p>
                 </div>
                 <div class="flex items-center">
-                  <input id="radio3" type="radio" name="value1" class="hidden peer" />
+                  <input id="radio3" formControlName="subject" type="radio" value="feedback" class="hidden peer" />
                   <label for="radio3" class="relative p-0.5 flex items-center justify-center shrink-0 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer border-2 border-[#011c2b] rounded-full overflow-hidden">
                     <span class="border-[4px] border-[#011c2b] rounded-full w-full h-full"></span>
                   </label>
@@ -165,7 +164,19 @@
               </div>
             </div>
           </div>
-          <button type="button" class="mt-12 flex items-center justify-center text-sm lg:ml-auto max-lg:w-full rounded-lg px-4 py-3 tracking-wide text-white bg-indigo-600 hover:bg-indigo-500">
+          <div *ngIf="isLoading" class="text-center mt-4">
+            <i class="pi pi-spin pi-spinner text-4xl"></i>
+          </div>
+          <div *ngIf="message" class="flex items-start max-sm:flex-col mt-4" [ngClass]="{'bg-green-100 text-green-800': messageType === 'success', 'bg-red-100 text-red-800': messageType === 'error'}" role="alert">
+            <div class="flex items-center max-sm:mb-2">
+              <i *ngIf="messageType === 'success'" class="pi pi-check-circle fill-green-500 inline mr-3"></i>
+              <i *ngIf="messageType === 'error'" class="pi pi-times-circle fill-red-500 inline mr-3"></i>
+              <strong class="font-bold text-sm">{{ messageType === 'success' ? 'Success!' : 'Error!' }}</strong>
+            </div>
+            <span class="block sm:inline text-sm ml-4 mr-8 max-sm:ml-0 max-sm:mt-2">{{ message }}</span>
+            <i class="pi pi-times w-7 hover:bg-green-200 rounded-lg transition-all p-2 cursor-pointer absolute right-4 top-1/2 -translate-y-1/2" (click)="closeMessage()"></i>
+          </div>
+          <button type="submit" class="mt-8 flex items-center justify-center text-sm lg:ml-auto max-lg:w-full rounded-lg px-4 py-3 tracking-wide text-white bg-indigo-600 hover:bg-indigo-500">
             <i class="pi pi-send mr-2"></i>
             Send Message
           </button>

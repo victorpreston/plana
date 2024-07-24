@@ -1,140 +1,152 @@
 <div class="container mx-auto px-4 py-4">
-    <!-- Navbar -->
-    <nav class="flex items-center justify-between py-2 mb-4 bg-indigo-100 shadow-md rounded-lg">
-      <div class="flex items-center text-xl font-medium px-4">
-        <i class="pi pi-file-check mr-2"></i>Events
-      </div>
-    </nav>
-  
+  <!-- Navbar -->
+  <nav class="flex items-center justify-between py-2 mb-4 bg-indigo-100 shadow-md rounded-lg">
+    <div class="flex items-center text-xl font-medium px-4">
+      <i class="pi pi-file-check mr-2"></i>Events
+    </div>
+  </nav>
 
-<div class="container mx-auto px-4 py-4">
-    <!-- Table -->
-    <div class="font-[sans-serif] overflow-x-auto">
-      <table class="min-w-full bg-white">
-        <thead class="bg-indigo-700 text-white">
-          <tr>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-image mr-1"></i>Banner
-            </th>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-tag mr-1"></i>Title
-            </th>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-map-marker mr-1"></i>Location
-            </th>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-calendar mr-1"></i>Date
-            </th>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-cog ml-3"></i>Action
-            </th>
-            <th class="p-4 text-left text-sm font-semibold">
-              <i class="pi pi-info-circle mr-1"></i>Details
-            </th>
-          </tr>
-        </thead>
-        <tbody class="whitespace-nowrap divide-y divide-gray-200">
-          <tr *ngFor="let event of events" class="odd:bg-blue-50">
-            <td class="p-4 text-sm">
-              <div class="flex items-center">
-                <img [src]="event.banner" class="w-10 h-10 p-1.5 shrink-0 bg-gray-100" />
-              </div>
-            </td>
-            <td class="p-4 text-sm text-black">
-              {{ event.title }}
-            </td>
-            <td class="p-4 text-sm text-black">
-              {{ event.location }}
-            </td>
-            <td class="p-4 text-sm text-black">
-              {{ event.date }}
-            </td>
-            <td class="p-4 text-sm text-center">
-              <input type="checkbox" [(ngModel)]="event.visible" (change)="toggleEventVisibility(event)" class="toggle-checkbox">
-            </td>
-            <td class="p-4 text-sm text-center">
-              <button (click)="showViewEventModal(event)" class="bg-indigo-700 text-white py-1 px-3 rounded-md hover:bg-indigo-800">
-                <i class="pi pi-eye"></i> View
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  
-    <!-- View Event Modal -->
-    <div *ngIf="isViewing" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div class="bg-white p-6 rounded-md shadow-md relative w-full max-w-3xl mx-auto">
-        <div class="flex justify-between items-center mb-4">
-          <h2 class="text-xl font-semibold">Event Details</h2>
-          <button (click)="closeViewEventModal()" class="text-gray-500 hover:text-gray-700">
-            <i class="pi pi-times"></i>
-          </button>
-        </div>
-        <div class="flex">
-          <div class="w-2/3 pr-4">
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-tag mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Title:</label>
-                <p>{{ selectedEvent?.title }}</p>
-              </div>
+  <!-- Table -->
+  <div class="font-[sans-serif] overflow-x-auto">
+    <table class="min-w-full bg-white">
+      <thead class="bg-indigo-700 text-white">
+        <tr>
+          <th class="p-4 text-left text-sm font-semibold">
+            <i class="pi pi-image mr-1"></i>Banner
+          </th>
+          <th class="p-4 text-left text-sm font-semibold">
+            <i class="pi pi-tag mr-1"></i>Title
+          </th>
+          <th class="p-4 text-left text-sm font-semibold">
+            <i class="pi pi-map-marker mr-1"></i>Location
+          </th>
+          <th class="p-4 text-left text-sm font-semibold">
+            <i class="pi pi-calendar mr-1"></i>Date
+          </th>
+          <th class="p-4 text-left text-sm font-semibold">
+            <i class="pi pi-info-circle mr-1"></i>Details
+          </th>
+        </tr>
+      </thead>
+      <tbody class="whitespace-nowrap divide-y divide-gray-200">
+        <tr *ngFor="let event of paginatedEvents" class="odd:bg-blue-50">
+          <td class="p-4 text-sm">
+            <div class="flex items-center">
+              <img [src]="event.bannerImage || 'assets/default-event.png'" class="w-10 h-10 p-1.5 shrink-0 bg-gray-100" />
             </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-map-marker mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Location:</label>
-                <p>{{ selectedEvent?.location }}</p>
-              </div>
-            </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-calendar mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Date:</label>
-                <p>{{ selectedEvent?.date }}</p>
-              </div>
-            </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-wallet mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">VIP Ticket Price:</label>
-                <p>{{ selectedEvent?.vipPrice }}</p>
-              </div>
-            </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-wallet mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Regular Ticket Price:</label>
-                <p>{{ selectedEvent?.regularPrice }}</p>
-              </div>
-            </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-users mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Number of Tickets:</label>
-                <p>{{ selectedEvent?.numberOfTickets }}</p>
-              </div>
-            </div>
-            <div class="mb-4 flex items-center">
-              <i class="pi pi-align-left mr-2"></i>
-              <div>
-                <label class="text-sm font-medium">Description:</label>
-                <p>{{ selectedEvent?.description }}</p>
-              </div>
+          </td>
+          <td class="p-4 text-sm text-black">
+            {{ event.title }}
+          </td>
+          <td class="p-4 text-sm text-black">
+            {{ event.location }}
+          </td>
+          <td class="p-4 text-sm text-black">
+            {{ event.date | date: 'shortDate' }}
+          </td>
+          <td class="p-4 text-sm text-center">
+            <button (click)="showViewEventModal(event)" class="bg-indigo-700 text-white py-1 px-3 rounded-md hover:bg-indigo-800">
+              <i class="pi pi-eye"></i> View
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Pagination -->
+  <ul class="flex space-x-3 justify-center mt-8">
+    <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="previousPage()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+        <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+      </svg>
+    </li>
+    <li *ngFor="let page of visiblePages" class="flex items-center justify-center shrink-0 cursor-pointer text-sm font-bold text-[#333] w-9 h-8 rounded" 
+        [class.bg-indigo-800]="page === currentPage"
+        [class.text-white]="page === currentPage" 
+        (click)="setPage(page)">
+      {{page}}
+    </li>
+    <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="nextPage()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+        <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+      </svg>
+    </li>
+  </ul>
+
+  <!-- View Event Modal -->
+  <div *ngIf="isViewing" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded-md shadow-md relative w-full max-w-3xl mx-auto">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-semibold">Event Details</h2>
+        <button (click)="closeViewEventModal()" class="text-gray-500 hover:text-gray-700">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+      <div class="flex">
+        <div class="w-2/3 pr-4">
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-tag mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Title:</label>
+              <p>{{ selectedEvent?.title }}</p>
             </div>
           </div>
-          <div class="w-1/3">
-            <div class="mb-4">
-              <label class="text-sm font-medium mb-2">Banner Image:</label>
-              <img [src]="selectedEvent?.image" alt="Event Banner" class="w-full h-auto rounded-md" />
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-map-marker mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Location:</label>
+              <p>{{ selectedEvent?.location }}</p>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-calendar mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Date:</label>
+              <p>{{ selectedEvent?.date | date: 'short' }}</p>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-wallet mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">VIP Ticket Price:</label>
+              <p>{{ vipPrice }}</p>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-wallet mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Regular Ticket Price:</label>
+              <p>{{ regularPrice }}</p>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-users mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Number of Tickets:</label>
+              <p>{{ totalTickets }}</p>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-align-left mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Description:</label>
+              <p>{{ selectedEvent?.description }}</p>
             </div>
           </div>
         </div>
-        <div class="flex justify-end mt-4">
-          <button (click)="closeViewEventModal()" class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
-            <i class="pi pi-check mr-2"></i> Close
-          </button>
+        <div class="w-1/3">
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2">Banner Image:</label>
+            <img [src]="selectedEvent?.bannerImage || 'assets/default-event.png'" alt="Event Banner" class="w-full h-auto rounded-md" />
+          </div>
         </div>
       </div>
+      <div class="flex justify-end mt-4">
+        <button (click)="closeViewEventModal()" class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+          <i class="pi pi-check mr-2"></i> Close
+        </button>
+      </div>
     </div>
-  </div>  
+  </div>
+</div>

@@ -19,7 +19,7 @@ const router = Router();
  * Booking routes
  */
 router.post('/bookings', authenticateJWT, create);
-router.get('/bookings', authenticateJWT , authorizeRole(Role.MANAGER), getRecent);
+router.get('/bookings', authenticateJWT , getRecent);
 router.delete('/bookings/:id', authenticateJWT, cancel);
 router.get('/bookings/verify/:ticketCode', verify);
 router.put('/bookings/:id', authenticateJWT, update);

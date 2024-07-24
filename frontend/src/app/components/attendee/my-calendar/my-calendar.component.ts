@@ -30,7 +30,7 @@ export class MyCalendarComponent implements OnInit {
     eventMouseLeave: this.handleEventMouseLeave.bind(this),
     height: 'auto',
     aspectRatio: 2,
-    contentHeight: 400
+    contentHeight:400
   };
 
   constructor(private bookingService: BookingService) {}

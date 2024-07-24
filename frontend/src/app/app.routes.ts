@@ -27,6 +27,10 @@ import { MyBookingsComponent } from './components/attendee/my-bookings/my-bookin
 import { MyTicketsComponent } from './components/attendee/my-tickets/my-tickets.component';
 import { MyNotificationsComponent } from './components/attendee/my-notifications/my-notifications.component';
 import { MyCalendarComponent } from './components/attendee/my-calendar/my-calendar.component';
+import { ResetPasswordRequestComponent } from './components/reset-password-request/reset-password-request.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { NotfoundComponent } from './components/notfound/notfound.component';
+
 export const routes: Routes = [
     { path: '', component: LandingComponent},
     { path: 'login', component: LoginComponent },
@@ -40,6 +44,8 @@ export const routes: Routes = [
     { path: 'my-tickets', component: MyTicketsComponent },
     { path: 'my-notifications', component: MyNotificationsComponent },
     { path: 'my-calendar', component: MyCalendarComponent },
+    { path: 'reset-password-request', component: ResetPasswordRequestComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
     {
         path: 'organiser',
         component: OrganiserComponent,
@@ -67,5 +73,7 @@ export const routes: Routes = [
         { path: 'calendar', component: CalendarComponent },
         { path: '', redirectTo: 'analytics', pathMatch: 'full' },
         // { path: 'category', component: CategoriesComponent },
-      ]}
+      ]},
+      { path: '**', component: NotfoundComponent },
+
 ];
