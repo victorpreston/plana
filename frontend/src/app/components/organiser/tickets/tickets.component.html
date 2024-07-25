@@ -1,1 +1,152 @@
-<p>tickets works!</p>
+<nav class="flex items-center justify-between py-2 mb-4 bg-indigo-100 shadow-md rounded-lg">
+  <div class="flex items-center text-xl font-medium px-4">
+    <i class="pi pi-verified mr-2"></i>Verification
+  </div>
+</nav>
+
+<div class="max-w-2xl mx-auto mt-8">
+  <div class="flex justify-center mb-4">
+    <button class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-900 mr-4" (click)="toggleView('form')">
+      <i class="pi pi-verified mr-2"></i>
+      Ticket Verification
+    </button>
+    <button class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-900" (click)="toggleView('bookings')">
+      <i class="pi pi-file-check mr-2"></i>
+      Recent Bookings
+    </button>
+  </div>
+
+  <div *ngIf="showForm">
+    <form [formGroup]="ticketForm" (ngSubmit)="verifyTicket()" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 animate-fade-in">
+      <div class="mb-4">
+        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+        <div class="flex items-center">
+          <i class="pi pi-envelope mr-2"></i>
+          <input id="email" type="email" formControlName="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700" placeholder="Enter your email" />
+        </div>
+      </div>
+      <div class="mb-6">
+        <label for="ticketCode" class="block text-gray-700 text-sm font-bold mb-2">Ticket Code</label>
+        <div class="flex items-center">
+          <i class="pi pi-file-check mr-2"></i>
+          <input id="ticketCode" type="text" formControlName="ticketCode" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700" placeholder="Enter your ticket code" />
+        </div>
+      </div>
+      <div class="flex items-center justify-between">
+        <button type="submit" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700 flex items-center" [disabled]="ticketForm.invalid">
+          <i class="pi pi-verified mr-2"></i>Verify
+        </button>
+      </div>
+    </form>
+
+    <div *ngIf="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mt-4 animate-fade-in flex items-center" role="alert">
+      <i class="pi pi-check-circle mr-2"></i>
+      {{ successMessage }}
+    </div>
+    <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4 animate-fade-in flex items-center" role="alert">
+      <i class="pi pi-exclamation-circle mr-2"></i>
+      {{ errorMessage }}
+    </div>
+  </div>
+
+  <div *ngIf="showBookings">
+    <h2 class="text-2xl font-bold mb-4 text-center">Recent Bookings</h2>
+    <div *ngIf="isLoading" class="text-center">
+      <i class="pi pi-spin pi-spinner text-4xl text-indigo-800"></i>
+    </div>
+    <div *ngIf="!isLoading" class="font-[sans-serif] ">
+      <table class="min-w-full bg-white">
+        <thead class="whitespace-nowrap">
+          <tr>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950"></th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Event</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Status</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Persons</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Total Price</th>
+            <th class="p-4 text-left text-sm font-semibold text-white bg-slate-950">Action</th>
+          </tr>
+        </thead>
+        <tbody class="whitespace-nowrap">
+          <tr *ngFor="let booking of paginatedBookings" class="odd:bg-blue-50">
+            <td class="p-4 text-sm text-gray-800">
+              <img [src]="booking.event.bannerImage" alt="{{ booking.event.title }}" class="w-12 h-12 object-cover rounded-md">
+            </td>
+            <td class="p-4 text-sm text-gray-800">{{ booking.event.title }}</td>
+            <td class="p-4 text-sm text-gray-800">
+              <span [ngClass]="{'text-green-600 border-green-500': booking.status !== 'cancelled', 'text-red-600 border-red-500': booking.status === 'cancelled'}" class="w-[68px] block text-center py-1 border rounded text-xs">{{ booking.status }}</span>
+            </td>
+            <td class="p-4 text-sm text-gray-800">{{ booking.tickets }}</td>
+            <td class="p-4 text-sm text-gray-800">{{ booking.totalPrice | currency }}</td>
+            <td class="p-4 text-sm text-gray-800 flex space-x-2">
+              <button class="bg-yellow-500 text-white py-1 px-3 rounded-md hover:bg-yellow-600" (click)="editBooking(booking)">Edit</button>
+              <button class="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600" (click)="showConfirmationModal('cancel', booking.id)">Cancel</button>
+              <button class="bg-gray-500 text-white py-1 px-3 rounded-md hover:bg-gray-600" (click)="showConfirmationModal('delete', booking.id)">Delete
+                <i class="pi pi-trash ml-2 text-red-600"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <ul class="flex space-x-3 justify-center mt-8">
+        <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="previousPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+            <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+          </svg>
+        </li>
+        <li *ngFor="let page of visiblePages" class="flex items-center justify-center shrink-0 cursor-pointer text-sm font-bold text-[#333] w-9 h-8 rounded" 
+            [class.bg-indigo-800]="page === currentPage" 
+            [class.text-white]="page === currentPage" 
+            (click)="setPage(page)">
+          {{page}}
+        </li>
+        <li class="flex items-center justify-center shrink-0 cursor-pointer bg-gray-300 w-9 h-8 rounded" (click)="nextPage()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+            <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-original="#000000" />
+          </svg>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="editMode" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
+      <h3 class="text-xl font-bold mb-4">Edit Booking</h3>
+      <form [formGroup]="editForm" (ngSubmit)="saveBooking()">
+        <div class="mb-4">
+          <label for="tickets" class="block text-gray-700 text-sm font-bold mb-2">Tickets</label>
+          <input id="tickets" type="number" formControlName="tickets" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700" />
+        </div>
+        <div class="mb-4">
+          <label for="status" class="block text-gray-700 text-sm font-bold mb-2">Status</label>
+          <select id="status" formControlName="status" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700">
+            <option value="confirmed">Active</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="flex items-center justify-between">
+          <button type="submit" class="bg-indigo-700 hover:bg-indigo-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700">
+            Save
+          </button>
+          <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-700" (click)="editMode = false">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="showModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white p-8 rounded shadow-lg max-w-md mx-auto">
+      <h3 class="text-xl font-bold mb-4">Confirm Action</h3>
+      <p>Are you sure you want to {{ modalAction }} this booking?</p>
+      <div class="flex items-center justify-between mt-4">
+        <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-red-700" (click)="confirmAction()">
+          Yes
+        </button>
+        <button class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-gray-700" (click)="closeModal()">
+          No
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

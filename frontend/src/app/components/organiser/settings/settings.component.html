@@ -4,21 +4,29 @@
     <div class="flex items-center text-xl font-medium px-4">
       <i class="pi pi-spin pi-cog mr-2"></i>Profile Settings
     </div>
-    <button (click)="toggleEdit()" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center mr-4" [disabled]="isLoading">
+    <button (click)="enableEditing()" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center mr-4" [disabled]="isLoading">
       <i *ngIf="!isLoading" class="pi pi-user-edit mr-2"></i>
       <i *ngIf="isLoading" class="pi pi-spin pi-spinner mr-2"></i>
       {{ isLoading ? 'Loading...' : 'Edit' }}
     </button>
   </nav>
 
+  <div *ngIf="alertMessage" class="mb-4 p-4 rounded-lg" [ngClass]="{'bg-green-100 text-green-800': alertType === 'success', 'bg-red-100 text-red-800': alertType === 'error'}">
+    {{ alertMessage }}
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <i class="pi pi-spin pi-spinner text-4xl text-indigo-800"></i>
+  </div>
+
   <div class="flex flex-col md:flex-row justify-center items-center">
     <!-- Profile Card -->
-    <div *ngIf="!isEditing" class="w-full md:w-2/3 bg-white shadow-lg rounded-lg p-6 flex flex-col md:flex-row items-center min-h-[500px]">
+    <div *ngIf="!isEditing && profile" class="w-full md:w-2/3 bg-white shadow-lg rounded-lg p-6 flex flex-col md:flex-row items-center min-h-[500px]">
       <!-- Left column -->
       <div class="md:w-1/3 text-center mb-4 md:mb-0 flex flex-col items-center">
-        <img src="assets/profile.png" class="w-24 h-24 rounded-full" alt="avatar">
-        <h6 class="mt-2 text-lg font-medium">Victor Preston</h6>
-        <p class="text-gray-600">victor&#64;example.com</p>
+        <img [src]="profile.imageUrl || 'assets/profile.png'" class="w-24 h-24 rounded-full" alt="avatar">
+        <h6 class="mt-2 text-lg font-medium">{{ profile.firstName }} {{ profile.lastName }}</h6>
+        <p class="text-gray-600">{{ user?.email }}</p>
       </div>
       
       <!-- Profile details column -->
@@ -26,69 +34,59 @@
         <div class="space-y-4 max-w-md mx-auto">
           <div class="flex flex-col relative">
             <label class="font-medium flex items-center"><i class="pi pi-user mr-2"></i>Username</label>
-            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">Victor Preston</p>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ profile.firstName }} {{ profile.lastName }}</p>
           </div>
           <div class="flex flex-col relative">
             <label class="font-medium flex items-center"><i class="pi pi-envelope mr-2"></i>Email</label>
-            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">victor&#64;example.com</p>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ user?.email }}</p>
           </div>
           <div class="flex flex-col relative">
             <label class="font-medium flex items-center"><i class="pi pi-phone mr-2"></i>Phone Number</label>
-            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">0705383588</p>
+            <p class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md">{{ profile.phone }}</p>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Edit Profile Card -->
-    <div *ngIf="isEditing" class="w-full md:w-2/3 bg-white shadow-lg rounded-lg p-4 flex flex-col md:flex-row items-center">
+    <div *ngIf="isEditing && profile" class="w-full md:w-2/3 bg-white shadow-lg rounded-lg p-4 flex flex-col md:flex-row items-center">
       <!-- Left column -->
       <div class="md:w-1/3 text-center mb-4 md:mb-0 flex flex-col items-center">
-        <img src="assets/profile.png" class="w-24 h-24 rounded-full" alt="avatar">
+        <img [src]="profileForm.get('imageUrl')?.value || 'assets/profile.png'" class="w-24 h-24 rounded-full" alt="avatar">
         <h6 class="mt-2 text-lg font-medium">Upload a different photo...</h6>
         <div class="relative mt-2 w-full">
           <label class="flex items-center justify-center w-full p-2 bg-gray-100 text-gray-500 border border-gray-300 rounded cursor-pointer hover:bg-gray-200">
             <i class="pi pi-cloud-upload mr-2"></i>
             <span>Choose File</span>
-            <input type="file" class="hidden">
+            <input type="file" class="hidden" (change)="onImageUpload($event)">
           </label>
         </div>
       </div>
 
       <!-- Edit form column -->
       <div class="md:w-2/3 md:pl-8">
-        <form class="space-y-4 max-w-md mx-auto">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="space-y-4 max-w-md mx-auto">
           <div class="flex flex-col relative">
-            <label class="font-medium">Username</label>
-            <input class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter username" type="text">
+            <label class="font-medium">First Name</label>
+            <input formControlName="firstName" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter first name" type="text">
             <i class="pi pi-user absolute right-2 top-9"></i>
           </div>
           <div class="flex flex-col relative">
-            <label class="font-medium">Email</label>
-            <input class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter email" type="text">
-            <i class="pi pi-envelope absolute right-2 top-9"></i>
+            <label class="font-medium">Last Name</label>
+            <input formControlName="lastName" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter last name" type="text">
+            <i class="pi pi-user absolute right-2 top-9"></i>
           </div>
           <div class="flex flex-col relative">
             <label class="font-medium">Phone Number</label>
-            <input class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter phone number" type="text">
+            <input formControlName="phone" class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter phone number" type="text">
             <i class="pi pi-phone absolute right-2 top-9"></i>
           </div>
-          <div class="flex flex-col relative">
-            <label class="font-medium">Password</label>
-            <input class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Enter password" type="password">
-            <i class="pi pi-lock absolute right-2 top-9"></i>
-          </div>
-          <div class="flex flex-col relative">
-            <label class="font-medium">Confirm Password</label>
-            <input class="form-input mt-1 block w-full p-2 border border-gray-300 rounded-md pr-10" placeholder="Confirm password" type="password">
-            <i class="pi pi-eye absolute right-2 top-9"></i>
-          </div>
           <div class="flex justify-end space-x-4 mt-4">
-            <button type="button" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center">
-              Save Changes
+            <button type="submit" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center">
+              <i class="pi pi-check mr-2"></i> Save Changes
             </button>
-            <button type="button" (click)="cancelEdit()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 flex items-center">
-              <i class="pi pi-times mr-2"></i>Cancel
+            <button type="button" (click)="disableEditing()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 flex items-center">
+              <i class="pi pi-times mr-2"></i> Cancel
             </button>
           </div>
         </form>

@@ -1,18 +1,11 @@
-<nav class="flex items-center justify-between p-4 shadow-md m-4 rounded-md">
+<nav class="flex items-center justify-between p-4 shadow-md m-4 rounded-md bg-white">
   <div class="flex items-center w-full max-w-lg relative">
     <input type="text" placeholder="Search..." class="pl-12 py-2 rounded-2xl border border-gray-300 flex-grow">
     <i class="pi pi-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-xl"></i>
   </div>
   <div class="flex items-center space-x-6">
-    <div class="relative flex items-center">
-      <i class="pi pi-bell text-3xl cursor-pointer"></i>
-      <span class="absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-red-100 bg-red-600 rounded-full">3</span>
-    </div>
     <div class="relative">
-      <img src="assets/profile.png" alt="Profile" class="w-12 h-12 rounded-full cursor-pointer">
-      <div class="absolute right-0 mt-2 w-48 bg-white text-black shadow-md rounded-md p-2 hidden">
-        <!-- Profile details and logout option -->
+      <img [src]="profile?.imageUrl || 'assets/profile.png'" alt="Profile" class="w-12 h-12 rounded-full cursor-pointer" (mouseover)="showDropdown = true" (mouseleave)="showDropdown = false">
+        </div>
       </div>
-    </div>
-  </div>
 </nav>

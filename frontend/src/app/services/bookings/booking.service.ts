@@ -59,4 +59,10 @@ export class BookingService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<Booking[]>(`${this.baseUrl}/bookings/event/${eventId}`, { headers });
   }
+
+  getAllBookings(): Observable<Booking[]> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<Booking[]>(`${this.baseUrl}/bookings/all`, { headers });
+  }
 }

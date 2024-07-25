@@ -1,210 +1,136 @@
-<div class="container mx-auto px-4 py-4">
-    <!-- Navbar -->
-    <nav class="flex items-center justify-between p-4 m-4 rounded-md">
-      <div class="flex items-center text-xl font-medium px-4">
-        <i class="pi pi-calendar mr-2"></i>Events
-      </div>
-      <button (click)="showAddEventForm()" [disabled]="isLoading" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center mr-4">
-        <ng-container *ngIf="!isLoading; else loading">
-          <i class="pi pi-plus mr-2" *ngIf="!isEditing"></i>
-          <i class="pi pi-pencil mr-2" *ngIf="isEditing"></i>
-          {{ isEditing ? 'Edit Event' : 'Add Event' }}
-        </ng-container>
-        <ng-template #loading>
-          <i class="pi pi-spin pi-spinner mr-2"></i>Loading...
-        </ng-template>
+<div class="container mx-auto px-4 py-1">
+  <nav class="flex items-center justify-between p-4 m-4 mt-0 rounded-md">
+    <div class="flex items-center text-xl font-medium px-4">
+      <i class="pi pi-calendar mr-2"></i>Events
+    </div>
+    <button (click)="showAddEventForm()" [disabled]="isLoading" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 flex items-center mr-4">
+      <ng-container *ngIf="!isLoading; else loading">
+        <i class="pi pi-plus-circle mr-2" *ngIf="!isEditing"></i>
+        <i class="pi pi-pencil mr-2" *ngIf="isEditing"></i>
+        {{ isEditing ? 'Edit Event' : 'Add Event' }}
+      </ng-container>
+      <ng-template #loading>
+        <i class="pi pi-spin pi-spinner mr-2"></i>Loading...
+      </ng-template>
+    </button>
+  </nav>
+
+  <div *ngIf="showSuccess" class="flex items-start max-sm:flex-col bg-green-100 text-green-800 p-4 rounded-lg relative mb-4" role="alert">
+    <div class="flex items-center max-sm:mb-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] fill-green-500 inline mr-3" viewBox="0 0 512 512">
+        <ellipse cx="256" cy="256" fill="#32bea6" data-original="#32bea6" rx="256" ry="255.832" />
+        <path fill="#fff" d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" data-original="#ffffff" />
+      </svg>
+      <strong class="font-bold text-sm">Success!</strong>
+    </div>
+    <span class="block sm:inline text-sm ml-4 mr-8 max-sm:ml-0 max-sm:mt-2">{{ successMessage }}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 hover:bg-green-200 rounded-lg transition-all p-2 cursor-pointer fill-green-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591" (click)="showSuccess = false">
+      <path d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z" data-original="#000000" />
+      <path d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z" data-original="#000000" />
+    </svg>
+  </div>
+
+  <div *ngIf="showError" class="flex items-start max-sm:flex-col bg-red-100 text-red-800 p-4 rounded-lg relative mb-4" role="alert">
+    <div class="flex items-center max-sm:mb-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-[18px] fill-red-500 inline mr-3" viewBox="0 0 512 512">
+        <ellipse cx="256" cy="256" fill="#ff4444" data-original="#ff4444" rx="256" ry="255.832" />
+        <path fill="#fff" d="m235.472 392.08-121.04-94.296 34.416-44.168 74.328 57.904 122.672-177.016 46.032 31.888z" data-original="#ffffff" />
+      </svg>
+      <strong class="font-bold text-sm">Error!</strong>
+    </div>
+    <span class="block sm:inline text-sm ml-4 mr-8 max-sm:ml-0 max-sm:mt-2">{{ errorMessage }}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-7 hover:bg-red-200 rounded-lg transition-all p-2 cursor-pointer fill-red-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591" (click)="showError = false">
+      <path d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z" data-original="#000000" />
+      <path d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z" data-original="#000000" />
+    </svg>
+  </div>
+
+  <div *ngIf="!isAddingEvent && !isViewing" class="font-[sans-serif] overflow-x-auto">
+    <table class="min-w-full bg-white">
+      <thead class="bg-indigo-700 text-white">
+        <tr>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-image mr-1"></i>Banner
+          </th>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-tag mr-1"></i>Title
+          </th>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-map-marker mr-1"></i>Location
+          </th>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-calendar mr-1"></i>Date
+          </th>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-cog mr-1"></i>Action
+          </th>
+          <th class="p-4 text-center text-sm font-semibold">
+            <i class="pi pi-info-circle mr-1"></i>Details
+          </th>
+        </tr>
+      </thead>
+
+      <tbody class="whitespace-nowrap divide-y divide-gray-200">
+        <tr *ngFor="let event of paginate(events)" class="odd:bg-blue-50">
+          <td class="p-4 text-center text-sm">
+            <div class="flex items-center justify-center">
+              <img [src]="event.bannerImage" class="w-10 h-10 p-1.5 shrink-0 bg-gray-100" alt="Event Banner" />
+            </div>
+          </td>
+          <td class="p-4 text-center text-sm text-black">
+            {{ event.title }}
+          </td>
+          <td class="p-4 text-center text-sm text-black">
+            {{ event.location }}
+          </td>
+          <td class="p-4 text-center text-sm text-black">
+            {{ event.date | date: 'shortDate' }}
+          </td>
+          <td class="p-4 text-center text-sm">
+            <button (click)="showEditEventForm(event)" class="mr-2" title="Edit">
+              <i class="pi pi-file-edit text-indigo-700" style="font-size: 1.25rem;"></i>
+            </button>
+            <button (click)="deleteEvent(event.id)" title="Delete">
+              <i class="pi pi-trash text-red-700" style="font-size: 1.25rem;"></i>
+            </button>
+          </td>
+          <td class="p-4 text-center text-sm">
+            <button (click)="showViewEventModal(event)" class="bg-indigo-700 text-white py-1 px-3 rounded-md hover:bg-indigo-800">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginator -->
+  <div *ngIf="!isAddingEvent && !isViewing" class="flex justify-end mt-4">
+    <ul class="flex space-x-4">
+      <li class="flex items-center justify-center shrink-0 bg-gray-300 w-10 h-10 rounded-full cursor-pointer" (click)="previousPage()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400" viewBox="0 0 55.753 55.753">
+          <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-name="7-Check" data-original="#000000" />
+        </svg>
+      </li>
+      <li class="flex items-center justify-center shrink-0 bg-indigo-700 text-white w-10 h-10 rounded-full cursor-pointer">{{ currentPage }}</li>
+      <li class="flex items-center justify-center shrink-0 bg-gray-300 w-10 h-10 rounded-full cursor-pointer" (click)="nextPage()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400 rotate-180" viewBox="0 0 55.753 55.753">
+          <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" data-name="7-Check" data-original="#000000" />
+        </svg>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- <div *ngIf="isAddingEvent && !isLoading" class="bg-white p-6 rounded-md shadow-md relative flex flex-col mx-auto" style="height: 700px; width: 1000px;">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">{{ isEditing ? 'Edit Event' : 'Add Event' }}</h2>
+      <button (click)="cancelAddEvent()" class="text-gray-500 hover:text-gray-700">
+        <i class="pi pi-times"></i>
       </button>
-    </nav>
-  
-    <div *ngIf="!isAddingEvent && !isViewing" class="font-[sans-serif] overflow-x-auto">
-      <table class="min-w-full bg-white">
-        <thead class="bg-indigo-700 text-white">
-          <tr>
-            <th class="pl-4 w-8 text-center">
-              <input id="checkbox" type="checkbox" class="hidden peer" />
-              <label for="checkbox"
-                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-4 h-4 cursor-pointer bg-indigo-500 border border-gray-400 rounded overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
-                  <path
-                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                    data-name="7-Check" data-original="#000000" />
-                </svg>
-              </label>
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-image mr-1"></i>Banner
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-tag mr-1"></i>Title
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-map-marker mr-1"></i>Location
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-calendar mr-1"></i>Date
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-cog mr-1"></i>Action
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-info-circle mr-1"></i>Details
-            </th>
-          </tr>
-        </thead>
-  
-        <tbody class="whitespace-nowrap divide-y divide-gray-200">
-          <tr class="odd:bg-blue-50">
-            <td class="pl-4 w-8 text-center">
-              <input id="checkbox1" type="checkbox" class="hidden peer" />
-              <label for="checkbox1"
-                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-4 h-4 cursor-pointer bg-indigo-500 border border-gray-400 rounded overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
-                  <path
-                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                    data-name="7-Check" data-original="#000000" />
-                </svg>
-              </label>
-            </td>
-            <td class="p-4 text-center text-sm">
-              <div class="flex items-center justify-center">
-                <img src='assets/event1.jpg' class="w-10 h-10 p-1.5 shrink-0 bg-gray-100" />
-              </div>
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              Summer Festival
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              New York City
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              2024-07-15
-            </td>
-            <td class="p-4 text-center text-sm">
-              <button (click)="showEditEventForm({ title: 'Summer Festival', location: 'New York City', date: '2024-07-15', vipPrice: 50, regularPrice: 30, numberOfTickets: 100, description: 'A great summer festival' })" class="mr-2" title="Edit">
-                <i class="pi pi-file-edit text-indigo-700" style="font-size: 1.25rem;"></i>
-              </button>
-              <button title="Delete">
-                <i class="pi pi-trash  text-red-700" style="font-size: 1.25rem;"></i>
-              </button>
-            </td>
-            <td class="p-4 text-center text-sm">
-              <button (click)="showViewEventModal({ title: 'Summer Festival', location: 'New York City', date: '2024-07-15', vipPrice: 50, regularPrice: 30, numberOfTickets: 100, description: 'A great summer festival', image: 'assets/event1.jpg' })" class="bg-indigo-700 text-white py-1 px-3 rounded-md hover:bg-indigo-800">View</button>
-            </td>
-          </tr>
-  
-          <tr class="odd:bg-blue-50">
-            <td class="pl-4 w-8 text-center">
-              <input id="checkbox2" type="checkbox" class="hidden peer" />
-              <label for="checkbox2"
-                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-4 h-4 cursor-pointer bg-indigo-500 border border-gray-400 rounded overflow-hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
-                  <path
-                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
-                    data-name="7-Check" data-original="#000000" />
-                </svg>
-              </label>
-            </td>
-            <td class="p-4 text-center text-sm">
-              <div class="flex items-center justify-center">
-                <img src='assets/event1.jpg' class="w-10 h-10 p-1.5 shrink-0 bg-gray-100" />
-              </div>
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              Tech Conference
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              San Francisco
-            </td>
-            <td class="p-4 text-center text-sm text-black">
-              2024-08-10
-            </td>
-            <td class="p-4 text-center text-sm">
-              <button (click)="showEditEventForm({ title: 'Tech Conference', location: 'San Francisco', date: '2024-08-10', vipPrice: 150, regularPrice: 100, numberOfTickets: 200, description: 'A great tech conference' })" class="mr-2" title="Edit">
-                <i class="pi pi-file-edit text-indigo-700" style="font-size: 1.25rem;"></i>
-              </button>
-              <button title="Delete">
-                <i class="pi pi-trash text-red-700" style="font-size: 1.25rem;"></i>
-              </button>
-            </td>
-            <td class="p-4 text-center text-sm">
-              <button (click)="showViewEventModal({ title: 'Tech Conference', location: 'San Francisco', date: '2024-08-10', vipPrice: 150, regularPrice: 100, numberOfTickets: 200, description: 'A great tech conference', image: 'assets/event1.jpg' })" class="bg-indigo-700 text-white py-1 px-3 rounded-md hover:bg-indigo-800">View</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
     </div>
-  
-    <!-- Paginator -->
-    <div *ngIf="!isAddingEvent && !isViewing" class="flex justify-end mt-4">
-      <ul class="flex space-x-4">
-        <li class="flex items-center justify-center shrink-0 bg-gray-300 w-10 h-10 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400" viewBox="0 0 55.753 55.753">
-            <path
-              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-              data-original="#000000" />
-          </svg>
-        </li>
-        <li
-          class="flex items-center justify-center shrink-0 bg-indigo-700 border-2 border-indigo-700 cursor-pointer text-base font-bold text-white w-10 h-10 rounded-full">
-          1
-        </li>
-        <li
-          class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
-          2
-        </li>
-        <li
-          class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
-          3
-        </li>
-        <li class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer w-10 h-10 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400 rotate-180" viewBox="0 0 55.753 55.753">
-            <path
-              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-              data-original="#000000" />
-          </svg>
-        </li>
-      </ul>
-    </div>
-  
-    <!-- Stepper Form -->
-    <div *ngIf="isAddingEvent && !isLoading" class="bg-white p-6 rounded-md shadow-md relative flex flex-col mx-auto" style="height: 550px; width: 600px;">
-      <div class="flex justify-between items-center mb-4">
-        <h2 class="text-xl font-semibold">{{ isEditing ? 'Edit Event' : 'Add Event' }}</h2>
-        <button (click)="cancelAddEvent()" class="text-gray-500 hover:text-gray-700">
-          <i class="pi pi-times"></i>
-        </button>
-      </div>
-  
-      <!-- Stepper Progress Bar -->
-      <div class="flex items-center mb-4">
-        <div class="flex items-center w-full">
-          <div class="w-8 h-8 shrink-0 mx-[-1px] p-1.5 flex items-center justify-center rounded-full" [ngClass]="{'bg-indigo-800': currentStep >= 1, 'bg-gray-300': currentStep < 1}">
-            <span class="text-base text-white font-bold">1</span>
-          </div>
-          <div class="w-full h-1" [ngClass]="{'bg-indigo-800': currentStep > 1, 'bg-gray-300': currentStep <= 1}"></div>
-        </div>
-        <div class="flex items-center w-full">
-          <div class="w-8 h-8 shrink-0 mx-[-1px] p-1.5 flex items-center justify-center rounded-full" [ngClass]="{'bg-indigo-800': currentStep >= 2, 'bg-gray-300': currentStep < 2}">
-            <span class="text-base text-white font-bold">2</span>
-          </div>
-          <div class="w-full h-1" [ngClass]="{'bg-indigo-800': currentStep > 2, 'bg-gray-300': currentStep <= 2}"></div>
-        </div>
-        <div class="flex items-center w-full">
-          <div class="w-8 h-8 shrink-0 mx-[-1px] p-1.5 flex items-center justify-center rounded-full" [ngClass]="{'bg-indigo-800': currentStep >= 3, 'bg-gray-300': currentStep < 3}">
-            <span class="text-base text-white font-bold">3</span>
-          </div>
-          <div class="w-full h-1" [ngClass]="{'bg-indigo-800': currentStep > 3, 'bg-gray-300': currentStep <= 3}"></div>
-        </div>
-        <div class="flex items-center">
-          <div class="w-8 h-8 shrink-0 mx-[-1px] p-1.5 flex items-center justify-center rounded-full" [ngClass]="{'bg-indigo-800': currentStep >= 4, 'bg-gray-300': currentStep < 4}">
-            <span class="text-base text-white font-bold">4</span>
-          </div>
-        </div>
-      </div>
-  
-      <form [formGroup]="eventForm" class="h-full flex flex-col justify-between">
-        <!-- Step 1: Basic Details -->
-        <div *ngIf="currentStep === 1" class="w-full mx-auto">
+
+    <form [formGroup]="eventForm" class="h-full flex flex-col">
+      <div class="flex justify-between space-x-4">
+        <div class="w-1/3">
           <div class="mb-4">
             <label class="text-sm font-medium mb-2 flex items-center">
               <i class="pi pi-tag mr-2"></i>Event Title
@@ -223,32 +149,6 @@
             </label>
             <input formControlName="date" type="date" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
           </div>
-        </div>
-  
-        <!-- Step 2: Ticket Details -->
-        <div *ngIf="currentStep === 2" class="w-full mx-auto">
-          <div class="mb-4">
-            <label class="text-sm font-medium mb-2 flex items-center">
-              <i class="pi pi-wallet mr-2"></i>VIP Ticket Price
-            </label>
-            <input formControlName="vipPrice" type="number" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
-          </div>
-          <div class="mb-4">
-            <label class="text-sm font-medium mb-2 flex items-center">
-              <i class="pi pi-wallet mr-2"></i>Regular Ticket Price
-            </label>
-            <input formControlName="regularPrice" type="number" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
-          </div>
-          <div class="mb-4">
-            <label class="text-sm font-medium mb-2 flex items-center">
-              <i class="pi pi-users mr-2"></i>Number of Tickets
-            </label>
-            <input formControlName="numberOfTickets" type="number" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
-          </div>
-        </div>
-  
-        <!-- Step 3: Description -->
-        <div *ngIf="currentStep === 3" class="w-full mx-auto">
           <div class="mb-4">
             <label class="text-sm font-medium mb-2 flex items-center">
               <i class="pi pi-align-left mr-2"></i>Description
@@ -256,9 +156,46 @@
             <textarea formControlName="description" rows="4" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md"></textarea>
           </div>
         </div>
-  
-        <!-- Step 4: Image Upload -->
-        <div *ngIf="currentStep === 4" class="w-full mx-auto">
+        <div class="w-1/3">
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-tags mr-2"></i>Category
+            </label>
+            <select formControlName="categoryId" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-tag mr-2"></i>Tags
+            </label>
+            <div class="flex flex-wrap space-x-2">
+              <div *ngFor="let tag of selectedTags" class="flex items-center bg-gray-200 px-2 py-1 rounded-full">
+                {{ tag.name }}
+                <i class="pi pi-times ml-2 cursor-pointer" (click)="removeTag(tag)"></i>
+              </div>
+            </div>
+            <select formControlName="tags" (change)="onTagSelect($event)" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md">
+              <option *ngFor="let tag of tags" [value]="tag.id">{{ tag.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-wallet mr-2"></i>Ticket Types
+            </label>
+            <div formArrayName="ticketTypes">
+              <div *ngFor="let ticketType of ticketTypesControls; let i = index" [formGroupName]="i" class="flex space-x-4">
+                <input formControlName="type" type="text" placeholder="Type" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+                <input formControlName="price" type="number" placeholder="Price" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+                <input formControlName="quantity" type="number" placeholder="Quantity" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+              </div>
+            </div>
+            <button type="button" (click)="addTicketType()" class="mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+              Add Ticket Type
+            </button>
+          </div>
+        </div>
+        <div class="w-1/3 flex flex-col justify-between">
           <div class="mb-4">
             <label class="text-sm font-medium mb-2 flex items-center">
               <i class="pi pi-image mr-2"></i>Upload Event Image
@@ -269,31 +206,131 @@
                 <span>Choose File</span>
                 <input type="file" (change)="onFileChange($event)" class="hidden">
               </label>
+              <div *ngIf="uploadedImageUrl" class="mt-2">
+                <img [src]="uploadedImageUrl" alt="Uploaded Image" class="w-full h-auto rounded-md">
+              </div>
+              <div *ngIf="isUploading" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-md">
+                <i class="pi pi-spin pi-spinner text-white" style="font-size: 2rem;"></i>
+              </div>
             </div>
           </div>
-        </div>
-  
-        <!-- Navigation Buttons -->
-        <div class="mt-4 w-full mx-auto">
-          <div class="flex justify-between">
-            <button *ngIf="currentStep > 1" type="button" (click)="previousStep()" class="bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400">
-              Previous
+          <div class="flex justify-end mt-4 fixed bottom-4 right-4">
+            <button type="button" (click)="saveEvent()" class="bg-indigo-800 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+              Save
             </button>
-            <div class="flex space-x-4">
-              <button *ngIf="currentStep < 4" type="button" (click)="nextStep()" class="bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
-                Next
-              </button>
-              <button *ngIf="currentStep === 4" type="button" (click)="finish()" class="bg-indigo-800 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
-                Finish
-              </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div> -->
+  <!-- Add/Edit Event Form -->
+  <div *ngIf="isAddingEvent && !isLoading" class="bg-white p-6 rounded-md shadow-md relative flex flex-col mx-auto" style="height: 100%; width: 900px;">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-xl font-semibold">{{ isEditing ? 'Edit Event' : 'Add Event' }}</h2>
+      <button (click)="cancelAddEvent()" class="text-gray-500 hover:text-gray-700">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="eventForm" class="h-full flex flex-col justify-between">
+      <div class="flex justify-between space-x-4">
+        <div class="w-1/3">
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-tag mr-2"></i>Event Title
+            </label>
+            <input formControlName="title" type="text" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-map-marker mr-2"></i>Location
+            </label>
+            <input formControlName="location" type="text" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-calendar mr-2"></i>Date
+            </label>
+            <input formControlName="date" type="date" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md" />
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-align-left mr-2"></i>Description
+            </label>
+            <textarea formControlName="description" rows="4" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md"></textarea>
+          </div>
+        </div>
+        <div class="w-1/3">
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-tags mr-2"></i>Category
+            </label>
+            <select formControlName="categoryId" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md">
+              <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-tag mr-2"></i>Tags
+            </label>
+            <div class="flex flex-wrap space-x-2">
+              <div *ngFor="let tag of selectedTags" class="flex items-center bg-gray-200 px-2 py-1 rounded-full">
+                {{ tag.name }}
+                <i class="pi pi-times ml-2 cursor-pointer" (click)="removeTag(tag)"></i>
+              </div>
+            </div>
+            <select formControlName="tags" (change)="onTagSelect($event)" class="form-input mt-1 w-full p-2 border border-gray-300 rounded-md">
+              <option *ngFor="let tag of tags" [value]="tag.id">{{ tag.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-wallet mr-2"></i>Ticket Types
+            </label>
+            <div formArrayName="ticketTypes">
+              <div *ngFor="let ticketType of ticketTypesControls; let i = index" [formGroupName]="i" class="flex space-x-4 mb-2">
+                <input formControlName="type" type="text" placeholder="Type" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+                <input formControlName="price" type="number" placeholder="Price" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+                <input formControlName="quantity" type="number" placeholder="Quantity" class="form-input mt-1 w-1/3 p-2 border border-gray-300 rounded-md" />
+              </div>
+            </div>
+            <button type="button" (click)="addTicketType()" class="mt-2 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+              Add Ticket Type
+            </button>
+          </div>
+        </div>
+        <div class="w-1/3 flex flex-col justify-between">
+          <div class="mb-4">
+            <label class="text-sm font-medium mb-2 flex items-center">
+              <i class="pi pi-image mr-2"></i>Upload Event Image
+            </label>
+            <div class="relative mt-2 w-full">
+              <label class="flex items-center justify-center w-full p-2 bg-gray-100 text-gray-500 border border-gray-300 rounded cursor-pointer hover:bg-gray-200">
+                <i class="pi pi-cloud-upload mr-2"></i>
+                <span>Choose File</span>
+                <input type="file" (change)="onFileChange($event)" class="hidden">
+              </label>
+              <div *ngIf="uploadedImageUrl" class="mt-2">
+                <img [src]="uploadedImageUrl" alt="Uploaded Image" class="w-full h-auto rounded-md">
+              </div>
+              <div *ngIf="isUploading" class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 rounded-md">
+                <i class="pi pi-spin pi-spinner text-white" style="font-size: 2rem;"></i>
+              </div>
             </div>
           </div>
         </div>
-      </form>
-    </div>
-  
-    <!-- View Event Modal -->
-<div *ngIf="isViewing" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      </div>
+      <div class="flex justify-end mt-4">
+        <button type="button" (click)="saveEvent()" class="bg-indigo-800 text-white py-2 px-4 rounded-md hover:bg-indigo-700">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- View Event Modal -->
+  <div *ngIf="isViewing" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded-md shadow-md relative w-full max-w-3xl mx-auto">
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold">Event Details</h2>
@@ -321,28 +358,7 @@
             <i class="pi pi-calendar mr-2"></i>
             <div>
               <label class="text-sm font-medium">Date:</label>
-              <p>{{ selectedEvent?.date }}</p>
-            </div>
-          </div>
-          <div class="mb-4 flex items-center">
-            <i class="pi pi-wallet mr-2"></i>
-            <div>
-              <label class="text-sm font-medium">VIP Ticket Price:</label>
-              <p>{{ selectedEvent?.vipPrice }}</p>
-            </div>
-          </div>
-          <div class="mb-4 flex items-center">
-            <i class="pi pi-wallet mr-2"></i>
-            <div>
-              <label class="text-sm font-medium">Regular Ticket Price:</label>
-              <p>{{ selectedEvent?.regularPrice }}</p>
-            </div>
-          </div>
-          <div class="mb-4 flex items-center">
-            <i class="pi pi-users mr-2"></i>
-            <div>
-              <label class="text-sm font-medium">Number of Tickets:</label>
-              <p>{{ selectedEvent?.numberOfTickets }}</p>
+              <p>{{ selectedEvent?.date | date: 'shortDate' }}</p>
             </div>
           </div>
           <div class="mb-4 flex items-center">
@@ -352,11 +368,29 @@
               <p>{{ selectedEvent?.description }}</p>
             </div>
           </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-tags mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Tags:</label>
+              <ul>
+                <li *ngFor="let tag of selectedEvent?.tags">{{ tag.tag.name }}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="mb-4 flex items-center">
+            <i class="pi pi-wallet mr-2"></i>
+            <div>
+              <label class="text-sm font-medium">Ticket Types:</label>
+              <ul>
+                <li *ngFor="let ticket of selectedEvent?.ticketTypes">{{ ticket.type }} - {{ ticket.price | currency }} ({{ ticket.quantity }})</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <div class="w-1/3">
           <div class="mb-4">
             <label class="text-sm font-medium mb-2">Banner Image:</label>
-            <img [src]="selectedEvent?.image" alt="Event Banner" class="w-full h-auto rounded-md" />
+            <img [src]="selectedEvent?.bannerImage" alt="Event Banner" class="w-full h-auto rounded-md" />
           </div>
         </div>
       </div>
@@ -366,5 +400,5 @@
         </button>
       </div>
     </div>
-  </div>  
-  </div>  
+  </div>
+</div>

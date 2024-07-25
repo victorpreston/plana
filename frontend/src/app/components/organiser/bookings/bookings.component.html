@@ -1,76 +1,44 @@
-  <div class="container mx-auto px-4 py-4">
-    <!-- Navbar -->
-    <nav class="flex items-center justify-between p-4 m-4 rounded-md">
-      <div class="flex items-center text-xl font-medium px-4">
-        <i class="pi pi-check-square mr-2"></i>Bookings
+<div class="container mx-auto px-4 py-10 mt-12">
+  <!-- Alert Message -->
+  <div *ngIf="alertMessage" class="mb-4 p-4 rounded-lg" [ngClass]="{'bg-green-100 text-green-800': alertType === 'success', 'bg-red-100 text-red-800': alertType === 'error'}">
+    {{ alertMessage }}
+  </div>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center">
+    <i class="pi pi-spin pi-spinner text-4xl text-indigo-800"></i>
+  </div>
+
+  <!-- Tag Form -->
+  <form [formGroup]="tagForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+    <div class="mb-4">
+      <label class="block text-sm font-medium text-gray-700">
+        <i class="pi pi-tag"></i>
+        Tag Name
+      </label>
+      <input formControlName="name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" />
+    </div>
+    <div class="flex justify-end">
+      <button type="submit" class="bg-indigo-700 text-white py-2 px-4 rounded-md hover:bg-indigo-800">
+        <i class="pi pi-{{ isEditing ? 'pencil' : 'plus-circle' }}"></i> {{ isEditing ? 'Update Tag' : 'Create Tag' }}
+      </button>
+    </div>
+  </form>
+
+  <!-- Tag List -->
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold mb-4">Tags</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div *ngFor="let tag of tags" class="bg-white shadow-md rounded-md p-4 flex justify-between items-center">
+        <div>
+          <span>{{ tag.name }}</span>
+          <p class="text-xs text-gray-500 mt-1">{{ tag.events.length }} events</p>
+        </div>
+        <div class="flex space-x-4">
+          <button (click)="editTag(tag)" class="text-blue-500 hover:text-blue-700"><i class="pi pi-pencil"></i></button>
+          <button (click)="deleteTag(tag.id)" class="text-red-500 hover:text-red-700"><i class="pi pi-trash"></i></button>
+        </div>
       </div>
-    </nav>
-  
-    <!-- Booking Table -->
-    <div class="font-[sans-serif] overflow-x-auto">
-      <table class="min-w-full bg-white">
-        <thead class="bg-indigo-700 text-white">
-          <tr>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-calendar mr-1"></i>Event Name
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-users mr-1"></i>Number of Bookings
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-wallet mr-1"></i>Regular Tickets
-            </th>
-            <th class="p-4 text-center text-sm font-semibold">
-              <i class="pi pi-wallet mr-1"></i>VIP Tickets
-            </th>
-          </tr>
-        </thead>
-  
-        <tbody class="whitespace-nowrap divide-y divide-gray-200">
-          <tr *ngFor="let booking of bookings" class="odd:bg-blue-50">
-            <td class="p-4 text-center text-sm text-black">{{ booking.eventName }}</td>
-            <td class="p-4 text-center text-sm text-black">{{ booking.numBookings }}</td>
-            <td class="p-4 text-center text-sm text-black">${{ booking.regularTicketsRevenue }}</td>
-            <td class="p-4 text-center text-sm text-black">${{ booking.vipTicketsRevenue }}</td>
-          </tr>
-        </tbody>
-  
-        <tfoot class="bg-indigo-100 text-slate-900">
-          <tr>
-            <td colspan="2" class="p-4 text-right text-sm font-semibold">Total Revenue:</td>
-            <td class="p-4 text-center text-sm">${{ getTotalRegularRevenue() }}</td>
-            <td class="p-4 text-center text-sm">${{ getTotalVipRevenue() }}</td>
-          </tr>
-        </tfoot>
-      </table>
     </div>
-  
-    <!-- Paginator -->
-    <div class="flex justify-end mt-4">
-      <ul class="flex space-x-4">
-        <li class="flex items-center justify-center shrink-0 bg-gray-300 w-10 h-10 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400" viewBox="0 0 55.753 55.753">
-            <path
-              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-              data-original="#000000" />
-          </svg>
-        </li>
-        <li class="flex items-center justify-center shrink-0 bg-indigo-700 border-2 border-indigo-700 cursor-pointer text-base font-bold text-white w-10 h-10 rounded-full">
-          1
-        </li>
-        <li class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
-          2
-        </li>
-        <li class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer text-base font-bold text-[#333] w-10 h-10 rounded-full">
-          3
-        </li>
-        <li class="flex items-center justify-center shrink-0 hover:bg-gray-50 border-2 cursor-pointer w-10 h-10 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-400 rotate-180" viewBox="0 0 55.753 55.753">
-            <path
-              d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
-              data-original="#000000" />
-          </svg>
-        </li>
-      </ul>
-    </div>
-  </div>  
+  </div>
+</div>

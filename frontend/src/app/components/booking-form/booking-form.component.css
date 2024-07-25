@@ -1,4 +1,17 @@
-.booking-form-container {
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-in-out;
+  }
+  
+  .booking-form-container {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
@@ -44,4 +57,8 @@
     width: 3rem;
     border-left: none;
     border-right: none;
+  }
+  
+  .alert {
+    margin-top: 1rem;
   }  

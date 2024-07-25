@@ -18,6 +18,7 @@ export class DashboardComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.renderChart();
+    this.renderAnotherChart();
     this.initializeCalendar();
   }
 
@@ -51,7 +52,7 @@ export class DashboardComponent implements AfterViewInit {
       },
       yaxis: {
         title: {
-          text: 'Number of Leads'
+          text: 'Number of Tickets'
         }
       },
       fill: {
@@ -73,13 +74,40 @@ export class DashboardComponent implements AfterViewInit {
     }
   }
 
+  renderAnotherChart(): void {
+    const options = {
+      chart: {
+        height: 350,
+        type: 'line',
+      },
+      series: [{
+        name: 'Revenue',
+        data: [10, 41, 35, 51, 49, 62, 69]
+      }],
+      xaxis: {
+        categories: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      },
+      yaxis: {
+        title: {
+          text: 'Revenue'
+        }
+      }
+    };
+
+    const anotherChartElement = document.getElementById('another-chart');
+    if (anotherChartElement && typeof ApexCharts !== 'undefined') {
+      const anotherChart = new ApexCharts(anotherChartElement, options);
+      anotherChart.render();
+    }
+  }
+
   initializeCalendar(): void {
     const calendarEl = this.calendarElement.nativeElement;
     const calendar = new Calendar(calendarEl, {
       plugins: [dayGridPlugin],
       initialView: 'dayGridMonth',
-      height: 'auto', // Ensure the calendar height is adjusted to its content
-      contentHeight: 350 // Adjust this value as needed
+      height: 'auto',
+      contentHeight: 350
     });
     calendar.render();
   }

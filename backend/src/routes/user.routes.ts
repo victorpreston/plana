@@ -25,7 +25,7 @@ router.post('/login', validateLogin, login);
 /**
  * protected routes
  */
-router.get('/users', authenticateJWT, authorizeRole(Role.ADMIN), getUsers);
+router.get('/users', authenticateJWT, getUsers);
 router.get('/users/:id', authenticateJWT, getUser);
 router.put('/users/:id/role', authenticateJWT, authorizeRole(Role.ADMIN), updateRole);
 router.delete('/users/:id', authenticateJWT, authorizeRole(Role.ADMIN), removeUser);

@@ -1,4 +1,5 @@
 import prisma from '../config/database.config';
+import logger from '../config/logger.config';
 import { Event } from '../interfaces/event.interfaces';
 
 /**
@@ -52,6 +53,71 @@ export const createEvent = async (eventData: Partial<Event>): Promise<Event> => 
   return mapEvent(newEvent);
 };
 
+// /**
+//  * Function to update an event
+//  * @param id 
+//  * @param eventData 
+//  * @returns 
+//  */
+// export const updateEvent = async (id: string, eventData: Partial<Event>): Promise<Event> => {
+//   console.log('Received update payload:', eventData); // Log the incoming payload
+
+//   const updatedEvent = await prisma.event.update({
+//     where: { id },
+//     data: {
+//       title: eventData.title,
+//       description: eventData.description,
+//       date: eventData.date,
+//       time: eventData.time,
+//       location: eventData.location,
+//       bannerImage: eventData.bannerImage,
+//       manager: eventData.managerId ? { connect: { id: eventData.managerId } } : undefined,
+//       category: eventData.categoryId ? { connect: { id: eventData.categoryId } } : undefined,
+//       ticketTypes: {
+//         upsert: eventData.ticketTypes?.map(ticketType => ({
+//           where: { id: ticketType.id || undefined},
+//           update: {
+//             type: ticketType.type,
+//             price: ticketType.price,
+//             quantity: ticketType.quantity,
+//           },
+//           create: {
+//             type: ticketType.type,
+//             price: ticketType.price,
+//             quantity: ticketType.quantity,
+//           },
+//         })),
+//       },
+//       tags: {
+//         upsert: eventData.tags?.map(tag => ({
+//           where: { eventId_tagId: { eventId: id, tagId: tag.tagId } },
+//           update: {},
+//           create: { tag: { connect: { id: tag.tagId } } },
+//         })),
+//       },
+//     },
+//     include: {
+//       ticketTypes: true,
+//       bookings: {
+//         include: {
+//           user: true,
+//           event: true,
+//           ticketType: true,
+//         },
+//       },
+//       manager: true,
+//       category: true,
+//       tags: {
+//         include: {
+//           tag: true,
+//         },
+//       },
+//     },
+//   });
+
+//   return mapEvent(updatedEvent);
+// };
+
 /**
  * Function to update an event
  * @param id 
@@ -59,6 +125,7 @@ export const createEvent = async (eventData: Partial<Event>): Promise<Event> => 
  * @returns 
  */
 export const updateEvent = async (id: string, eventData: Partial<Event>): Promise<Event> => {
+
   const updatedEvent = await prisma.event.update({
     where: { id },
     data: {
@@ -72,7 +139,7 @@ export const updateEvent = async (id: string, eventData: Partial<Event>): Promis
       category: eventData.categoryId ? { connect: { id: eventData.categoryId } } : undefined,
       ticketTypes: {
         upsert: eventData.ticketTypes?.map(ticketType => ({
-          where: { id: ticketType.id },
+          where: { id: ticketType.id || '' },
           update: {
             type: ticketType.type,
             price: ticketType.price,
@@ -114,6 +181,7 @@ export const updateEvent = async (id: string, eventData: Partial<Event>): Promis
 
   return mapEvent(updatedEvent);
 };
+
 
 /**
  * get all events
@@ -184,6 +252,39 @@ export const deleteEvent = async (id: string): Promise<void> => {
     data: { isDeleted: true },
   });
 };
+
+
+
+/**
+ * Function to get events created by a specific manager
+ * @param managerId 
+ * @returns 
+ */
+export const getEventsByManager = async (managerId: string): Promise<Event[]> => {
+  const events = await prisma.event.findMany({
+    where: { managerId, isDeleted: false },
+    include: {
+      ticketTypes: true,
+      bookings: {
+        include: {
+          user: true,
+          event: true,
+          ticketType: true,
+        },
+      },
+      manager: true,
+      category: true,
+      tags: {
+        include: {
+          tag: true,
+        },
+      },
+    },
+  });
+
+  return events.map(mapEvent);
+};
+
 
 /**
  * Function to map Prisma Event to TypeScript Event interface

@@ -4,7 +4,8 @@ import {
     update, 
     getAll, 
     getById, 
-    remove 
+    remove, 
+    getByManager
 } from '../controllers/event.controllers';
 import { authenticateJWT } from '../middleware/auth.middleware';
 import { authorizeRole } from '../middleware/role.middleware';
@@ -25,5 +26,9 @@ router.get('/events/:id', getById);
 router.post('/events', authenticateJWT, authorizeRole(Role.MANAGER), validateEvent, create);
 router.put('/events/:id', authenticateJWT, authorizeRole(Role.MANAGER), validateEvent, update);
 router.delete('/events/:id', authenticateJWT, authorizeRole(Role.MANAGER), remove);
+/**
+ * New route to get events by manager ID
+ */
+router.get('/events/manager/:managerId', authenticateJWT, authorizeRole(Role.MANAGER), getByManager);
 
 export default router;

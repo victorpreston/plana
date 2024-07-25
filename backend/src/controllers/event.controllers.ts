@@ -4,7 +4,8 @@ import {
   updateEvent, 
   getAllEvents, 
   getEventById, 
-  deleteEvent 
+  deleteEvent, 
+  getEventsByManager
 } from '../services/event.services';
 
 
@@ -97,6 +98,22 @@ export const remove = async (req: Request, res: Response) => {
     }
     await deleteEvent(id);
     res.status(204).send();
+  } catch (error) {
+    const err = error as Error;
+    res.status(400).json({ error: err.message });
+  }
+};
+
+/**
+ * Get events by manager ID
+ * @param req 
+ * @param res 
+ */
+export const getByManager = async (req: Request, res: Response) => {
+  try {
+    const { managerId } = req.params;
+    const events = await getEventsByManager(managerId);
+    res.status(200).json(events);
   } catch (error) {
     const err = error as Error;
     res.status(400).json({ error: err.message });

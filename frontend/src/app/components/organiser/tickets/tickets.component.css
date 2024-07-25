@@ -1,0 +1,34 @@
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.ticket-verification {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.alert {
+  margin-top: 1rem;
+}
+
+.table-row {
+  height: 48px; /* Reduced height */
+}
+
+.table-row img {
+  width: 48px; /* Reduced size of banners */
+  height: 48px;
+}

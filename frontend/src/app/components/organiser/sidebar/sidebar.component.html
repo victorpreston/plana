@@ -8,7 +8,7 @@
       <ul class="space-y-2">
         <li>
           <a routerLink="dashboard" routerLinkActive="active" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 hover:text-white group mx-2">
-            <i class="pi pi-tags" style="font-size: 1.5rem;"></i>
+            <i class="pi pi-chart-pie" style="font-size: 1.5rem;"></i>
             <span class="ml-3">Dashboard</span>
           </a>
         </li>
@@ -20,13 +20,13 @@
         </li>
         <li>
           <a routerLink="bookings" routerLinkActive="active" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 hover:text-white group mx-2">
-            <i class="pi pi-check-square" style="font-size: 1.5rem;"></i>
-            <span class="flex-1 ml-3 whitespace-nowrap">Bookings</span>
+            <i class="pi pi-tags" style="font-size: 1.5rem;"></i>
+            <span class="flex-1 ml-3 whitespace-nowrap">Tags</span>
           </a>
         </li>
         <li>
           <a routerLink="tickets" routerLinkActive="active" class="flex items-center p-2 text-white rounded-lg hover:bg-gray-700 hover:text-white group mx-2">
-            <i class="pi pi-wallet" style="font-size: 1.5rem;"></i>
+            <i class="pi pi-file-check" style="font-size: 1.5rem;"></i>
             <span class="flex-1 ml-3 whitespace-nowrap">Tickets</span>
           </a>
         </li>
@@ -59,7 +59,7 @@
           </a>
         </li>
         <li>
-          <a routerLink="/" (click)="logout()" class="flex items-center p-2 text-white transition duration-75 rounded-lg hover:bg-gray-700 hover:text-white group mx-2">
+          <a (click)="logout()" class="flex items-center p-2 text-white transition duration-75 rounded-lg hover:bg-gray-700 hover:text-white group mx-2">
             <i class="pi pi-sign-out" style="font-size: 1.5rem; padding-right: 10px;"></i>
             <span class="ml-3">Logout</span>
           </a>

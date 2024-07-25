@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Booking } from '../../interfaces/booking';
 import { User } from '../../interfaces/user';
 import { TicketType } from '../../interfaces/ticket';
-import { Router } from '@angular/router'; // Import Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-booking-form',
@@ -24,12 +24,14 @@ export class BookingFormComponent implements OnInit {
   selectedTicketType: string = '';
   ticketQuantity: number = 1;
   userId: string | null = null;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private bookingService: BookingService,
     private authService: AuthService,
-    private router: Router // Inject Router
+    private router: Router
   ) {
     this.bookingForm = this.fb.group({
       ticketType: [''],
@@ -80,16 +82,28 @@ export class BookingFormComponent implements OnInit {
 
       this.bookingService.createBooking(booking).subscribe({
         next: (response) => {
-          alert('Booking successful!');
-          this.close.emit();
-          this.router.navigate(['/payment'], { queryParams: { bookingId: response.id } });
+          this.successMessage = 'Booking successful! Redirecting to payment...';
+          this.errorMessage = null;
+          this.setAutoHideMessages();
+          setTimeout(() => {
+            this.close.emit();
+            this.router.navigate(['/payment'], { queryParams: { bookingId: response.id } });
+          }, 3000);
         },
         error: (error) => {
-          console.error('Booking failed', error);
-          alert('Booking failed. Please try again.');
+          this.errorMessage = 'Booking failed. Please try again.';
+          this.successMessage = null;
+          this.setAutoHideMessages();
         }
       });
     }
+  }
+
+  private setAutoHideMessages() {
+    setTimeout(() => {
+      this.successMessage = null;
+      this.errorMessage = null;
+    }, 3000);
   }
 
   onClose() {

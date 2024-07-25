@@ -1,3 +1,77 @@
+<!-- <app-navbar></app-navbar>
+
+<div class="font-[sans-serif] bg-gray-50 flex items-center md:h-screen p-4">
+  <div class="w-full max-w-4xl max-md:max-w-xl mx-auto">
+    <div class="bg-white grid md:grid-cols-2 gap-8 w-full sm:p-12 p-12 shadow-md rounded-md overflow-hidden">
+      <div class="max-md:order-1 space-y-8">
+        <div class="md:mb-8 mb-4">
+          <h3 class="text-gray-800 text-2xl font-bold">Instant Access</h3>
+        </div>
+
+        <div class="space-y-6">
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-indigo-700 hover:bg-indigo-800">
+            <i class="pi pi-facebook mr-2"></i>
+            Continue with Facebook
+          </button>
+          <button type="button" class="w-full px-4 py-2 flex items-center justify-center rounded-md text-gray-800 text-base tracking-wider font-semibold border-none outline-none bg-gray-100 hover:bg-gray-200">
+            <i class="pi pi-google mr-2"></i>
+            Continue with Google
+          </button>
+          <button type="button"
+            class="w-full px-4 py-2 flex items-center justify-center rounded-md text-white text-base tracking-wider font-semibold border-none outline-none bg-black hover:bg-[#333]">
+            <i class="pi pi-apple mr-2"></i>
+            Continue with Apple
+          </button>
+        </div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full">
+        <div class="mb-6">
+          <h3 class="text-gray-800 text-2xl font-bold">Login</h3>
+        </div>
+
+        <div class="space-y-6">
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Email</label>
+            <div class="relative flex items-center">
+              <input formControlName="email" type="email" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter email" />
+              <i class="pi pi-envelope absolute right-4 text-gray-400"></i>
+            </div>
+            <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+              <div *ngIf="loginForm.get('email')?.errors?.['email']">Invalid email format.</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-800 text-sm mb-2 block">Password</label>
+            <div class="relative flex items-center">
+              <input formControlName="password" type="password" class="bg-white border border-gray-300 w-full text-sm text-gray-800 pl-4 pr-10 py-2 rounded-md outline-indigo-700" placeholder="Enter password" />
+              <i class="pi pi-eye absolute right-4 text-gray-400 cursor-pointer"></i>
+            </div>
+            <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-red-600 text-sm mt-1">
+              <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+              <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters long.</div>
+            </div>
+          </div>
+          <div class="flex items-center">
+            <a routerLink="/reset-password-request" class="text-indigo-700 font-semibold hover:underline ml-1">Forgot Password?</a>
+          </div>
+        </div>
+
+        <div class="mt-8">
+          <button type="submit" [disabled]="loginForm.invalid" class="w-full py-2.5 px-4 text-sm tracking-wider font-semibold rounded-md bg-indigo-700 hover:bg-indigo-800 text-white focus:outline-none">
+            Login
+          </button>
+        </div>
+        <p class="text-gray-800 text-sm mt-4 text-center">Don't have an account? <a routerLink="/register" class="text-indigo-700 font-semibold hover:underline ml-1">Register here</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer> -->
+
+
 <app-navbar></app-navbar>
 
 <div class="font-[sans-serif] bg-gray-50 flex items-center md:h-screen p-4">
@@ -28,6 +102,15 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="w-full">
         <div class="mb-6">
           <h3 class="text-gray-800 text-2xl font-bold">Login</h3>
+        </div>
+
+        <div *ngIf="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4 animate-fade-in flex items-center" role="alert">
+          <i class="pi pi-check-circle mr-2"></i>
+          {{ successMessage }}
+        </div>
+        <div *ngIf="errorMessage" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4 animate-fade-in flex items-center" role="alert">
+          <i class="pi pi-exclamation-circle mr-2"></i>
+          {{ errorMessage }}
         </div>
 
         <div class="space-y-6">
