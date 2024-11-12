@@ -120,6 +120,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 
 
----
 
-For more information, visit the [Plana GitHub Repository](https://github.com/victorpreston/plana).
+
