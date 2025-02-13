@@ -1,4 +1,4 @@
-# Plana- Comprehensive Event Management System
+# Plana
 
 Plana is a full-stack event management application designed to streamline the organization and coordination of events. It offers a robust backend API and a dynamic frontend interface, providing users with an efficient platform to manage events seamlessly.
 
